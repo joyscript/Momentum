@@ -25,7 +25,7 @@ export const timer = () => {
   };
 
   const showName = () => {
-    name.value = hidName.textContent = localStorage.getItem('name');
+    hidName.textContent = name.value = localStorage.getItem('name');
     setTimeout(() => hidName.classList.add('trans'), 600);
     checkName();
   };
@@ -39,5 +39,8 @@ export const timer = () => {
   setInterval(showTime, 1000);
 
   name.addEventListener('input', () => (hidName.textContent = name.value));
-  name.addEventListener('change', checkName);
+  name.addEventListener('change', () => {
+    hidName.textContent = name.value = name.value.trim().replace(/\s{1,}/g, ' ');
+    checkName();
+  });
 };
