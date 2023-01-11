@@ -1,6 +1,8 @@
-import { timer } from './modules/timer.js';
 import { storage } from './modules/storage.js';
+import { timer } from './modules/timer.js';
+import { slider } from './modules/slider.js';
 
 
-timer();
 storage();
+timer();
+slider();

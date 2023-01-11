@@ -16,10 +16,90 @@ body {
   font-size: 16px;
   color: #fff;
   text-align: center;
-  background: url('../assets/img/bg.jpg') center/cover, rgba(0, 0, 0, 0.5);
-  background-blend-mode: multiply;
-  transition: background-image 1s ease-in-out;
+  background: rgba(0, 0, 0, 0.9);
 }
+
+.slider,
+.slider::after {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.slider {
+  z-index: -1;
+}
+
+.slider::after {
+  z-index: 0;
+  content: '';
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.fade-in,
+.fade-out {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.fade-out {
+  animation-name: fade-out;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.slider-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  cursor: pointer;
+  transition: 1s ease-in-out;
+}
+
+.slider-icon.disabled {
+  opacity: 0;
+}
+
+.slide-prev {
+  left: 20px;
+  background-image: url('../assets/svg/slider-prev.svg');
+}
+
+.slide-next {
+  right: 20px;
+  background-image: url('../assets/svg/slider-next.svg');
+}
+
+/* --------------------- */
 
 .header {
   display: flex;
@@ -176,22 +256,7 @@ body {
   padding: 20px;
 }
 
-.slider-icon {
-  position: absolute;
-  top: 50%;
-  margin-top: -16px;
-  cursor: pointer;
-}
-
-.slide-prev {
-  left: 20px;
-  background-image: url('../assets/svg/slider-prev.svg');
-}
-
-.slide-next {
-  right: 20px;
-  background-image: url('../assets/svg/slider-next.svg');
-}
+/* ---------------------------------- */
 
 .time {
   min-height: 124px;
@@ -199,12 +264,14 @@ body {
   font-family: 'Arial-MT';
   font-size: 100px;
   letter-spacing: -4px;
+  user-select: none;
 }
 
 .date {
   min-height: 28px;
   font-size: 24px;
   margin-bottom: 20px;
+  user-select: none;
 }
 
 /* --------------------------- */
@@ -262,7 +329,7 @@ body {
 }
 
 .hid-name {
-  min-width: 250px;
+  min-width: 255px;
   white-space: pre;
   visibility: hidden;
 }
