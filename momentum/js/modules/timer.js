@@ -6,6 +6,7 @@ const greeting = document.querySelector('.greeting');
 
 const now = new Date();
 const timesOfDay = ['night', 'morning', 'afternoon', 'evening'];
+const placeHolders = ['[Enter name]', '[Ваше имя]'];
 
 const showTime = () => {
   const nowString = new Date().toLocaleTimeString();
@@ -21,17 +22,27 @@ const showDate = () => {
 const showGreeting = () => (greeting.textContent = `Good ${getTimeOfDay()},`);
 
 const showName = () => {
-  hidName.textContent = name.value = localStorage.getItem('name');
+  name.value = localStorage.getItem('name');
   setTimeout(() => hidName.classList.add('trans'), 600);
-  checkName();
+  checkValue();
 };
 
-const checkName = () => (name.value ? name.classList.add('filled') : name.classList.remove('filled'));
+const showPlaceholder = () => {
+  hidName.textContent = name.placeholder = placeHolders[0];
+  hidName.style.minWidth = hidName.offsetWidth + 'px';
+};
+
+const showValue = () => {
+  hidName.textContent = name.value;
+  hidName.style = '';
+};
+
+const checkValue = () => (name.value ? showValue() : showPlaceholder());
 
 name.addEventListener('input', () => (hidName.textContent = name.value));
 name.addEventListener('change', () => {
   hidName.textContent = name.value = name.value.trim().replace(/\s{1,}/g, ' ');
-  checkName();
+  checkValue();
 });
 
 export const getTimeOfDay = () => timesOfDay[Math.floor(now.getHours() / 6)];

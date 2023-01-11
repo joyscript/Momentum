@@ -20,7 +20,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  max-width: 100%;
   font-size: 40px;
 }
 
@@ -31,12 +31,11 @@
 
 .name-wrapper {
   position: relative;
-  height: 100%;
+  overflow: hidden;
 }
 
 .name,
 .hid-name {
-  height: 100%;
   padding: 10px;
   font-size: inherit;
   text-align: left;
@@ -53,34 +52,33 @@
   width: 100%;
   border: none;
   outline: none;
-}
 
-.name:focus {
-  background: rgba(255, 255, 255, 0.1);
-}
+  &:focus {
+    background: rgba(255, 255, 255, 0.2);
+  }
 
-.name::placeholder {
-  color: #fff;
-  opacity: 0.6;
-}
+  &::placeholder {
+    color: #fff;
+    opacity: 0.6;
+    transition: 0.3s;
+  }
 
-.name:focus::placeholder {
-  opacity: 0;
+  &:focus::placeholder {
+    opacity: 0;
+  }
 }
 
 .hid-name {
-  min-width: 255px;
+  min-width: 1em;
   white-space: pre;
   visibility: hidden;
+
+  &.trans {
+    transition: 0.5s;
+  }
 }
 
-.name.filled ~ .hid-name {
-  min-width: 40px;
-}
-
-.hid-name.trans {
-  transition: 0.5s;
-}
+// ------------------------------
 
 @media (max-width: 768px) {
   .time {
@@ -88,17 +86,27 @@
     font-size: 72px;
   }
 
-  .greeting-container {
+  .date {
+    font-size: 20px;
+  }
+
+  .greeting-wrapper {
     min-height: 40px;
-    font-size: 32px;
+    font-size: 30px;
   }
 
-  .greeting {
-    padding: 5px;
-  }
-
+  .greeting,
   .name {
-    font-size: 32px;
     padding: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .time {
+    font-size: 50px;
+  }
+
+  .greeting-wrapper {
+    font-size: 24px;
   }
 }

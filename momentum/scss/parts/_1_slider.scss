@@ -72,3 +72,13 @@
   right: 20px;
   background-image: url('../assets/svg/slider-next.svg');
 }
+
+@media (max-width: 480px) {
+  .slide-prev {
+    left: 10px;
+  }
+
+  .slide-next {
+    right: 5px;
+  }
+}
