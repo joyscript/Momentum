@@ -1,7 +1,7 @@
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
 const name = document.querySelector('.name');
-const hidName = document.querySelector('.hid-name');
+const double = document.querySelector('.double');
 const greeting = document.querySelector('.greeting');
 
 const now = new Date();
@@ -23,25 +23,25 @@ const showGreeting = () => (greeting.textContent = `Good ${getTimeOfDay()},`);
 
 const showName = () => {
   name.value = localStorage.getItem('name');
-  setTimeout(() => hidName.classList.add('trans'), 600);
+  setTimeout(() => double.classList.add('trans'), 600);
   checkValue();
 };
 
 const showPlaceholder = () => {
-  hidName.textContent = name.placeholder = placeHolders[0];
-  hidName.style.minWidth = hidName.offsetWidth + 'px';
+  double.textContent = name.placeholder = placeHolders[0];
+  double.style.minWidth = double.offsetWidth + 'px';
 };
 
 const showValue = () => {
-  hidName.textContent = name.value;
-  hidName.style = '';
+  double.textContent = name.value;
+  double.style = '';
 };
 
 const checkValue = () => (name.value ? showValue() : showPlaceholder());
 
-name.addEventListener('input', () => (hidName.textContent = name.value));
+name.addEventListener('input', () => (double.textContent = name.value));
 name.addEventListener('change', () => {
-  hidName.textContent = name.value = name.value.trim().replace(/\s{1,}/g, ' ');
+  double.textContent = name.value = name.value.trim().replace(/\s{1,}/g, ' ');
   checkValue();
 });
 
