@@ -1,20 +1,14 @@
 .time {
-  min-height: 124px;
   margin-bottom: 10px;
   font-family: 'Arial-MT';
   font-size: 100px;
   letter-spacing: -4px;
-  user-select: none;
 }
 
 .date {
-  min-height: 28px;
   font-size: 24px;
   margin-bottom: 20px;
-  user-select: none;
 }
-
-/* --------------------------- */
 
 .greeting-wrapper {
   display: flex;
@@ -24,24 +18,15 @@
   font-size: 40px;
 }
 
-.greeting {
-  padding: 10px;
-  user-select: none;
-}
-
 .name-wrapper {
   position: relative;
   overflow: hidden;
 }
 
+.greeting,
 .name,
-.hid-name {
+.double {
   padding: 10px;
-  font-size: inherit;
-  text-align: left;
-  color: #fff;
-  background: transparent;
-  user-select: none;
 }
 
 .name {
@@ -50,11 +35,14 @@
   top: 0;
   left: 0;
   width: 100%;
+  font-size: inherit;
+  color: inherit;
   border: none;
   outline: none;
+  background: transparent;
 
   &:focus {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   &::placeholder {
@@ -68,7 +56,7 @@
   }
 }
 
-.hid-name {
+.double {
   min-width: 1em;
   white-space: pre;
   visibility: hidden;
@@ -82,21 +70,21 @@
 
 @media (max-width: 768px) {
   .time {
-    min-height: 80px;
     font-size: 72px;
   }
 
   .date {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .greeting-wrapper {
-    min-height: 40px;
-    font-size: 30px;
+    padding: 0 20px;
+    font-size: 32px;
   }
 
   .greeting,
-  .name {
+  .name,
+  .double {
     padding: 5px;
   }
 }
@@ -104,6 +92,10 @@
 @media (max-width: 480px) {
   .time {
     font-size: 50px;
+  }
+
+  .date {
+    font-size: 20px;
   }
 
   .greeting-wrapper {

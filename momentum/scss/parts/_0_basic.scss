@@ -13,6 +13,7 @@ body {
   position: relative;
   min-width: 320px;
   min-height: 100vh;
+  padding: 20px;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
   color: #fff;
@@ -20,32 +21,20 @@ body {
   background: rgb(13, 3, 42);
 }
 
-.header,
-.main,
-.footer {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-}
-
 .header {
+  display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   height: 30vh;
   min-height: 220px;
 }
 
 .main {
-  flex-direction: column;
-  justify-content: center;
   height: 40vh;
-  min-height: 260px;
+  min-height: 250px;
+  margin: 20px 0;
 }
 
 .footer {
-  flex-direction: column;
-  justify-content: flex-end;
   height: 30vh;
   min-height: 160px;
 }

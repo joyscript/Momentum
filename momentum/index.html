@@ -11,12 +11,6 @@
   </head>
 
   <body>
-    <div class="slider"></div>
-    <div class="slider__buttons">
-      <button class="slider__button button slide-prev"></button>
-      <button class="slider__button button slide-next"></button>
-    </div>
-
     <header class="header">
       <div class="player">
         <div class="player-controls">
@@ -41,14 +35,21 @@
     </header>
 
     <main class="main">
-      <time class="time"></time>
-      <date class="date"></date>
+      <div class="time"></div>
+      <div class="date"></div>
+
       <div class="greeting-wrapper">
         <div class="greeting"></div>
         <div class="name-wrapper">
-          <input class="name" type="text" maxlength="30"/>
+          <input class="name" type="text" maxlength="30" />
           <div class="double"></div>
         </div>
+      </div>
+
+      <div class="slider"></div>
+      <div class="slider-buttons">
+        <button class="slider-button button slide-prev"></button>
+        <button class="slider-button button slide-next"></button>
       </div>
     </main>
 

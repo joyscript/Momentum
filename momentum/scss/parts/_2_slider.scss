@@ -51,16 +51,20 @@
   }
 }
 
-.slider__button {
+.slider-button {
   position: absolute;
   z-index: 1;
   top: 50%;
   margin-top: -16px;
-  transition: 1s ease-in-out;
-}
+  transition: opacity 1s ease-in-out, transform 0.5s;
 
-.slider__button.disabled {
-  opacity: 0;
+  &.disabled {
+    opacity: 0;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .slide-prev {
@@ -74,11 +78,17 @@
 }
 
 @media (max-width: 480px) {
+  .slider__button {
+    width: 25px;
+  }
+
   .slide-prev {
     left: 10px;
+    background-position-x: left;
   }
 
   .slide-next {
-    right: 5px;
+    right: 10px;
+    background-position-x: right;
   }
 }
