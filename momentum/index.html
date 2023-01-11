@@ -9,16 +9,24 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/index.js" type="module" defer></script>
   </head>
+
   <body>
+    <div class="slider"></div>
+    <div class="slider__buttons">
+      <button class="slider__button button slide-prev"></button>
+      <button class="slider__button button slide-next"></button>
+    </div>
+
     <header class="header">
       <div class="player">
         <div class="player-controls">
-          <button class="play-prev player-icon"></button>
-          <button class="play player-icon"></button>
-          <button class="play-next player-icon"></button>
+          <button class="play-prev button"></button>
+          <button class="play button"></button>
+          <button class="play-next button"></button>
         </div>
         <ul class="play-list"></ul>
       </div>
+
       <div class="weather">
         <input type="text" class="city" />
         <i class="weather-icon owf"></i>
@@ -31,15 +39,11 @@
         <div class="humidity"></div>
       </div>
     </header>
+
     <main class="main">
-      <div class="slider"></div>
-      <div class="slider-icons">
-        <button class="slide-prev slider-icon"></button>
-        <button class="slide-next slider-icon"></button>
-      </div>
       <time class="time"></time>
       <date class="date"></date>
-      <div class="greeting-container">
+      <div class="greeting-wrapper">
         <div class="greeting"></div>
         <div class="name-wrapper">
           <input class="name" type="text" maxlength="40" placeholder="[Enter name]" />
@@ -47,8 +51,9 @@
         </div>
       </div>
     </main>
+
     <footer class="footer">
-      <button class="change-quote"></button>
+      <button class="change-quote button"></button>
       <div>
         <div class="quote"></div>
         <div class="author"></div>

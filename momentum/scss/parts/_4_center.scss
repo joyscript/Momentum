@@ -1,0 +1,104 @@
+.time {
+  min-height: 124px;
+  margin-bottom: 10px;
+  font-family: 'Arial-MT';
+  font-size: 100px;
+  letter-spacing: -4px;
+  user-select: none;
+}
+
+.date {
+  min-height: 28px;
+  font-size: 24px;
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+/* --------------------------- */
+
+.greeting-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+.greeting {
+  padding: 10px;
+  user-select: none;
+}
+
+.name-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.name,
+.hid-name {
+  height: 100%;
+  padding: 10px;
+  font-size: inherit;
+  text-align: left;
+  color: #fff;
+  background: transparent;
+  user-select: none;
+}
+
+.name {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.name:focus {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.name::placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.name:focus::placeholder {
+  opacity: 0;
+}
+
+.hid-name {
+  min-width: 255px;
+  white-space: pre;
+  visibility: hidden;
+}
+
+.name.filled ~ .hid-name {
+  min-width: 40px;
+}
+
+.hid-name.trans {
+  transition: 0.5s;
+}
+
+@media (max-width: 768px) {
+  .time {
+    min-height: 80px;
+    font-size: 72px;
+  }
+
+  .greeting-container {
+    min-height: 40px;
+    font-size: 32px;
+  }
+
+  .greeting {
+    padding: 5px;
+  }
+
+  .name {
+    font-size: 32px;
+    padding: 5px;
+  }
+}
