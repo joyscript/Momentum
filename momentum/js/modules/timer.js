@@ -6,7 +6,7 @@ const greeting = document.querySelector('.greeting');
 
 const now = new Date();
 const timesOfDay = ['night', 'morning', 'afternoon', 'evening'];
-const placeHolders = ['[Enter name]', '[Ваше имя]'];
+const placeholders = ['[Enter name]', '[Ваше имя]'];
 
 const showTime = () => {
   const nowString = new Date().toLocaleTimeString();
@@ -28,7 +28,7 @@ const showName = () => {
 };
 
 const showPlaceholder = () => {
-  double.textContent = name.placeholder = placeHolders[0];
+  double.textContent = name.placeholder = placeholders[0];
   double.style.minWidth = double.offsetWidth + 'px';
 };
 

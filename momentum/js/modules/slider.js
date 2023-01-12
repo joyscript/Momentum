@@ -44,7 +44,7 @@ export const slider = () => {
     img.addEventListener('load', () => startAnimation(img), { once: true });
     img.addEventListener('animationend', () => endAnimation(img), { once: true });
 
-    console.log(num);
+    console.log('Image: ', num);
   };
 
   setBg();
