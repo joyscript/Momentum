@@ -22,7 +22,7 @@ export const weather = () => {
   const showError = () => {
     weatherData.innerHTML = '';
     weatherIcon.className = 'weather-icon owf';
-    weatherError.textContent = 'No data. Please write the correct name of the city';
+    weatherError.innerHTML = 'No data. Please enter the correct name of&nbsp;the&nbsp;city';
   };
 
   const getWeather = async () => {
