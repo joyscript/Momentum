@@ -23,27 +23,24 @@ const showGreeting = () => (greeting.textContent = `Good ${getTimeOfDay()},`);
 
 const showName = () => {
   name.value = localStorage.getItem('name');
+  name.value ? updateDouble() : showPlaceholder();
   setTimeout(() => double.classList.add('trans'), 600);
-  checkValue();
 };
+
+const updateDouble = () => (double.textContent = name.value);
 
 const showPlaceholder = () => {
   double.textContent = name.placeholder = placeholders[0];
   double.style.minWidth = double.offsetWidth + 'px';
 };
 
-const showValue = () => {
-  double.textContent = name.value;
-  double.style = '';
+const updateName = () => {
+  name.value = name.value.trim().replace(/\s{1,}/g, ' ');
+  name.value ? (double.style.minWidth = '') : showPlaceholder();
 };
 
-const checkValue = () => (name.value ? showValue() : showPlaceholder());
-
-name.addEventListener('input', () => (double.textContent = name.value));
-name.addEventListener('change', () => {
-  double.textContent = name.value = name.value.trim().replace(/\s{1,}/g, ' ');
-  checkValue();
-});
+name.addEventListener('input', updateDouble);
+name.addEventListener('change', updateName);
 
 export const getTimeOfDay = () => timesOfDay[Math.floor(now.getHours() / 6)];
 
