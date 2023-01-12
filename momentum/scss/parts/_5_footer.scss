@@ -1,22 +1,16 @@
-.footer {
-  padding: 0 10px;
-}
-
 .change-quote {
+  min-height: 32px;
   margin-bottom: 30px;
   background-image: url('../assets/svg/reload.svg');
 }
 
 .quote {
   margin-bottom: 10px;
+  padding: 0 10px;
   font-size: 18px;
 }
 
 @media (max-width: 768px) {
-  .footer {
-    min-height: 150px;
-  }
-
   .quote {
     font-size: 16px;
   }
