@@ -407,15 +407,25 @@ body {
   background-image: url("../assets/svg/play-next.svg");
 }
 
+.footer {
+  padding: 0 10px;
+}
+
 .change-quote {
   margin-bottom: 30px;
   background-image: url("../assets/svg/reload.svg");
 }
 
 .quote {
-  min-height: 32px;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
-.author {
-  min-height: 20px;
+@media (max-width: 768px) {
+  .footer {
+    min-height: 150px;
+  }
+  .quote {
+    font-size: 16px;
+  }
 }/*# sourceMappingURL=style.css.map */

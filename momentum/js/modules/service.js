@@ -5,6 +5,6 @@ export const fetchAndGo = async (url, func, errorFunc) => {
     const data = await res.json();
     func(data);
   } catch (err) {
-    errorFunc();
+    if (errorFunc) errorFunc();
   }
 };
