@@ -11,6 +11,8 @@
 
 body {
   position: relative;
+  display: flex;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
   padding: 20px;
@@ -25,19 +27,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  height: 30vh;
   min-height: 220px;
 }
 
 .main {
-  height: 40vh;
-  min-height: 250px;
+  flex-grow: 1;
   margin: 20px 0;
-}
-
-.footer {
-  height: 30vh;
-  min-height: 160px;
 }
 
 .button {
