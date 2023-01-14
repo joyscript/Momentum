@@ -1,11 +1,11 @@
-import { storage } from './modules/storage.js';
-import { timer } from './modules/timer.js';
-import { slider } from './modules/slider.js';
-import { weather } from './modules/weather.js';
-import { quote } from './modules/quote.js';
+import { setUserSettings } from './modules/settings.js';
+import { showTimeAndGreeting } from './modules/timer.js';
+import { showBackground } from './modules/slider.js';
+import { showWeather } from './modules/weather.js';
+import { showQuote } from './modules/quote.js';
 
-storage();
-timer();
-slider();
-weather();
-quote();
+setUserSettings();
+showTimeAndGreeting();
+showBackground();
+showWeather();
+showQuote();

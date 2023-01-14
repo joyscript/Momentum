@@ -37,10 +37,6 @@
     color: #fff;
     opacity: 0.6;
   }
-
-  &:focus::placeholder {
-    opacity: 0;
-  }
 }
 
 @media (max-width: 480px) {

@@ -77,6 +77,19 @@ body {
 
 // -----------------------
 
+[id] {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+// -----------------------
+
 @media (max-width: 768px) {
   .main {
     min-height: 200px;

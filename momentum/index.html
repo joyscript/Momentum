@@ -12,7 +12,7 @@
 
   <body>
     <header class="header">
-      <div class="player">
+      <div class="player" id="player">
         <div class="player-controls">
           <button class="play-prev button"></button>
           <button class="play button"></button>
@@ -21,8 +21,8 @@
         <ul class="play-list"></ul>
       </div>
 
-      <div class="weather">
-        <input class="city" type="text" maxlength="30" />
+      <div class="weather" id="weather">
+        <input class="city" type="text" maxlength="20" name="city" autocomplete="off" />
         <i class="weather-icon owf"></i>
         <div class="weather-data"></div>
         <div class="weather-error"></div>
@@ -30,13 +30,13 @@
     </header>
 
     <main class="main">
-      <div class="time"></div>
-      <div class="date"></div>
+      <div class="time" id="time"></div>
+      <div class="date" id="date"></div>
 
-      <div class="greeting-wrapper">
+      <div class="greeting-wrapper" id="greeting">
         <div class="greeting"></div>
         <div class="name-wrapper">
-          <input class="name" type="text" maxlength="30" />
+          <input class="name" type="text" maxlength="30" autocomplete="off" />
           <div class="double"></div>
         </div>
       </div>
@@ -48,12 +48,42 @@
       </div>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="quote">
       <button class="change-quote button"></button>
       <div>
         <div class="quote"></div>
         <div class="author"></div>
       </div>
     </footer>
+
+    <div class="menu">
+      <div class="menu-option">
+        <div class="menu-title">Language</div>
+        <div class="menu-buttons">
+          <button class="menu-button switch" name="lang" value="ru">RU</button>
+          <button class="menu-button switch" name="lang" value="en">EN</button>
+        </div>
+      </div>
+      <div class="menu-option">
+        <div class="menu-title">Photo sourse</div>
+        <div class="menu-buttons">
+          <button class="menu-button switch" name="photo" value="github">GitHub</button>
+          <button class="menu-button switch" name="photo" value="unsplash">Unsplash</button>
+          <button class="menu-button switch" name="photo" value="flickr">Flickr</button>
+        </div>
+      </div>
+      <div class="menu-option">
+        <div class="menu-title">Show / hide</div>
+        <div class="menu-buttons">
+          <button class="menu-button" name="show" value="time">Time</button>
+          <button class="menu-button" name="show" value="date">Date</button>
+          <button class="menu-button" name="show" value="greeting">Greeting</button>
+          <button class="menu-button" name="show" value="weather">Weather</button>
+          <button class="menu-button" name="show" value="quote">Quote</button>
+          <button class="menu-button" name="show" value="player">Player</button>
+        </div>
+      </div>
+    </div>
+    <button class="button menu-toggle-button"></button>
   </body>
 </html>

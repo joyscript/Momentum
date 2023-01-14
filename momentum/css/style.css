@@ -73,6 +73,17 @@ body {
   transform: scale(1.1);
 }
 
+[id] {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+  visibility: visible;
+}
+
 @media (max-width: 768px) {
   .main {
     min-height: 200px;
@@ -120,6 +131,7 @@ body {
   border: none;
   outline: none;
   background: transparent;
+  transition: 0.4s;
 }
 .name:focus {
   background: rgba(255, 255, 255, 0.1);
@@ -127,19 +139,14 @@ body {
 .name::-moz-placeholder {
   color: #fff;
   opacity: 0.6;
-  -moz-transition: 0.3s;
-  transition: 0.3s;
 }
 .name:-ms-input-placeholder {
   color: #fff;
   opacity: 0.6;
-  -ms-transition: 0.3s;
-  transition: 0.3s;
 }
 .name::placeholder {
   color: #fff;
   opacity: 0.6;
-  transition: 0.3s;
 }
 .name:focus::-moz-placeholder {
   opacity: 0;
@@ -347,15 +354,6 @@ body {
   color: #fff;
   opacity: 0.6;
 }
-.city:focus::-moz-placeholder {
-  opacity: 0;
-}
-.city:focus:-ms-input-placeholder {
-  opacity: 0;
-}
-.city:focus::placeholder {
-  opacity: 0;
-}
 
 @media (max-width: 480px) {
   .weather {
@@ -441,5 +439,92 @@ body {
 @media (max-width: 768px) {
   .quote {
     font-size: 16px;
+  }
+}
+.menu {
+  position: fixed;
+  z-index: 10;
+  left: 20px;
+  bottom: 60px;
+  width: 340px;
+  padding: 20px;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+.menu-open .menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-option:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.menu-title {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.menu-button {
+  width: 90px;
+  height: 30px;
+  padding: 5px;
+  font-size: inherit;
+  color: rgb(153, 153, 153);
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  pointer-events: all;
+  transition: 0.3s;
+}
+.menu-button:hover {
+  color: rgb(39, 1, 51);
+}
+.menu-button.active {
+  background: rgb(206, 81, 245);
+  color: #fff;
+}
+
+.switch.active {
+  pointer-events: none;
+  cursor: default;
+}
+
+.menu-toggle-button {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  background: url("../assets/svg/menu.svg");
+  filter: invert(100%);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+.menu-open .menu-toggle-button {
+  transform: rotate(90deg);
+}
+
+@media (max-width: 480px) {
+  .menu {
+    left: 15px;
+    width: 290px;
+    padding: 15px;
+    font-size: 16px;
+  }
+  .menu-buttons {
+    gap: 10px;
+  }
+  .menu-button {
+    width: 80px;
+    height: 30px;
   }
 }/*# sourceMappingURL=style.css.map */
