@@ -6,9 +6,10 @@
   width: 340px;
   padding: 20px;
   font-size: 18px;
-  background: rgba(0, 0, 0, 0.8);
-  opacity: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
   visibility: hidden;
+  opacity: 0;
   transition: 0.3s;
   // transform: scale(0);
   // transform-origin: 15px 100%;

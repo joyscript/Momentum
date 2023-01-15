@@ -2,8 +2,9 @@ let user = {
   name: '',
   city: '',
   lang: 'en',
-  photo: 'github',
-  show: {
+  photoSource: 'github',
+  tag: 'cats',
+  showBlock: {
     time: true,
     date: true,
     greeting: true,

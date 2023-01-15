@@ -2,6 +2,7 @@ import { user, getUser, saveUser } from './user.js';
 import { showDate, showGreeting } from './timer.js';
 import { showWeather } from './weather.js';
 import { showCurQuote } from './quote.js';
+import { showBackground } from './slider.js';
 
 const blocks = document.querySelectorAll('[id]');
 const menu = document.querySelector('.menu');
@@ -11,13 +12,15 @@ const menuToggleBtn = document.querySelector('.menu-toggle-button');
 const changeBtns = (option) => {
   menuBtns.forEach((btn) => {
     if (btn.name !== option) return;
-    const isTrue = btn.name === 'show' ? user.show[btn.value] : btn.value === user[btn.name];
+    const isTrue = btn.name === 'showBlock' ? user.showBlock[btn.value] : btn.value === user[btn.name];
     isTrue ? btn.classList.add('active') : btn.classList.remove('active');
   });
 };
 
 const showBlocks = () => {
-  blocks.forEach((block) => (user.show[block.id] ? block.classList.add('show') : block.classList.remove('show')));
+  blocks.forEach((block) => {
+    user.showBlock[block.id] ? block.classList.add('show') : block.classList.remove('show');
+  });
 };
 
 const changeLanguage = () => {
@@ -29,7 +32,16 @@ const changeLanguage = () => {
 };
 
 const changePhotoSourse = () => {
-  changeBtns('photo');
+  changeBtns('photoSource');
+  showBackground();
+};
+
+const setUserSettings = () => {
+  getUser();
+  changeBtns('lang');
+  changeBtns('photoSource');
+  changeBtns('showBlock');
+  showBlocks();
 };
 
 const closeMenu = (e) => {
@@ -48,24 +60,17 @@ const handleClicks = (e) => {
   const btn = e.target;
   btn.classList.toggle('active');
 
-  if (btn.name === 'show') {
-    user.show[btn.value] = btn.classList.contains('active');
+  if (btn.name === 'showBlock') {
+    user.showBlock[btn.value] = btn.classList.contains('active');
     showBlocks();
   } else {
-    if (btn.classList.contains('active')) user[btn.name] = btn.value;
+    user[btn.name] = btn.value;
     btn.name === 'lang' ? changeLanguage() : changePhotoSourse();
   }
-
   saveUser();
 };
 
 menu.addEventListener('click', handleClicks);
 menuToggleBtn.addEventListener('click', toggleMenu);
 
-export const setUserSettings = () => {
-  getUser();
-  changeBtns('lang');
-  changeBtns('photo');
-  changeBtns('show');
-  showBlocks();
-};
+export { setUserSettings, changePhotoSourse };
