@@ -21,6 +21,7 @@
 .fade-in,
 .fade-out {
   object-fit: cover;
+  object-position: center;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
 }
@@ -55,7 +56,8 @@
   position: absolute;
   z-index: 1;
   top: 50%;
-  margin-top: -16px;
+  height: 200px;
+  margin-top: -100px;
   transition: opacity 1s ease-in-out, transform 0.5s;
 
   &.disabled {

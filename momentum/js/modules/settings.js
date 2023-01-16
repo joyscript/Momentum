@@ -1,20 +1,78 @@
 import { user, getUser, saveUser } from './user.js';
-import { showDate, showGreeting } from './timer.js';
+import { showDate, showGreeting, timeOfDay } from './timer.js';
 import { showWeather } from './weather.js';
 import { showCurQuote } from './quote.js';
 import { showBackground } from './slider.js';
 
 const blocks = document.querySelectorAll('[id]');
 const menu = document.querySelector('.menu');
-const menuBtns = menu.querySelectorAll('.menu-button');
+const tagInput = menu.querySelector('.menu-tag');
+const switchBtns = menu.querySelectorAll('.menu-button.switch');
+const showBtns = menu.querySelectorAll('.menu-button[name="showBlock"]');
 const menuToggleBtn = document.querySelector('.menu-toggle-button');
 
+const buttonLabels = {
+  en: [
+    'English',
+    'Russian',
+    'GitHub',
+    'Unsplash',
+    'Flickr',
+    'night',
+    'morning',
+    'afternoon',
+    'evening',
+    'animals',
+    'beauty',
+    'Time',
+    'Date',
+    'Name',
+    'Weather',
+    'Quote',
+    'Player',
+  ],
+  ru: [
+    'Англ.',
+    'Русский',
+    'GitHub',
+    'Unsplash',
+    'Flickr',
+    'ночь',
+    'утро',
+    'день',
+    'вечер',
+    'животные',
+    'красота',
+    'Время',
+    'Дата',
+    'Имя',
+    'Погода',
+    'Цитата',
+    'Плеер',
+  ],
+};
+
 const changeBtns = (option) => {
-  menuBtns.forEach((btn) => {
-    if (btn.name !== option) return;
-    const isTrue = btn.name === 'showBlock' ? user.showBlock[btn.value] : btn.value === user[btn.name];
-    isTrue ? btn.classList.add('active') : btn.classList.remove('active');
+  switchBtns.forEach((btn) => {
+    if (option && btn.name !== option) return;
+    btn.value === user[btn.name] ? btn.classList.add('active') : btn.classList.remove('active');
   });
+};
+
+const changeShowBtns = () => {
+  showBtns.forEach((btn) => {
+    user.showBlock[btn.value] ? btn.classList.add('active') : btn.classList.remove('active');
+  });
+};
+
+const translateBtns = () => {
+  [...switchBtns, ...showBtns].forEach((btn, i) => (btn.textContent = buttonLabels[user.lang][i]));
+};
+
+const changeTagInput = () => {
+  tagInput.placeholder = user.lang === 'en' ? 'Enter your tag' : 'Введите ваш тег';
+  tagInput.disabled = user.photoSource === 'github';
+  user.photoSource === 'github' && (tagInput.value = '');
 };
 
 const showBlocks = () => {
@@ -23,8 +81,19 @@ const showBlocks = () => {
   });
 };
 
+const setUserSettings = () => {
+  getUser();
+  changeBtns();
+  changeShowBtns();
+  changeTagInput();
+  translateBtns();
+  showBlocks();
+};
+
 const changeLanguage = () => {
   changeBtns('lang');
+  changeTagInput();
+  translateBtns();
   showDate();
   showGreeting();
   showWeather();
@@ -32,16 +101,16 @@ const changeLanguage = () => {
 };
 
 const changePhotoSourse = () => {
+  if (user.photoSource === 'github') user.photoTag = timeOfDay;
+  changeBtns('photoTag');
   changeBtns('photoSource');
+  changeTagInput();
   showBackground();
 };
 
-const setUserSettings = () => {
-  getUser();
-  changeBtns('lang');
-  changeBtns('photoSource');
-  changeBtns('showBlock');
-  showBlocks();
+const changePhotoTag = (e) => {
+  changeBtns('photoTag');
+  showBackground();
 };
 
 const closeMenu = (e) => {
@@ -65,12 +134,19 @@ const handleClicks = (e) => {
     showBlocks();
   } else {
     user[btn.name] = btn.value;
-    btn.name === 'lang' ? changeLanguage() : changePhotoSourse();
+    if (btn.name === 'lang') changeLanguage();
+    if (btn.name === 'photoTag') changePhotoTag();
+    if (btn.name === 'photoSource') changePhotoSourse();
   }
   saveUser();
 };
 
 menu.addEventListener('click', handleClicks);
 menuToggleBtn.addEventListener('click', toggleMenu);
+
+tagInput.addEventListener('change', (e) => {
+  user.photoTag = e.target.value;
+  changePhotoTag();
+});
 
 export { setUserSettings, changePhotoSourse };

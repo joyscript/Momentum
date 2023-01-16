@@ -1,9 +1,11 @@
+import { timeOfDay } from './timer.js';
+
 let user = {
   name: '',
   city: '',
   lang: 'en',
   photoSource: 'github',
-  tag: 'cats',
+  photoTag: timeOfDay,
   showBlock: {
     time: true,
     date: true,

@@ -1,5 +1,4 @@
 import { user } from './user.js';
-import { timeOfDay } from './timer.js';
 import { fetchAndGo } from './service.js';
 import { changePhotoSourse } from './settings.js';
 
@@ -11,9 +10,10 @@ const unsplashKey = 'XNzUrppnWkjOt4XX7VhMokSfBd-nbanps_7kePh2oeQ';
 const flickrKey = '334110c40a5f1c9ae925a64f0815ecee';
 
 const URL = {
-  github: (num) => `https://raw.githubusercontent.com/joyscript/stage1-tasks/assets/images/${timeOfDay}/${num}.jpg`,
-  unsplash: `https://api.unsplash.com/photos/random?orientation=landscape&query=${user.tag}&client_id=${unsplashKey}`,
-  flickr: `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrKey}&tags=${user.tag}&extras=url_l&format=json&nojsoncallback=1`,
+  github: (num) => `https://raw.githubusercontent.com/joyscript/stage1-tasks/assets/images/${user.photoTag}/${num}.jpg`,
+  unsplash: () => `https://api.unsplash.com/photos/random?orientation=landscape&query=${user.photoTag}&client_id=${unsplashKey}`,
+  flickr: () =>
+    `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrKey}&tags=${user.photoTag}&extras=url_l&format=json&nojsoncallback=1`,
 };
 
 const maxGithub = 20;
@@ -39,7 +39,7 @@ const endAnimation = (img) => {
 const animateImage = (img) => {
   img.addEventListener('load', () => startAnimation(img), { once: true });
   img.addEventListener('animationend', () => endAnimation(img), { once: true });
-  console.log('Image: ', img.src);
+  console.log(randNum, 'Image: ', img.src);
 };
 
 const formatRandNum = () => {
@@ -47,19 +47,22 @@ const formatRandNum = () => {
   return `${num < 9 ? '0' : ''}${num + 1}`;
 };
 
-const showOtherSlide = (i) => {
+const showAnotherSlide = (i) => {
   if (user.photoSource === 'github') randNum += i;
   showBackground();
 };
 
 const changeImage = (data, img) => {
-  console.log(data);
-  
   if (user.photoSource === 'unsplash') {
-    img.src = data.urls.regular;
-  } else {
-    getRandNum(data.photos.photo.length - 1);
-    img.src = data.photos.photo[randNum]['url_l'];
+    data.urls.regular ? (img.src = data.urls.regular) : showBackground();
+  }
+  if (user.photoSource === 'flickr') {
+    const photos = data.photos.photo;
+    do {
+      getRandNum(photos.length - 1);
+      console.log(randNum, photos[randNum]);
+    } while (!(photos[randNum]['url_l'] && photos[randNum]['width_l'] > photos[randNum]['height_l']));
+    img.src = photos[randNum]['url_l'];
   }
   animateImage(img);
 };
@@ -79,9 +82,14 @@ export const showBackground = () => {
     img.src = URL.github(formatRandNum());
     animateImage(img);
   } else {
-    fetchAndGo(URL[user.photoSource], (data) => changeImage(data, img), handleError);
+    fetchAndGo(URL[user.photoSource](user), (data) => changeImage(data, img), handleError);
   }
 };
 
-prevBtn.addEventListener('click', () => isReady && showOtherSlide(-1));
-nextBtn.addEventListener('click', () => isReady && showOtherSlide(1));
+prevBtn.addEventListener('click', () => isReady && showAnotherSlide(-1));
+nextBtn.addEventListener('click', () => isReady && showAnotherSlide(1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'ArrowLeft') isReady && showAnotherSlide(-1);
+  if (e.code === 'ArrowRight') isReady && showAnotherSlide(1);
+});
