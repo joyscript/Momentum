@@ -1,78 +1,37 @@
-import { user, getUser, saveUser } from './user.js';
-import { showDate, showGreeting, timeOfDay } from './timer.js';
+import { user, saveUser, transText } from './user.js';
+import { showDateAndGreeting, timeOfDay } from './timer.js';
 import { showWeather } from './weather.js';
 import { showCurQuote } from './quote.js';
 import { showBackground } from './slider.js';
+import { loadTodo, toggleTodo } from './todo.js';
 
 const blocks = document.querySelectorAll('[id]');
-const menu = document.querySelector('.menu');
-const tagInput = menu.querySelector('.menu-tag');
-const switchBtns = menu.querySelectorAll('.menu-button.switch');
-const showBtns = menu.querySelectorAll('.menu-button[name="showBlock"]');
+const modals = document.querySelectorAll('.modal');
+const modalBtns = document.querySelectorAll('.modal-button');
+const modalInputs = document.querySelectorAll('.modal-input');
+const transItems = document.querySelectorAll('[data-trans]');
+const tagInput = document.querySelector('.menu-tag-input');
 const menuToggleBtn = document.querySelector('.menu-toggle-button');
-
-const buttonLabels = {
-  en: [
-    'English',
-    'Russian',
-    'GitHub',
-    'Unsplash',
-    'Flickr',
-    'night',
-    'morning',
-    'afternoon',
-    'evening',
-    'animals',
-    'beauty',
-    'Time',
-    'Date',
-    'Name',
-    'Weather',
-    'Quote',
-    'Player',
-  ],
-  ru: [
-    'Англ.',
-    'Русский',
-    'GitHub',
-    'Unsplash',
-    'Flickr',
-    'ночь',
-    'утро',
-    'день',
-    'вечер',
-    'животные',
-    'красота',
-    'Время',
-    'Дата',
-    'Имя',
-    'Погода',
-    'Цитата',
-    'Плеер',
-  ],
-};
+const todoToggleBtn = document.querySelector('.todo-toggle-button');
 
 const changeBtns = (option) => {
-  switchBtns.forEach((btn) => {
+  modalBtns.forEach((btn) => {
     if (option && btn.name !== option) return;
-    btn.value === user[btn.name] ? btn.classList.add('active') : btn.classList.remove('active');
+    const isTrue = btn.name === 'showBlock' ? user.showBlock[btn.value] : btn.value === user[btn.name];
+    isTrue ? btn.classList.add('active') : btn.classList.remove('active');
   });
-};
-
-const changeShowBtns = () => {
-  showBtns.forEach((btn) => {
-    user.showBlock[btn.value] ? btn.classList.add('active') : btn.classList.remove('active');
-  });
-};
-
-const translateBtns = () => {
-  [...switchBtns, ...showBtns].forEach((btn, i) => (btn.textContent = buttonLabels[user.lang][i]));
 };
 
 const changeTagInput = () => {
-  tagInput.placeholder = user.lang === 'en' ? 'Enter your tag' : 'Введите ваш тег';
   tagInput.disabled = user.photoSource === 'github';
-  user.photoSource === 'github' && (tagInput.value = '');
+  if (user.photoSource === 'github') tagInput.value = '';
+};
+
+const translate = () => {
+  const ind = user.lang === 'en' ? 0 : 1;
+  modalBtns.forEach((btn) => (btn.textContent = transText[btn.value][ind]));
+  modalInputs.forEach((input) => (input.placeholder = transText[input.name][ind]));
+  transItems.forEach((item) => (item.textContent = transText[item.dataset.trans][ind]));
 };
 
 const showBlocks = () => {
@@ -82,27 +41,26 @@ const showBlocks = () => {
 };
 
 const setUserSettings = () => {
-  getUser();
   changeBtns();
-  changeShowBtns();
   changeTagInput();
-  translateBtns();
   showBlocks();
+  translate();
+  loadTodo();
 };
 
 const changeLanguage = () => {
   changeBtns('lang');
-  changeTagInput();
-  translateBtns();
-  showDate();
-  showGreeting();
+  translate();
+  showDateAndGreeting();
   showWeather();
   showCurQuote();
 };
 
 const changePhotoSourse = () => {
-  if (user.photoSource === 'github') user.photoTag = timeOfDay;
-  changeBtns('photoTag');
+  if (user.photoSource === 'github') {
+    user.photoTag = timeOfDay;
+    changeBtns('photoTag');
+  }
   changeBtns('photoSource');
   changeTagInput();
   showBackground();
@@ -113,19 +71,14 @@ const changePhotoTag = (e) => {
   showBackground();
 };
 
-const closeMenu = (e) => {
-  if (!e.target.closest('.menu') && e.target !== menuToggleBtn) document.body.classList.remove('menu-open');
+const changeTodo = (e) => {
+  changeBtns('todoShow');
+  toggleTodo();
 };
 
-const toggleMenu = (e) => {
-  document.body.classList.toggle('menu-open');
-  document.body.classList.contains('menu-open')
-    ? document.body.addEventListener('click', closeMenu)
-    : document.body.removeEventListener('click', closeMenu);
-};
+const handleModalClicks = (e) => {
+  if (!e.target.classList.contains('modal-button')) return;
 
-const handleClicks = (e) => {
-  if (!e.target.classList.contains('menu-button')) return;
   const btn = e.target;
   btn.classList.toggle('active');
 
@@ -137,12 +90,26 @@ const handleClicks = (e) => {
     if (btn.name === 'lang') changeLanguage();
     if (btn.name === 'photoTag') changePhotoTag();
     if (btn.name === 'photoSource') changePhotoSourse();
+    if (btn.name === 'todoShow') changeTodo();
   }
   saveUser();
 };
 
-menu.addEventListener('click', handleClicks);
-menuToggleBtn.addEventListener('click', toggleMenu);
+const toggleModal = (modal, toggleBtn) => {
+  document.body.classList.toggle(`${modal}-open`);
+
+  const closeModal = (e) => {
+    if (!e.target.closest(`.${modal}`) && e.target !== toggleBtn) document.body.classList.remove(`${modal}-open`);
+  };
+
+  document.body.classList.contains(`${modal}-open`)
+    ? document.body.addEventListener('click', closeModal)
+    : document.body.removeEventListener('click', closeModal);
+};
+
+modals.forEach((modal) => modal.addEventListener('click', handleModalClicks));
+menuToggleBtn.addEventListener('click', () => toggleModal('menu', menuToggleBtn));
+todoToggleBtn.addEventListener('click', () => toggleModal('todo', todoToggleBtn));
 
 tagInput.addEventListener('change', (e) => {
   user.photoTag = e.target.value;

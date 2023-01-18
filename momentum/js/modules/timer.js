@@ -1,4 +1,5 @@
 import { user, saveUser } from './user.js';
+import { checkValue } from './service.js';
 
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
@@ -12,7 +13,7 @@ const timesOfDay = ['night', 'morning', 'afternoon', 'evening'];
 const timeOfDay = timesOfDay[partOfDay];
 
 const locale = { en: 'en-US', ru: 'ru-RU' };
-const placeholder = { en: '[Enter name]', ru: '[Ваше имя]' };
+const placeholder = { en: '[Enter name]', ru: '[Введите имя]' };
 const greetingsRU = ['Доброй ночи,', 'Доброе утро,', 'Добрый день,', 'Добрый вечер,'];
 
 const showTime = () => {
@@ -30,37 +31,38 @@ const showGreeting = () => {
   greeting.textContent = user.lang == 'en' ? `Good ${timeOfDay},` : greetingsRU[partOfDay];
 };
 
-const showName = () => {
-  user.name ? showValue() : showPlaceholder();
-  setTimeout(() => double.classList.add('trans'), 600);
-};
+const showName = () => (user.name ? showValue() : showPlaceholder());
 
 const showValue = () => (double.textContent = name.value = user.name);
 
 const showPlaceholder = () => {
+  double.style.minWidth = 'min-content';
   double.textContent = name.placeholder = placeholder[user.lang];
   double.style.minWidth = double.offsetWidth + 'px';
 };
 
 const changeName = () => {
-  name.value = name.value.trim().replace(/\s{1,}/g, ' ');
-  name.value ? (double.style.minWidth = '') : showPlaceholder();
-  user.name = name.value;
+  user.name = double.textContent = name.value = checkValue(name.value);
+  user.name ? (double.style.minWidth = '') : showPlaceholder();
   saveUser();
+};
+
+const showDateAndGreeting = () => {
+  showDate();
+  showName();
+  showGreeting();
 };
 
 const showTimeAndGreeting = () => {
   showTime();
-  showDate();
-  showName();
-  showGreeting();
+  showDateAndGreeting();
   setInterval(showTime, 1000);
 };
 
 name.addEventListener('input', () => (double.textContent = name.value));
 name.addEventListener('change', changeName);
 name.addEventListener('keydown', (e) => {
-  if (e.keyCode === 13 || e.keyCode === 27) e.target.blur();
+  if (e.key === 'Enter' || e.key === 'Escape') e.target.blur();
 });
 
-export { showTimeAndGreeting, showDate, showGreeting, timeOfDay };
+export { showTimeAndGreeting, showDateAndGreeting, timeOfDay };

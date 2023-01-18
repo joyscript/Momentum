@@ -89,7 +89,7 @@ export const showBackground = () => {
 prevBtn.addEventListener('click', () => isReady && showAnotherSlide(-1));
 nextBtn.addEventListener('click', () => isReady && showAnotherSlide(1));
 
-document.addEventListener('keydown', (e) => {
-  if (e.code === 'ArrowLeft') isReady && showAnotherSlide(-1);
-  if (e.code === 'ArrowRight') isReady && showAnotherSlide(1);
-});
+// document.addEventListener('keydown', (e) => {
+//   if (e.code === 'ArrowLeft') isReady && showAnotherSlide(-1);
+//   if (e.code === 'ArrowRight') isReady && showAnotherSlide(1);
+// });

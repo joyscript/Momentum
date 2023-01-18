@@ -15,8 +15,8 @@ const errorText = {
   ru: 'Нет данных.<br> Введите корректное название города',
 };
 
-city.value = user.city || defaultCity[user.lang];
-city.placeholder = placeholder[user.lang];
+const setCity = () => (city.value = user.city || defaultCity[user.lang]);
+const setPlaceholder = () => (city.placeholder = placeholder[user.lang]);
 
 const getURL = () => {
   const key = '4bb428ba7924feb431066c5f16731af7';
@@ -44,9 +44,12 @@ const showError = () => {
 
 const checkValue = () => (city.value = isNaN(city.value) ? city.value.trim() : '');
 
-city.addEventListener('change', changeWeather);
+setCity();
 
 export const showWeather = () => {
   checkValue();
+  setPlaceholder();
   fetchAndGo(getURL(), changeWeather, showError);
 };
+
+city.addEventListener('change', showWeather);

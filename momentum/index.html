@@ -22,7 +22,7 @@
       </div>
 
       <div class="weather" id="weather">
-        <input class="city" type="text" maxlength="20" name="city" autocomplete="off" />
+        <input class="city" type="text" name="city" maxlength="20" autocomplete="off" />
         <i class="weather-icon owf"></i>
         <div class="weather-data"></div>
         <div class="weather-error"></div>
@@ -36,7 +36,7 @@
       <div class="greeting-wrapper" id="greeting">
         <div class="greeting"></div>
         <div class="name-wrapper">
-          <input class="name" type="text" maxlength="30" autocomplete="off" />
+          <input class="name" type="text" name="name" maxlength="30" autocomplete="off" />
           <div class="double"></div>
         </div>
       </div>
@@ -56,46 +56,59 @@
       </div>
     </footer>
 
-    <div class="menu">
+    <div class="modal menu">
       <div class="menu-option">
-        <div class="menu-title">Language</div>
+        <div class="menu-title" data-trans="language">Language</div>
         <div class="menu-buttons">
-          <button class="menu-button switch" name="lang" value="en">EN</button>
-          <button class="menu-button switch" name="lang" value="ru">RU</button>
+          <button class="modal-button switch" name="lang" value="en">EN</button>
+          <button class="modal-button switch" name="lang" value="ru">RU</button>
         </div>
       </div>
       <div class="menu-option">
-        <div class="menu-title">Photo sourse</div>
+        <div class="menu-title" data-trans="photoSourse">Photo sourse</div>
         <div class="menu-buttons">
-          <button class="menu-button switch" name="photoSource" value="github">GitHub</button>
-          <button class="menu-button switch" name="photoSource" value="unsplash">Unsplash</button>
-          <button class="menu-button switch" name="photoSource" value="flickr">Flickr</button>
+          <button class="modal-button switch" name="photoSource" value="github">GitHub</button>
+          <button class="modal-button switch" name="photoSource" value="unsplash">Unsplash</button>
+          <button class="modal-button switch" name="photoSource" value="flickr">Flickr</button>
         </div>
       </div>
       <div class="menu-option">
-        <div class="menu-title">Photo tags</div>
+        <div class="menu-title" data-trans="photoTags">Photo tags</div>
         <div class="menu-buttons">
-          <button class="menu-button switch" name="photoTag" value="night">night</button>
-          <button class="menu-button switch" name="photoTag" value="morning">morning</button>
-          <button class="menu-button switch" name="photoTag" value="afternoon">afternoon</button>
-          <button class="menu-button switch" name="photoTag" value="evening">evening</button>
-          <button class="menu-button switch" name="photoTag" value="animals">animals</button>
-          <button class="menu-button switch" name="photoTag" value="beauty">beauty</button>
-          <input class="menu-tag" type="text" maxlength="30" autocomplete="off" />
+          <button class="modal-button switch" name="photoTag" value="night">night</button>
+          <button class="modal-button switch" name="photoTag" value="morning">morning</button>
+          <button class="modal-button switch" name="photoTag" value="afternoon">afternoon</button>
+          <button class="modal-button switch" name="photoTag" value="evening">evening</button>
+          <button class="modal-button switch" name="photoTag" value="animals">animals</button>
+          <button class="modal-button switch" name="photoTag" value="beauty">beauty</button>
+          <input class="menu-tag-input modal-input" name="tag" type="text" maxlength="30" autocomplete="off" />
         </div>
       </div>
       <div class="menu-option">
-        <div class="menu-title">Show / hide</div>
+        <div class="menu-title" data-trans="showBlocks">Show / hide</div>
         <div class="menu-buttons">
-          <button class="menu-button" name="showBlock" value="time">Time</button>
-          <button class="menu-button" name="showBlock" value="date">Date</button>
-          <button class="menu-button" name="showBlock" value="greeting">Greeting</button>
-          <button class="menu-button" name="showBlock" value="weather">Weather</button>
-          <button class="menu-button" name="showBlock" value="quote">Quote</button>
-          <button class="menu-button" name="showBlock" value="player">Player</button>
+          <button class="modal-button" name="showBlock" value="time">Time</button>
+          <button class="modal-button" name="showBlock" value="date">Date</button>
+          <button class="modal-button" name="showBlock" value="greeting">Greeting</button>
+          <button class="modal-button" name="showBlock" value="weather">Weather</button>
+          <button class="modal-button" name="showBlock" value="quote">Quote</button>
+          <button class="modal-button" name="showBlock" value="player">Player</button>
         </div>
       </div>
     </div>
     <button class="button menu-toggle-button"></button>
+
+    <div class="modal todo">
+      <div class="todo-header">
+        <button class="modal-button switch" name="todoShow" value="all">All</button>
+        <button class="modal-button switch" name="todoShow" value="done">Done</button>
+      </div>
+      <div class="todo-list">
+        <div class="todo-text" data-trans="todoText">AAA</div>
+        <div class="done-text" data-trans="doneText">Done</div>
+      </div>
+      <input class="todo-input modal-input" type="text" name="todo" maxlength="200" autocomplete="off" />
+    </div>
+    <button class="button todo-toggle-button">ToDo</button>
   </body>
 </html>

@@ -43,7 +43,7 @@
   transition: 0.4s;
 
   &:focus {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
   }
 
   &::placeholder {
@@ -57,13 +57,10 @@
 }
 
 .double {
-  min-width: 1em;
+  min-width: 40px;
   white-space: pre;
   visibility: hidden;
-
-  &.trans {
-    transition: 0.5s;
-  }
+  transition: 0.5s;
 }
 
 // ------------------------------

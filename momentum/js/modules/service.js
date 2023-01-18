@@ -8,3 +8,5 @@ export const fetchAndGo = async (url, func, errorFunc) => {
     if (errorFunc) errorFunc(err);
   }
 };
+
+export const checkValue = (str) => str.trim().replace(/\s{1,}/g, ' ');
