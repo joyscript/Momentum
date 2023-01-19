@@ -72,7 +72,7 @@
           <button class="modal-button switch" name="photoSource" value="flickr">Flickr</button>
         </div>
       </div>
-      <div class="menu-option">
+      <div class="menu-option tag-option">
         <div class="menu-title" data-trans="photoTags">Photo tags</div>
         <div class="menu-buttons">
           <button class="modal-button switch" name="photoTag" value="night">night</button>
@@ -81,8 +81,14 @@
           <button class="modal-button switch" name="photoTag" value="evening">evening</button>
           <button class="modal-button switch" name="photoTag" value="animals">animals</button>
           <button class="modal-button switch" name="photoTag" value="beauty">beauty</button>
-          <input class="menu-tag-input modal-input" name="tag" type="text" maxlength="30" autocomplete="off" />
         </div>
+        <div class="menu-custom">
+          <div class="menu-input-window">
+            <input class="menu-tag-input modal-input" name="tag" type="text" maxlength="30" autocomplete="off" />
+          </div>
+          <button class="modal-button custom-button switch" name="photoTag" value="custom" disabled>Your tag</button>
+        </div>
+        <div class="menu-error"></div>
       </div>
       <div class="menu-option">
         <div class="menu-title" data-trans="showBlocks">Show / hide</div>
@@ -104,8 +110,8 @@
         <button class="modal-button switch" name="todoShow" value="done">Done</button>
       </div>
       <div class="todo-list">
-        <div class="todo-text" data-trans="todoText">AAA</div>
-        <div class="done-text" data-trans="doneText">Done</div>
+        <div class="todo-text" data-trans="todoText"></div>
+        <div class="done-text" data-trans="doneText"></div>
       </div>
       <input class="todo-input modal-input" type="text" name="todo" maxlength="200" autocomplete="off" />
     </div>

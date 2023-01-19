@@ -1,18 +1,68 @@
-import { user, saveUser, transText } from './user.js';
+import { user, saveUser } from './user.js';
 import { showDateAndGreeting, timeOfDay } from './timer.js';
+import { checkValue } from './service.js';
 import { showWeather } from './weather.js';
 import { showCurQuote } from './quote.js';
 import { showBackground } from './slider.js';
 import { loadTodo, toggleTodo } from './todo.js';
 
+const menu = document.querySelector('.menu');
 const blocks = document.querySelectorAll('[id]');
 const modals = document.querySelectorAll('.modal');
 const modalBtns = document.querySelectorAll('.modal-button');
 const modalInputs = document.querySelectorAll('.modal-input');
 const transItems = document.querySelectorAll('[data-trans]');
-const tagInput = document.querySelector('.menu-tag-input');
+const tagsBlock = menu.querySelector('.tag-option');
+const customBlock = menu.querySelector('.menu-custom');
+const tagInput = menu.querySelector('.menu-tag-input');
+const customBtn = menu.querySelector('.custom-button');
+const menuError = menu.querySelector('.menu-error');
 const menuToggleBtn = document.querySelector('.menu-toggle-button');
 const todoToggleBtn = document.querySelector('.todo-toggle-button');
+
+const transText = {
+  language: ['Language', 'Язык'],
+  photoSourse: ['Photo sourse', 'Фото ресурс'],
+  photoTags: ['Photo tags', 'Фото тег'],
+  showBlocks: ['Show / hide', 'Показать / скрыть'],
+  todoText: ['No todos yet', 'Еще нет задач'],
+  doneText: ['No completed todos', 'Нет выполненных задач'],
+  tag: ['[Enter your tag]', '[Введите ваш тег]'],
+  todo: ['[Enter new todo]', '[Введите новую задачу]'],
+  en: ['English', 'Англ.'],
+  ru: ['Russian', 'Русский'],
+  github: ['GitHub', 'GitHub'],
+  unsplash: ['Unsplash', 'Unsplash'],
+  flickr: ['Flickr', 'Flickr'],
+  night: ['Night', 'Ночь'],
+  morning: ['Morning', 'Утро'],
+  afternoon: ['Afternoon', 'День'],
+  evening: ['Evening', 'Вечер'],
+  animals: ['Animals', 'Животные'],
+  beauty: ['Beauty', 'Красота'],
+  custom: ['Your tag', 'Ваш тег'],
+  time: ['Time', 'Время'],
+  date: ['Date', 'Дата'],
+  greeting: ['Name', 'Имя'],
+  weather: ['Weather', 'Погода'],
+  quote: ['Quote', 'Цитата'],
+  player: ['Player', 'Плеер'],
+  all: ['All', 'Все'],
+  done: ['Done', 'Выполнены'],
+  errorFetch: [
+    'Something went wrong. The API is not responding. Try again later.',
+    'Что-то пошло не так. API не отвечает. Попробуйте позже.',
+  ],
+  errorTag: ['There are no images for this tag.<br>Enter another one.', 'Нет изображений по данному тегу.<br>Введите другой.'],
+};
+
+const changeCustomBlock = () => {
+  user.photoSource === 'github' ? customBlock.classList.remove('active') : customBlock.classList.add('active');
+  if (user.customTag) {
+    customBtn.value = customBtn.textContent = user.customTag;
+    customBtn.removeAttribute('disabled');
+  }
+};
 
 const changeBtns = (option) => {
   modalBtns.forEach((btn) => {
@@ -22,58 +72,71 @@ const changeBtns = (option) => {
   });
 };
 
-const changeTagInput = () => {
-  tagInput.disabled = user.photoSource === 'github';
-  if (user.photoSource === 'github') tagInput.value = '';
-};
-
-const translate = () => {
-  const ind = user.lang === 'en' ? 0 : 1;
-  modalBtns.forEach((btn) => (btn.textContent = transText[btn.value][ind]));
-  modalInputs.forEach((input) => (input.placeholder = transText[input.name][ind]));
-  transItems.forEach((item) => (item.textContent = transText[item.dataset.trans][ind]));
-};
-
 const showBlocks = () => {
   blocks.forEach((block) => {
     user.showBlock[block.id] ? block.classList.add('show') : block.classList.remove('show');
   });
 };
 
+const renderError = () => {
+  menuError.innerHTML = transText[user.tagMode === 'custom' ? 'errorTag' : 'errorFetch'][user.lang === 'en' ? 0 : 1];
+};
+
+const translate = () => {
+  const ind = user.lang === 'en' ? 0 : 1;
+  modalInputs.forEach((input) => (input.placeholder = transText[input.name][ind]));
+  transItems.forEach((item) => (item.textContent = transText[item.dataset.trans][ind]));
+  modalBtns.forEach((btn) => {
+    if (btn === customBtn && btn.value !== 'custom') return;
+    btn.textContent = transText[btn.value][ind];
+  });
+  renderError();
+};
+
 const setUserSettings = () => {
+  changeCustomBlock(); // it's important to go first!
   changeBtns();
-  changeTagInput();
   showBlocks();
   translate();
   loadTodo();
+  saveUser();
 };
 
 const changeLanguage = () => {
-  changeBtns('lang');
   translate();
+  changeBtns('lang');
   showDateAndGreeting();
   showWeather();
   showCurQuote();
 };
 
+const resetError = () => {
+  tagsBlock.classList.remove('error');
+  tagInput.value = '';
+  user.tagMode = '';
+  saveUser();
+};
+
 const changePhotoSourse = () => {
+  resetError();
   if (user.photoSource === 'github') {
     user.photoTag = timeOfDay;
     changeBtns('photoTag');
   }
+  showBackground();
+  changeCustomBlock();
   changeBtns('photoSource');
-  changeTagInput();
-  showBackground();
 };
 
-const changePhotoTag = (e) => {
+const changePhotoTag = () => {
+  resetError();
+  showBackground();
   changeBtns('photoTag');
-  showBackground();
 };
 
-const changeTodo = (e) => {
-  changeBtns('todoShow');
+const changeTodo = () => {
   toggleTodo();
+  changeBtns('todoShow');
 };
 
 const handleModalClicks = (e) => {
@@ -107,13 +170,50 @@ const toggleModal = (modal, toggleBtn) => {
     : document.body.removeEventListener('click', closeModal);
 };
 
+const addCustomTag = () => {
+  tagInput.value = checkValue(tagInput.value);
+  if (!tagInput.value) return;
+  user.tagMode = 'custom';
+  showBackground(tagInput.value);
+};
+
+const animateInput = () => {
+  tagInput.parentElement.classList.add('anim');
+  setTimeout(() => (tagInput.value = ''), 250);
+  setTimeout(() => tagInput.parentElement.classList.remove('anim'), 500);
+};
+
+const goAfterSuccess = () => {
+  user.photoTag = user.customTag = tagInput.value;
+  user.tagMode = '';
+  changeCustomBlock(); // it's important to be in this place!
+  changeBtns('photoTag');
+  animateInput();
+  saveUser();
+};
+
+const handleError = (err) => {
+  if (user.tagMode !== 'custom') {
+    user.photoSource = 'github';
+    changePhotoSourse();
+  }
+  console.log(err);
+  tagsBlock.classList.add('error');
+  renderError();
+};
+
+// -----------------------------------------------------------------------
+
 modals.forEach((modal) => modal.addEventListener('click', handleModalClicks));
+
 menuToggleBtn.addEventListener('click', () => toggleModal('menu', menuToggleBtn));
 todoToggleBtn.addEventListener('click', () => toggleModal('todo', todoToggleBtn));
 
-tagInput.addEventListener('change', (e) => {
-  user.photoTag = e.target.value;
-  changePhotoTag();
+tagInput.addEventListener('change', () => {
+  addCustomTag();
+  tagInput.blur();
 });
 
-export { setUserSettings, changePhotoSourse };
+tagInput.addEventListener('input', () => tagInput.value === '' && tagsBlock.classList.remove('error'));
+
+export { setUserSettings, goAfterSuccess, handleError };

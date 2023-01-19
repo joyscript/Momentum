@@ -1,6 +1,6 @@
 import { user } from './user.js';
 import { fetchAndGo } from './service.js';
-import { changePhotoSourse } from './settings.js';
+import { handleError, goAfterSuccess } from './settings.js';
 
 const slider = document.querySelector('.slider');
 const prevBtn = document.querySelector('.slide-prev');
@@ -11,9 +11,9 @@ const flickrKey = '334110c40a5f1c9ae925a64f0815ecee';
 
 const URL = {
   github: (num) => `https://raw.githubusercontent.com/joyscript/stage1-tasks/assets/images/${user.photoTag}/${num}.jpg`,
-  unsplash: () => `https://api.unsplash.com/photos/random?orientation=landscape&query=${user.photoTag}&client_id=${unsplashKey}`,
-  flickr: () =>
-    `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrKey}&tags=${user.photoTag}&extras=url_l&format=json&nojsoncallback=1`,
+  unsplash: (tag) => `https://api.unsplash.com/photos/random?orientation=landscape&query=${tag}&client_id=${unsplashKey}`,
+  flickr: (tag) =>
+    `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrKey}&tags=${tag}&extras=url_l&format=json&nojsoncallback=1`,
 };
 
 const maxGithub = 20;
@@ -56,25 +56,21 @@ const changeImage = (data, img) => {
   if (user.photoSource === 'unsplash') {
     data.urls.regular ? (img.src = data.urls.regular) : showBackground();
   }
+
   if (user.photoSource === 'flickr') {
     const photos = data.photos.photo;
+    if (!photos.length) throw new Error();
+
     do {
       getRandNum(photos.length - 1);
-      console.log(randNum, photos[randNum]);
     } while (!(photos[randNum]['url_l'] && photos[randNum]['width_l'] > photos[randNum]['height_l']));
     img.src = photos[randNum]['url_l'];
   }
   animateImage(img);
+  if (user.tagMode === 'custom') goAfterSuccess();
 };
 
-const handleError = (err) => {
-  console.log(err.message);
-  user.photoSource = 'github';
-  getRandNum(maxGithub);
-  changePhotoSourse();
-};
-
-export const showBackground = () => {
+export const showBackground = (tag = user.photoTag) => {
   isReady = false;
   const img = new Image();
 
@@ -82,14 +78,16 @@ export const showBackground = () => {
     img.src = URL.github(formatRandNum());
     animateImage(img);
   } else {
-    fetchAndGo(URL[user.photoSource](user), (data) => changeImage(data, img), handleError);
+    fetchAndGo(URL[user.photoSource](tag), (data) => changeImage(data, img), handleError);
   }
 };
 
 prevBtn.addEventListener('click', () => isReady && showAnotherSlide(-1));
 nextBtn.addEventListener('click', () => isReady && showAnotherSlide(1));
 
-// document.addEventListener('keydown', (e) => {
-//   if (e.code === 'ArrowLeft') isReady && showAnotherSlide(-1);
-//   if (e.code === 'ArrowRight') isReady && showAnotherSlide(1);
-// });
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName !== 'INPUT' && e.target.contentEditable !== 'true') {
+    if (e.code === 'ArrowLeft') isReady && showAnotherSlide(-1);
+    if (e.code === 'ArrowRight') isReady && showAnotherSlide(1);
+  }
+});
