@@ -17,7 +17,7 @@ body {
   font-size: 16px;
   color: #fff;
   text-align: center;
-  background: rgb(13, 3, 42);
+  background: rgb(6, 8, 68);
 }
 
 .header {
@@ -388,11 +388,6 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
-
-.play-item:hover {
-  opacity: 1;
-}
-
 .play-item::before {
   content: "✓";
   position: absolute;
@@ -400,8 +395,13 @@ body {
   top: 2px;
   font-weight: 900;
 }
-
-.item-active::before {
+.play-item:hover {
+  opacity: 1;
+}
+.play-item.active {
+  color: #c5b358;
+}
+.play-item.active::before {
   color: #c5b358;
 }
 
