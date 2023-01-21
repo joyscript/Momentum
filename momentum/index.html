@@ -13,10 +13,19 @@
   <body>
     <header class="header">
       <div class="player" id="player">
+        <div class="song-name"></div>
+        <div class="progress-wrapper">
+          <input class="range progress-bar" type="range" min="0" max="100" step="0.1" />
+          <div class="song-time"><span class="current-time"></span><span></span><span class="duration"></span></div>
+        </div>
         <div class="player-controls">
           <button class="play-prev button"></button>
           <button class="play button"></button>
           <button class="play-next button"></button>
+        </div>
+        <div class="volume-wrapper">
+          <button class="volume button"></button>
+          <input class="range volume-bar" type="range" min="0" max="100" step="0.1" />
         </div>
         <ul class="play-list"></ul>
       </div>

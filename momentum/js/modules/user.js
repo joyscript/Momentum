@@ -14,11 +14,15 @@ let user = {
     greeting: true,
     weather: true,
     quote: true,
-    player: false,
+    player: true,
   },
   todoList: {},
   todoShow: 'all',
   todoID: 0,
+  playerVolume: 0.4,
+  playerMute: false,
+  playerSong: 0,
+  playerTime: 0,
 };
 
 const key = 'user-momentum-joyscript';
