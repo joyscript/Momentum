@@ -52,20 +52,23 @@ body {
 
 // ----------------------------
 
+button {
+  color: inherit;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .button {
   width: 32px;
   height: 32px;
-  color: inherit;
   font-size: 18px;
   background-size: 32px 32px;
   background-position: center center;
   background-repeat: no-repeat;
   background-color: transparent;
-  border: 0;
-  outline: none;
   opacity: 0.8;
-  cursor: pointer;
-  transition: 0.3s;
 
   &:hover {
     opacity: 1;

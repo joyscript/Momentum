@@ -1,31 +1,26 @@
-$color-light: rgb(255, 255, 255);
-$color-main: rgb(206, 81, 245);
-$color-text: rgb(140, 140, 140);
-$color-text-hover: rgb(39, 1, 51);
-$color-main-bg: rgba(0, 0, 0, 0.6);
-
 .modal {
   position: fixed;
   z-index: 10;
   bottom: 60px;
-  max-height: 85vh;
+  max-height: calc(100vh - 80px);
   padding: 20px;
   font-size: 18px;
   background: $color-main-bg;
   backdrop-filter: blur(2px);
-  overflow: auto;
   visibility: hidden;
   opacity: 0;
   transition: 0.3s ease-in-out;
+}
 
+.scroll {
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 1px grey;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgb(64, 64, 64);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
   }
 }
@@ -88,6 +83,7 @@ $color-main-bg: rgba(0, 0, 0, 0.6);
 
   &::placeholder {
     color: $color-text;
+    opacity: 0.9;
   }
 
   &:focus::placeholder {
@@ -95,293 +91,7 @@ $color-main-bg: rgba(0, 0, 0, 0.6);
   }
 }
 
-// ------------------
-
-.menu {
-  left: 20px;
-  width: 360px;
-
-  .menu-open & {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-.menu-option:not(:last-child) {
-  margin-bottom: 30px;
-}
-
-.menu-title {
-  text-align: left;
-  margin-bottom: 10px;
-}
-
-.menu-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.menu-toggle-button {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  background: url('../assets/svg/menu.svg');
-  opacity: 0.7;
-
-  .menu-open & {
-    transform: rotate(90deg);
-    opacity: 0.9;
-  }
-}
-
-.menu-custom {
-  display: flex;
-  height: 0;
-  margin-top: 15px;
-  opacity: 0;
-  transition: 0.3s;
-
-  &.active {
-    height: 30px;
-    opacity: 1;
-  }
-}
-
-.menu-input-window {
-  position: relative;
-  width: calc(60% + 15px);
-  height: 30px;
-  flex-grow: 1;
-  overflow: hidden;
-  background: $color-light;
-  opacity: 0.9;
-  transition: 0.3s;
-
-  &.anim {
-    opacity: 1;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.menu-tag-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-left: 10px;
-  background: transparent;
-  text-align: left;
-
-  .anim & {
-    animation: input 0.5s linear;
-  }
-
-  .error & {
-    color: red;
-    outline: 1px solid red;
-    outline-offset: -1px;
-  }
-}
-
-@keyframes input {
-  0% {
-    left: 0;
-  }
-  50% {
-    left: 100%;
-    opacity: 1;
-  }
-  51% {
-    width: 0;
-    opacity: 0;
-  }
-  52% {
-    left: 0;
-    opacity: 1;
-  }
-  100% {
-    width: 100%;
-  }
-}
-
-.menu-error {
-  height: 0;
-  margin-top: 15px;
-  text-align: left;
-  color: red;
-  font-size: 16px;
-  transition: height 0.3s;
-  overflow: hidden;
-  opacity: 0;
-
-  .error & {
-    height: 36px;
-    opacity: 1;
-  }
-}
-
-.custom-button {
-  overflow: hidden;
-  color: $color-main;
-  margin-left: 15px;
-
-  &:disabled {
-    width: 0;
-    flex-basis: 0;
-    margin-left: 0;
-    padding: 0;
-    color: $color-text;
-    pointer-events: none;
-    cursor: default;
-    opacity: 0.1;
-    transition: 0.3s;
-  }
-}
-
-// ----------------------------
-
-.todo {
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 300px;
-  min-height: 250px;
-
-  .todo-open & {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-.todo-header {
-  display: flex;
-  gap: 20px;
-}
-
-.todo-list {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.todo-text,
-.done-text {
-  margin: auto;
-  opacity: 0.6;
-  display: none;
-}
-
-.empty-all .todo-text {
-  display: block;
-}
-
-.show-done .todo-text {
-  display: none;
-}
-
-.show-done.empty-done .done-text {
-  display: block;
-}
-
-.todo-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-align: left;
-
-  &:not(:last-child) {
-    margin-bottom: 5px;
-  }
-
-  .show-done & {
-    display: none;
-
-    &.done {
-      display: flex;
-    }
-  }
-}
-
-.todo-task-wrapper {
-  width: 100%;
-  overflow: hidden;
-}
-
-.todo-id {
-  display: none;
-}
-
-.todo-task {
-  display: block;
-  padding: 5px;
-  line-height: 24px;
-  outline: none;
-
-  &:focus {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  .done & {
-    text-decoration: line-through;
-    opacity: 0.7;
-  }
-}
-
-.todo-check-button {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  background: $color-light;
-  cursor: pointer;
-
-  .done & {
-    background: $color-main url('../assets/svg/check.svg') no-repeat;
-    background-size: contain;
-    background-position: 2px -1px;
-    opacity: 1;
-  }
-}
-
-.todo-delete-button {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  margin-left: auto;
-  background-image: url('../assets/svg/delete.svg');
-  background-size: contain;
-}
-
-.todo-toggle-button {
-  position: fixed;
-  right: 40px;
-  bottom: 17px;
-  font-size: 20px;
-  line-height: 1;
-  font-weight: bold;
-
-  &:active {
-    transform: none;
-  }
-}
-
-// ---------------------------
-
 @media (max-width: 480px) {
-  .menu {
-    left: 15px;
-    width: 290px;
-    padding: 15px;
-    font-size: 16px;
-  }
-
-  .modal-buttons {
-    gap: 10px;
-  }
-
   .modal-button {
     width: 80px;
     height: 30px;

@@ -5,28 +5,27 @@ const todo = document.querySelector('.todo');
 const todoList = todo.querySelector('.todo-list');
 const todoInput = todo.querySelector('.todo-input');
 
-const createTask = (id) => {
+const maxListHeight = window.innerHeight - 255;
+const transDuration = 300;
+
+const createTask = (task, isDone) => {
   const element = document.createElement('div');
-  element.classList.add('todo-item');
-  if (user.todoList[id][1] === 'done') element.classList.add('done');
+  element.classList.add('todo-item', 'trans');
+  isDone && element.classList.add('done');
   element.innerHTML = `
     <button class="button todo-check-button"></button>
-    <div class="todo-task-wrapper">
-      <span class="todo-id">${id}:</span><span class="todo-task" contenteditable="true">${user.todoList[id][0]}</span>
-    </div>
+    <div class="todo-task" contenteditable="true">${task}</div>
     <button class="button todo-delete-button"></button>
   `;
   todoList.append(element);
+  todoList.style.height = todoList.scrollHeight + 'px';
+  setTimeout(() => element.classList.remove('trans'), transDuration);
 };
 
 const checkTodoList = () => {
   todoList.querySelector('.todo-item') ? todoList.classList.remove('empty-all') : todoList.classList.add('empty-all');
   todoList.querySelector('.done') ? todoList.classList.remove('empty-done') : todoList.classList.add('empty-done');
-};
-
-const checkAndSave = () => {
-  checkTodoList();
-  saveUser();
+  todoList.scrollHeight > maxListHeight ? todoList.classList.add('scroll') : todoList.classList.remove('scroll');
 };
 
 const addTask = () => {
@@ -35,61 +34,71 @@ const addTask = () => {
     todoInput.blur();
     return;
   }
-  user.todoList[user.todoID] = [task, user.todoShow === 'done' ? 'done' : ''];
-  createTask(user.todoID++);
+  createTask(task, user.todoShow === 'done' ? 'done' : '');
   todoInput.value = '';
-  checkAndSave();
+  checkTodoList();
 };
 
-const toggleTask = (btn) => {
-  btn.parentElement.classList.toggle('done');
-  const taskID = parseInt(btn.nextElementSibling.textContent);
-  user.todoList[taskID][1] = btn.parentElement.classList.contains('done') ? 'done' : '';
-  checkAndSave();
+const toggleTask = (item) => {
+  item.classList.toggle('done');
+  checkTodoList();
 };
 
-const deleteTask = (btn) => {
-  const taskID = parseInt(btn.previousElementSibling.textContent);
-  delete user.todoList[taskID];
+const deleteTask = (item) => {
+  item.style.height = item.offsetHeight + 'px';
+  todoList.style.height = todoList.scrollHeight - item.offsetHeight + 'px';
+  item.style.cssText = 'height: 0; opacity: 0; padding: 0';
   setTimeout(() => {
-    btn.parentElement.remove();
-    checkAndSave();
-  }, 100);
+    item.remove();
+    checkTodoList();
+  }, transDuration);
+};
+
+const clearList = () => {
+  const selector = user.todoShow === 'done' ? '.todo-item.done' : '.todo-item';
+  const items = todoList.querySelectorAll(selector);
+  const itemsHeight = Array.from(items).reduce((sum, item) => (sum += item.offsetHeight), 0);
+  items.forEach((item) => deleteTask(item));
+  todoList.style.height = todoList.scrollHeight - itemsHeight + 'px';
+  checkTodoList();
 };
 
 const changeTask = (task) => {
-  const taskID = parseInt(task.previousElementSibling.textContent);
-  user.todoList[taskID][0] = task.textContent = checkValue(task.innerText);
+  task.textContent = checkValue(task.textContent);
   task.blur();
-  saveUser();
 };
 
 const loadTodo = () => {
-  for (let taskID in user.todoList) createTask(taskID);
+  user.todoList.forEach((task) => createTask(task[0], task[1]));
   user.todoShow === 'done' ? toggleTodo() : checkTodoList();
 };
 
 const toggleTodo = () => {
-  if (user.todoShow === 'done') {
-    todoList.style.minHeight = todoList.offsetHeight + 'px';
-    todoList.classList.add('show-done');
-  } else {
-    todoList.style = '';
-    todoList.classList.remove('show-done');
-  }
+  user.todoShow === 'done' ? todoList.classList.add('show-done') : todoList.classList.remove('show-done');
   checkTodoList();
+};
+
+const saveTodo = () => {
+  user.todoList.length = 0;
+  todoList.querySelectorAll('.todo-task').forEach((task) => {
+    user.todoList.push([task.textContent, task.parentElement.classList.contains('done') ? 'done' : '']);
+  });
+  saveUser();
 };
 
 todoInput.addEventListener('change', addTask);
 
-todoList.addEventListener('click', (e) => {
-  if (e.target.classList.contains('todo-check-button')) toggleTask(e.target);
-  if (e.target.classList.contains('todo-delete-button')) deleteTask(e.target);
+todo.addEventListener('click', (e) => {
+  if (e.target.classList.contains('todo-check-button')) toggleTask(e.target.parentElement);
+  if (e.target.classList.contains('todo-delete-button')) deleteTask(e.target.parentElement);
+  if (e.target.classList.contains('todo-clear-button')) clearList();
 });
 
-todoList.addEventListener('keydown', (e) => {
+todo.addEventListener('keydown', (e) => {
   if (!e.target.classList.contains('todo-task')) return;
   if (e.key === 'Enter' || e.key === 'Escape') changeTask(e.target);
 });
+
+window.addEventListener('beforeunload', saveTodo);
 
 export { loadTodo, toggleTodo };

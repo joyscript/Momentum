@@ -131,5 +131,5 @@ export const showPlayer = () => {
   volumeBtn.addEventListener('click', toggleVolume);
   volumeBar.addEventListener('input', changeVolume);
   progressBar.addEventListener('input', changeTime);
-  window.addEventListener('beforeunload', saveUser);
+  // window.addEventListener('beforeunload', saveUser);
 };

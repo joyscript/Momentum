@@ -65,7 +65,7 @@
       </div>
     </footer>
 
-    <div class="modal menu">
+    <div class="modal menu scroll">
       <div class="menu-option">
         <div class="menu-title" data-trans="language">Language</div>
         <div class="menu-buttons">
@@ -93,7 +93,7 @@
         </div>
         <div class="menu-custom">
           <div class="menu-input-window">
-            <input class="menu-tag-input modal-input" name="tag" type="text" maxlength="30" autocomplete="off" />
+            <input class="menu-tag-input modal-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
           </div>
           <button class="modal-button custom-button switch" name="photoTag" value="custom" disabled>Your tag</button>
         </div>
@@ -108,22 +108,26 @@
           <button class="modal-button" name="showBlock" value="weather">Weather</button>
           <button class="modal-button" name="showBlock" value="quote">Quote</button>
           <button class="modal-button" name="showBlock" value="player">Player</button>
+          <button class="modal-button" name="showBlock" value="todo">ToDo</button>
         </div>
       </div>
     </div>
     <button class="button menu-toggle-button"></button>
 
-    <div class="modal todo">
-      <div class="todo-header">
-        <button class="modal-button switch" name="todoShow" value="all">All</button>
-        <button class="modal-button switch" name="todoShow" value="done">Done</button>
+    <div class="todo-wrapper" id="todo">
+      <div class="modal todo">
+        <div class="todo-header">
+          <button class="modal-button switch" name="todoShow" value="all">All</button>
+          <button class="modal-button switch" name="todoShow" value="done">Done</button>
+        </div>
+        <div class="todo-list">
+          <div class="todo-text" data-trans="todoText"></div>
+          <div class="done-text" data-trans="doneText"></div>
+        </div>
+        <button class="todo-clear-button" value="clear">Clear list</button>
+        <input class="todo-input modal-input" type="text" name="todoInput" maxlength="200" autocomplete="off" />
       </div>
-      <div class="todo-list">
-        <div class="todo-text" data-trans="todoText"></div>
-        <div class="done-text" data-trans="doneText"></div>
-      </div>
-      <input class="todo-input modal-input" type="text" name="todo" maxlength="200" autocomplete="off" />
+      <button class="button todo-toggle-button" id="todo">ToDo</button>
     </div>
-    <button class="button todo-toggle-button">ToDo</button>
   </body>
 </html>

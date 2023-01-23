@@ -19,16 +19,13 @@ const customBtn = menu.querySelector('.custom-button');
 const menuError = menu.querySelector('.menu-error');
 const menuToggleBtn = document.querySelector('.menu-toggle-button');
 const todoToggleBtn = document.querySelector('.todo-toggle-button');
+const todoClearBtn = document.querySelector('.todo-clear-button');
 
 const transText = {
   language: ['Language', 'Язык'],
   photoSourse: ['Photo sourse', 'Фото ресурс'],
   photoTags: ['Photo tags', 'Фото тег'],
   showBlocks: ['Show / hide', 'Показать / скрыть'],
-  todoText: ['No todos yet', 'Еще нет задач'],
-  doneText: ['No completed todos', 'Нет выполненных задач'],
-  tag: ['[Enter your tag]', '[Введите ваш тег]'],
-  todo: ['[Enter new todo]', '[Введите новую задачу]'],
   en: ['English', 'Англ.'],
   ru: ['Russian', 'Русский'],
   github: ['GitHub', 'GitHub'],
@@ -47,8 +44,14 @@ const transText = {
   weather: ['Weather', 'Погода'],
   quote: ['Quote', 'Цитата'],
   player: ['Player', 'Плеер'],
+  todo: ['ToDo', 'Задачи'],
   all: ['All', 'Все'],
   done: ['Done', 'Выполнены'],
+  clear: ['Clear list', 'Очистить'],
+  todoText: ['No todos yet', 'Еще нет задач'],
+  doneText: ['No completed todos', 'Нет выполненных задач'],
+  tagInput: ['[Enter your tag]', '[Введите ваш тег]'],
+  todoInput: ['[Enter new todo]', '[Введите новую задачу]'],
   errorFetch: [
     'Something went wrong. The API is not responding. Try again later.',
     'Что-то пошло не так. API не отвечает. Попробуйте позже.',
@@ -86,7 +89,7 @@ const translate = () => {
   const ind = user.lang === 'en' ? 0 : 1;
   modalInputs.forEach((input) => (input.placeholder = transText[input.name][ind]));
   transItems.forEach((item) => (item.textContent = transText[item.dataset.trans][ind]));
-  modalBtns.forEach((btn) => {
+  [...modalBtns, todoClearBtn].forEach((btn) => {
     if (btn === customBtn && btn.value !== 'custom') return;
     btn.textContent = transText[btn.value][ind];
   });
@@ -158,16 +161,18 @@ const handleModalClicks = (e) => {
   saveUser();
 };
 
-const toggleModal = (modal, toggleBtn) => {
+const toggleModal = (modal, toggleBtn, closeOnBodyClick) => {
   document.body.classList.toggle(`${modal}-open`);
 
-  const closeModal = (e) => {
-    if (!e.target.closest(`.${modal}`) && e.target !== toggleBtn) document.body.classList.remove(`${modal}-open`);
-  };
+  if (closeOnBodyClick) {
+    const closeModal = (e) => {
+      if (!e.target.closest(`.${modal}`) && e.target !== toggleBtn) document.body.classList.remove(`${modal}-open`);
+    };
 
-  document.body.classList.contains(`${modal}-open`)
-    ? document.body.addEventListener('click', closeModal)
-    : document.body.removeEventListener('click', closeModal);
+    document.body.classList.contains(`${modal}-open`)
+      ? document.body.addEventListener('click', closeModal)
+      : document.body.removeEventListener('click', closeModal);
+  }
 };
 
 const addCustomTag = () => {
@@ -206,8 +211,8 @@ const handleError = (err) => {
 
 modals.forEach((modal) => modal.addEventListener('click', handleModalClicks));
 
-menuToggleBtn.addEventListener('click', () => toggleModal('menu', menuToggleBtn));
-todoToggleBtn.addEventListener('click', () => toggleModal('todo', todoToggleBtn));
+menuToggleBtn.addEventListener('click', () => toggleModal('menu', menuToggleBtn, true));
+todoToggleBtn.addEventListener('click', () => toggleModal('todo', todoToggleBtn, false));
 
 tagInput.addEventListener('change', () => {
   addCustomTag();
