@@ -6,8 +6,9 @@ import { showCurQuote } from './quote.js';
 import { showBackground } from './slider.js';
 import { loadTodo, toggleTodo } from './todo.js';
 
-const menu = document.querySelector('.menu');
-const blocks = document.querySelectorAll('[id]');
+const menu = document.getElementById('menu');
+const todo = document.getElementById('todo');
+const blocks = document.querySelectorAll('[data-show]');
 const modals = document.querySelectorAll('.modal');
 const modalBtns = document.querySelectorAll('.modal-button');
 const modalInputs = document.querySelectorAll('.modal-input');
@@ -17,9 +18,7 @@ const customBlock = menu.querySelector('.menu-custom');
 const tagInput = menu.querySelector('.menu-tag-input');
 const customBtn = menu.querySelector('.custom-button');
 const menuError = menu.querySelector('.menu-error');
-const menuToggleBtn = document.querySelector('.menu-toggle-button');
-const todoToggleBtn = document.querySelector('.todo-toggle-button');
-const todoClearBtn = document.querySelector('.todo-clear-button');
+const todoClearBtn = todo.querySelector('.todo-clear-button');
 
 const transText = {
   language: ['Language', 'Язык'],
@@ -44,7 +43,7 @@ const transText = {
   weather: ['Weather', 'Погода'],
   quote: ['Quote', 'Цитата'],
   player: ['Player', 'Плеер'],
-  todo: ['ToDo', 'Задачи'],
+  todo: ['Todo', 'Задачи'],
   all: ['All', 'Все'],
   done: ['Done', 'Выполнены'],
   clear: ['Clear list', 'Очистить'],
@@ -77,7 +76,7 @@ const changeBtns = (option) => {
 
 const showBlocks = () => {
   blocks.forEach((block) => {
-    user.showBlock[block.id] ? block.classList.add('show') : block.classList.remove('show');
+    user.showBlock[block.dataset.show] ? block.classList.add('show') : block.classList.remove('show');
   });
 };
 
@@ -161,18 +160,19 @@ const handleModalClicks = (e) => {
   saveUser();
 };
 
-const toggleModal = (modal, toggleBtn, closeOnBodyClick) => {
-  document.body.classList.toggle(`${modal}-open`);
+const toggleModal = (modal) => {
+  modal.classList.toggle('open');
+  document.body.classList.toggle('lock');
 
-  if (closeOnBodyClick) {
-    const closeModal = (e) => {
-      if (!e.target.closest(`.${modal}`) && e.target !== toggleBtn) document.body.classList.remove(`${modal}-open`);
-    };
+  const closeModal = (e) => {
+    if (!e.target.closest(`.${modal.id}`)) {
+      modal.classList.remove('open');
+      document.body.classList.remove('lock');
+      document.body.removeEventListener('click', closeModal);
+    }
+  };
 
-    document.body.classList.contains(`${modal}-open`)
-      ? document.body.addEventListener('click', closeModal)
-      : document.body.removeEventListener('click', closeModal);
-  }
+  if (modal.classList.contains('open')) document.body.addEventListener('click', closeModal);
 };
 
 const addCustomTag = () => {
@@ -211,8 +211,11 @@ const handleError = (err) => {
 
 modals.forEach((modal) => modal.addEventListener('click', handleModalClicks));
 
-menuToggleBtn.addEventListener('click', () => toggleModal('menu', menuToggleBtn, true));
-todoToggleBtn.addEventListener('click', () => toggleModal('todo', todoToggleBtn, false));
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.modal-toggle-button')) {
+    toggleModal(e.target.closest('.modal-toggle-button').parentElement);
+  }
+});
 
 tagInput.addEventListener('change', () => {
   addCustomTag();
@@ -221,4 +224,4 @@ tagInput.addEventListener('change', () => {
 
 tagInput.addEventListener('input', () => tagInput.value === '' && tagsBlock.classList.remove('error'));
 
-export { setUserSettings, goAfterSuccess, handleError };
+export { setUserSettings, goAfterSuccess, handleError, toggleModal };

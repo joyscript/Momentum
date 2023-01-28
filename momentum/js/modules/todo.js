@@ -1,12 +1,10 @@
 import { user, saveUser } from './user.js';
 import { checkValue } from './service.js';
 
-const todo = document.querySelector('.todo');
-const todoList = todo.querySelector('.todo-list');
-const todoInput = todo.querySelector('.todo-input');
+const todoList = document.querySelector('.todo-list');
+const todoInput = document.querySelector('.todo-input');
 
-const maxListHeight = window.innerHeight - 255;
-const transDuration = 300;
+const maxHeight = parseInt(getComputedStyle(todoList).maxHeight);
 
 const createTask = (task, isDone) => {
   const element = document.createElement('div');
@@ -19,13 +17,14 @@ const createTask = (task, isDone) => {
   `;
   todoList.append(element);
   todoList.style.height = todoList.scrollHeight + 'px';
-  setTimeout(() => element.classList.remove('trans'), transDuration);
+  element.scrollIntoView();
+  setTimeout(() => element.classList.remove('trans'), 200);
 };
 
 const checkTodoList = () => {
   todoList.querySelector('.todo-item') ? todoList.classList.remove('empty-all') : todoList.classList.add('empty-all');
   todoList.querySelector('.done') ? todoList.classList.remove('empty-done') : todoList.classList.add('empty-done');
-  todoList.scrollHeight > maxListHeight ? todoList.classList.add('scroll') : todoList.classList.remove('scroll');
+  todoList.scrollHeight > maxHeight ? todoList.classList.add('scroll') : todoList.classList.remove('scroll');
 };
 
 const addTask = () => {
@@ -51,7 +50,7 @@ const deleteTask = (item) => {
   setTimeout(() => {
     item.remove();
     checkTodoList();
-  }, transDuration);
+  }, 300);
 };
 
 const clearList = () => {

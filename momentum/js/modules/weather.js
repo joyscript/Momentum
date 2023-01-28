@@ -1,10 +1,10 @@
 import { user, saveUser } from './user.js';
 import { fetchAndGo } from './service.js';
 
-const city = document.querySelector('.city');
-const weatherIcon = document.querySelector('.weather-icon');
-const weatherError = document.querySelector('.weather-error');
-const weatherData = document.querySelector('.weather-data');
+const weather = document.querySelector('.weather');
+const weatherMain = weather.querySelector('.weather-main');
+const weatherData = weather.querySelector('.weather-data');
+const city = weather.querySelector('.city-input');
 
 const defaultCity = { en: 'Minsk', ru: 'Минск' };
 const placeholder = { en: '[Enter city]', ru: '[Введите город]' };
@@ -12,7 +12,7 @@ const windText = { en: 'Wind speed', ru: 'Скорость ветра' };
 const humidText = { en: 'Humidity', ru: 'Влажность' };
 const errorText = {
   en: 'No data. Please enter the correct name of&nbsp;the&nbsp;city',
-  ru: 'Нет данных.<br> Введите корректное название города',
+  ru: 'Нет данных. Введите корректное название города',
 };
 
 const setCity = () => (city.value = user.city || defaultCity[user.lang]);
@@ -24,25 +24,30 @@ const getURL = () => {
 };
 
 const changeWeather = (data) => {
-  weatherError.textContent = '';
-  weatherIcon.className = 'weather-icon owf';
-  weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+  weather.classList.remove('error');
+  weatherMain.innerHTML = `
+    <i class="weather-icon owf owf-${data.weather[0].id}"></i>
+    <span class="weather-temp">${Math.round(data.main.temp)}°C</span>
+    <span class="weather-city">${city.value}</span>
+  `;
   weatherData.innerHTML = `
-  <div><b>${Math.round(data.main.temp)}°C</b> &nbsp; ${data.weather[0].description}</div>
-  <div>${windText[user.lang]}: ${Math.round(data.wind.speed)} m/s</div>
-  <div>${humidText[user.lang]}: ${Math.round(data.main.humidity)}%</div>
+    <span>${data.weather[0].description}</span>
+    <span>${humidText[user.lang]}: ${Math.round(data.main.humidity)}%</span>
+    <span>${windText[user.lang]}: ${Math.round(data.wind.speed)} m/s</span>
   `;
   user.city = city.value;
   saveUser();
 };
 
 const showError = () => {
-  weatherData.innerHTML = '';
-  weatherIcon.className = 'weather-icon owf';
-  weatherError.innerHTML = errorText[user.lang];
+  weatherData.innerHTML = errorText[user.lang];
+  weather.classList.add('error');
 };
 
-const checkValue = () => (city.value = isNaN(city.value) ? city.value.trim() : '');
+const checkValue = () => {
+  city.value = isNaN(city.value) ? city.value.trim() : '';
+  if (city.value) city.value = city.value[0].toUpperCase() + city.value.slice(1);
+};
 
 setCity();
 

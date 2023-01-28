@@ -10,79 +10,88 @@
 }
 
 body {
-  position: relative;
-  min-width: 320px;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 300px;
+  height: 100vh;
+  padding: 20px;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
   color: #fff;
   text-align: center;
-  // background: rgb(13, 3, 42);
   background: rgb(6, 8, 68);
+
+  &.lock {
+    overflow: hidden;
+  }
 }
 
 .header {
+  flex-basis: 30%;
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
-  height: 30vh;
-  min-height: 220px;
-  padding: 20px;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 40px;
 }
 
 .main {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 40vh;
-  min-height: 260px;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .footer {
+  flex-basis: 30%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
-  height: 30vh;
-  min-height: 160px;
-  padding: 20px;
+  min-height: 150px;
+  @include media-s {
+    min-height: 170px;
+  }
+  @include media-hs {
+    min-height: 30px;
+  }
 }
 
 // ----------------------------
 
 button {
   color: inherit;
+  font-size: inherit;
   border: 0;
   outline: none;
-  cursor: pointer;
+  background-color: transparent;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .button {
-  width: 32px;
-  height: 32px;
-  font-size: 18px;
-  background-size: 32px 32px;
-  background-position: center center;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-color: transparent;
+  background-position: center;
   opacity: 0.8;
 
   &:hover {
     opacity: 1;
   }
 
-  &:active {
-    border: 0;
-    transform: scale(1.1);
-  }
+  // &:active {
+  //   border: 0;
+  //   transform: scale(1.1);
+  // }
 }
 
 // -----------------------
 
-[id] {
+[data-show] {
   opacity: 0;
   visibility: hidden;
   transition: 0.3s ease-in-out;
@@ -91,12 +100,4 @@ button {
 .show {
   opacity: 1;
   visibility: visible;
-}
-
-// -----------------------
-
-@media (max-width: 768px) {
-  .main {
-    min-height: 200px;
-  }
 }

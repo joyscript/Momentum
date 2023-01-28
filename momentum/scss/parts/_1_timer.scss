@@ -3,19 +3,45 @@
   font-family: 'Arial-MT';
   font-size: 100px;
   letter-spacing: -4px;
+
+  @include media-mm {
+    font-size: 70px;
+  }
+
+  @include media-h(600px) {
+    font-size: 60px;
+  }
+
+  @include media-ss {
+    font-size: 42px;
+  }
 }
 
 .date {
   font-size: 24px;
   margin-bottom: 20px;
+
+  @include media-s {
+    font-size: 18px;
+  }
 }
 
 .greeting-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   max-width: 100%;
   font-size: 40px;
+
+  @include media-mm {
+    font-size: 30px;
+  }
+
+  @include media-s {
+    padding: 0 15px;
+    font-size: 24px;
+  }
 }
 
 .name-wrapper {
@@ -27,6 +53,10 @@
 .name,
 .double {
   padding: 10px;
+
+  @include media-ss {
+    padding: 5px;
+  }
 }
 
 .name {
@@ -61,41 +91,4 @@
   white-space: pre;
   visibility: hidden;
   transition: 0.5s;
-}
-
-// ------------------------------
-
-@media (max-width: 768px) {
-  .time {
-    font-size: 72px;
-  }
-
-  .date {
-    font-size: 24px;
-  }
-
-  .greeting-wrapper {
-    padding: 0 20px;
-    font-size: 32px;
-  }
-
-  .greeting,
-  .name,
-  .double {
-    padding: 5px;
-  }
-}
-
-@media (max-width: 480px) {
-  .time {
-    font-size: 50px;
-  }
-
-  .date {
-    font-size: 20px;
-  }
-
-  .greeting-wrapper {
-    font-size: 24px;
-  }
 }

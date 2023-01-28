@@ -1,11 +1,56 @@
-.menu {
+.menu-toggle-button {
   left: 20px;
-  width: 360px;
-  overflow: auto;
+  bottom: 20px;
+  background: url('../assets/svg/menu.svg');
 
-  .menu-open & {
-    opacity: 1;
-    visibility: visible;
+  .open > & {
+    left: 40px;
+    bottom: 35px;
+    transform: rotate(90deg);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @include media-mm {
+    left: 25px;
+    bottom: 20px;
+
+    .open > & {
+      left: 25px;
+      bottom: 20px;
+    }
+  }
+}
+
+.menu-modal {
+  left: 20px;
+  bottom: 20px;
+  width: 365px;
+  padding-top: 3px;
+
+  @include media-mm {
+    left: 5px;
+    bottom: 5px;
+  }
+
+  @include media(400px) {
+    width: 100%;
+  }
+}
+
+.menu-body {
+  max-height: calc(100vh - (60px + 40px));
+  padding: 20px;
+  box-shadow: $shadow;
+
+  @include media-mm {
+    max-height: calc(100vh - (60px + 10px));
+  }
+
+  @media (max-width: 400px) and (min-height: 481px) {
+    max-height: calc(100vh - (60px + 5px + 60px));
   }
 }
 
@@ -22,18 +67,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-}
 
-.menu-toggle-button {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  background: url('../assets/svg/menu.svg');
-  opacity: 0.7;
-
-  .menu-open & {
-    transform: rotate(90deg);
-    opacity: 0.9;
+  @include media-mm {
+    gap: 10px;
   }
 }
 
@@ -143,15 +179,48 @@
   }
 }
 
-@media (max-width: 480px) {
-  .menu {
-    left: 15px;
-    width: 290px;
-    padding: 15px;
-    font-size: 16px;
-  }
+.menu-footer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  height: 60px;
+  background: $color-modal-bg2;
 
-  .menu-buttons {
-    gap: 10px;
+  span {
+    font-size: 15px;
+    opacity: 0.3;
   }
+}
+
+.menu-link {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transition: 0.3s;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.github-link {
+  background-image: url('../assets/svg/github.svg');
+}
+
+.rss-link {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  background-image: url('../assets/svg/rss.svg');
+  background-size: 22px;
+  transform: translateY(-50%);
 }

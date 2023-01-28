@@ -1,9 +1,10 @@
 import { user } from './user.js';
 import { fetchAndGo } from './service.js';
 
-const quote = document.querySelector('.quote');
-const author = document.querySelector('.author');
-const quoteBtn = document.querySelector('.change-quote');
+const quote = document.querySelector('.quote-text');
+const author = document.querySelector('.quote-author');
+const quoteBtn = document.querySelector('.change-quote-button');
+
 const url = './data/quotes.json';
 const errorTexts = {
   en: 'Something went wrong. The quote cannot be displayed ',

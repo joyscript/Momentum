@@ -12,37 +12,44 @@
 
   <body>
     <header class="header">
-      <div class="player" id="player">
-        <div class="song-name"></div>
-        <div class="progress-wrapper">
-          <input class="range progress-bar" type="range" min="0" max="100" step="0.1" />
-          <div class="song-time"><span class="current-time"></span><span></span><span class="duration"></span></div>
+      <div class="player" data-show="player" id="player">
+        <button class="button modal-toggle-button player-toggle-button"></button>
+        <div class="player-modal">
+          <div class="player-header">
+            <div class="progress-wrapper">
+              <div class="song-name"></div>
+              <input class="range progress-bar" type="range" min="0" max="100" step="0.1" />
+              <div class="song-time"><span class="current-time"></span><span></span><span class="duration"></span></div>
+            </div>
+            <div class="player-controls">
+              <button class="play-prev button"></button>
+              <button class="play button"></button>
+              <button class="play-next button"></button>
+            </div>
+            <div class="volume-wrapper">
+              <button class="volume button"></button>
+              <input class="range volume-bar" type="range" min="0" max="100" step="0.1" />
+              <button class="button playlist-button"></button>
+            </div>
+          </div>
+          <ul class="play-list"></ul>
         </div>
-        <div class="player-controls">
-          <button class="play-prev button"></button>
-          <button class="play button"></button>
-          <button class="play-next button"></button>
-        </div>
-        <div class="volume-wrapper">
-          <button class="volume button"></button>
-          <input class="range volume-bar" type="range" min="0" max="100" step="0.1" />
-        </div>
-        <ul class="play-list"></ul>
       </div>
 
-      <div class="weather" id="weather">
-        <input class="city" type="text" name="city" maxlength="20" autocomplete="off" />
-        <i class="weather-icon owf"></i>
-        <div class="weather-data"></div>
-        <div class="weather-error"></div>
+      <div class="weather" data-show="weather" id="weather">
+        <div class="weather-main modal-toggle-button"></div>
+        <div class="weather-modal">
+          <input class="city-input" type="text" name="city" maxlength="20" autocomplete="off" />
+          <div class="weather-data"></div>
+        </div>
       </div>
     </header>
 
     <main class="main">
-      <div class="time" id="time"></div>
-      <div class="date" id="date"></div>
+      <div class="time" data-show="time"></div>
+      <div class="date" data-show="date"></div>
 
-      <div class="greeting-wrapper" id="greeting">
+      <div class="greeting-wrapper" data-show="greeting">
         <div class="greeting"></div>
         <div class="name-wrapper">
           <input class="name" type="text" name="name" maxlength="30" autocomplete="off" />
@@ -57,65 +64,82 @@
       </div>
     </main>
 
-    <footer class="footer" id="quote">
-      <button class="change-quote button"></button>
-      <div>
-        <div class="quote"></div>
-        <div class="author"></div>
+    <footer class="footer">
+      <div class="quote" data-show="quote" id="quote">
+        <button class="button modal-toggle-button quote-toggle-button"></button>
+        <div class="quote-modal">
+          <div class="quote-body">
+            <button class="button change-quote-button"></button>
+            <div class="quote-text"></div>
+            <div class="quote-author"></div>
+          </div>
+          <div class="quote-footer"></div>
+        </div>
       </div>
     </footer>
 
-    <div class="modal menu scroll">
-      <div class="menu-option">
-        <div class="menu-title" data-trans="language">Language</div>
-        <div class="menu-buttons">
-          <button class="modal-button switch" name="lang" value="en">EN</button>
-          <button class="modal-button switch" name="lang" value="ru">RU</button>
-        </div>
-      </div>
-      <div class="menu-option">
-        <div class="menu-title" data-trans="photoSourse">Photo sourse</div>
-        <div class="menu-buttons">
-          <button class="modal-button switch" name="photoSource" value="github">GitHub</button>
-          <button class="modal-button switch" name="photoSource" value="unsplash">Unsplash</button>
-          <button class="modal-button switch" name="photoSource" value="flickr">Flickr</button>
-        </div>
-      </div>
-      <div class="menu-option tag-option">
-        <div class="menu-title" data-trans="photoTags">Photo tags</div>
-        <div class="menu-buttons">
-          <button class="modal-button switch" name="photoTag" value="night">night</button>
-          <button class="modal-button switch" name="photoTag" value="morning">morning</button>
-          <button class="modal-button switch" name="photoTag" value="afternoon">afternoon</button>
-          <button class="modal-button switch" name="photoTag" value="evening">evening</button>
-          <button class="modal-button switch" name="photoTag" value="animals">animals</button>
-          <button class="modal-button switch" name="photoTag" value="beauty">beauty</button>
-        </div>
-        <div class="menu-custom">
-          <div class="menu-input-window">
-            <input class="menu-tag-input modal-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
+    <div class="menu" id="menu">
+      <button class="button modal-toggle-button menu-toggle-button"></button>
+      <div class="modal menu-modal">
+        <div class="menu-body scroll">
+          <div class="menu-option">
+            <div class="menu-title" data-trans="language">Language</div>
+            <div class="menu-buttons">
+              <button class="modal-button switch" name="lang" value="en">EN</button>
+              <button class="modal-button switch" name="lang" value="ru">RU</button>
+            </div>
           </div>
-          <button class="modal-button custom-button switch" name="photoTag" value="custom" disabled>Your tag</button>
+          <div class="menu-option">
+            <div class="menu-title" data-trans="photoSourse">Photo sourse</div>
+            <div class="menu-buttons">
+              <button class="modal-button switch" name="photoSource" value="github">GitHub</button>
+              <button class="modal-button switch" name="photoSource" value="unsplash">Unsplash</button>
+              <button class="modal-button switch" name="photoSource" value="flickr">Flickr</button>
+            </div>
+          </div>
+          <div class="menu-option tag-option">
+            <div class="menu-title" data-trans="photoTags">Photo tags</div>
+            <div class="menu-buttons">
+              <button class="modal-button switch" name="photoTag" value="night">night</button>
+              <button class="modal-button switch" name="photoTag" value="morning">morning</button>
+              <button class="modal-button switch" name="photoTag" value="afternoon">afternoon</button>
+              <button class="modal-button switch" name="photoTag" value="evening">evening</button>
+              <button class="modal-button switch" name="photoTag" value="animals">animals</button>
+              <button class="modal-button switch" name="photoTag" value="beauty">beauty</button>
+            </div>
+            <div class="menu-custom">
+              <div class="menu-input-window">
+                <input class="menu-tag-input modal-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
+              </div>
+              <button class="modal-button custom-button switch" name="photoTag" value="custom" disabled>Your tag</button>
+            </div>
+            <div class="menu-error"></div>
+          </div>
+          <div class="menu-option">
+            <div class="menu-title" data-trans="showBlocks">Show / hide</div>
+            <div class="menu-buttons">
+              <button class="modal-button" name="showBlock" value="time">Time</button>
+              <button class="modal-button" name="showBlock" value="date">Date</button>
+              <button class="modal-button" name="showBlock" value="greeting">Greeting</button>
+              <button class="modal-button" name="showBlock" value="weather">Weather</button>
+              <button class="modal-button" name="showBlock" value="quote">Quote</button>
+              <button class="modal-button" name="showBlock" value="player">Player</button>
+              <button class="modal-button" name="showBlock" value="todo">ToDo</button>
+            </div>
+          </div>
         </div>
-        <div class="menu-error"></div>
-      </div>
-      <div class="menu-option">
-        <div class="menu-title" data-trans="showBlocks">Show / hide</div>
-        <div class="menu-buttons">
-          <button class="modal-button" name="showBlock" value="time">Time</button>
-          <button class="modal-button" name="showBlock" value="date">Date</button>
-          <button class="modal-button" name="showBlock" value="greeting">Greeting</button>
-          <button class="modal-button" name="showBlock" value="weather">Weather</button>
-          <button class="modal-button" name="showBlock" value="quote">Quote</button>
-          <button class="modal-button" name="showBlock" value="player">Player</button>
-          <button class="modal-button" name="showBlock" value="todo">ToDo</button>
+        <div class="menu-footer">
+          <span>02</span>
+          <a href="https://github.com/joyscript" class="menu-link github-link" target="_blank"></a>
+          <span>23</span>
+          <a href="https://rs.school/js/" class="menu-link rss-link" target="_blank"></a>
         </div>
       </div>
     </div>
-    <button class="button menu-toggle-button"></button>
 
-    <div class="todo-wrapper" id="todo">
-      <div class="modal todo">
+    <div class="todo" id="todo" data-show="todo">
+      <button class="modal-toggle-button todo-toggle-button">Todo</button>
+      <div class="modal todo-modal">
         <div class="todo-header">
           <button class="modal-button switch" name="todoShow" value="all">All</button>
           <button class="modal-button switch" name="todoShow" value="done">Done</button>
@@ -125,9 +149,10 @@
           <div class="done-text" data-trans="doneText"></div>
         </div>
         <button class="todo-clear-button" value="clear">Clear list</button>
-        <input class="todo-input modal-input" type="text" name="todoInput" maxlength="200" autocomplete="off" />
+        <div class="todo-footer">
+          <input class="todo-input modal-input" type="text" name="todoInput" maxlength="200" autocomplete="off" />
+        </div>
       </div>
-      <button class="button todo-toggle-button" id="todo">ToDo</button>
     </div>
   </body>
 </html>

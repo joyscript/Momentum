@@ -1,36 +1,81 @@
-.todo {
+.todo-toggle-button {
   right: 20px;
-  width: 300px;
-  max-width: calc(100vw - 40px);
+  bottom: 20px;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: bold;
+  letter-spacing: -1px;
+  opacity: 0.8;
 
-  .todo-open & {
+  &:hover {
     opacity: 1;
-    visibility: visible;
+  }
+
+  .open > & {
+    right: 40px;
+    bottom: 37px;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @include media-mm {
+    right: 25px;
+    bottom: 23px;
+
+    .open > & {
+      right: 25px;
+      bottom: 23px;
+    }
+  }
+}
+
+.todo-modal {
+  right: 20px;
+  bottom: 20px;
+  width: 320px;
+
+  @include media-mm {
+    right: 5px;
+    bottom: 5px;
+  }
+
+  @include media(400px) {
+    width: 100%;
   }
 }
 
 .todo-header {
   display: flex;
   gap: 20px;
-  margin-bottom: 20px;
+  padding: 20px 20px 15px;
+  background: $color-modal-bg2;
 }
 
 .todo-list {
-  min-height: 165px;
-  max-height: calc(100vh - 255px);
-  margin-bottom: 15px;
-  padding-bottom: 5px;
+  position: relative;
+  min-height: 180px;
+  max-height: calc(100vh - (65px + 105px + 40px));
+  padding: 5px 20px 15px;
   overflow: hidden;
   transition: 0.3s;
-  box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.3);
-
-  &.empty-all,
-  &.show-done.empty-done {
-    box-shadow: none;
-  }
+  box-shadow: $shadow;
 
   &.scroll {
-    overflow: auto;
+    overflow: auto; //important
+  }
+
+  @include media-mm {
+    max-height: calc(100vh - (65px + 105px + 10px));
+  }
+
+  @media (max-width: 400px) and (min-height: 481px) {
+    max-height: calc(100vh - (65px + 105px + 5px + 60px));
+  }
+
+  @include media-hs {
+    min-height: calc(100vh - (65px + 105px + 10px));
   }
 }
 
@@ -73,10 +118,6 @@
 
   &.trans {
     opacity: 0;
-  }
-
-  .scroll & {
-    padding-right: 5px;
   }
 }
 
@@ -122,15 +163,22 @@
   background-size: contain;
 }
 
+.todo-footer {
+  height: 105px;
+  padding: 15px 20px 60px;
+  background: $color-modal-bg2;
+}
+
 .todo-clear-button {
-  margin: 0 auto 15px;
-  padding: 5px;
+  position: absolute;
+  left: 20px;
+  bottom: 17px;
+  padding: 0 10px;
   font-size: 15px;
-  line-height: 1;
+  line-height: 26px;
   color: $color-light;
   background: rgba(255, 255, 255, 0.2);
-  opacity: 0.7;
-  transition: 0.3s;
+  opacity: 0.75;
 
   &:hover {
     opacity: 0.9;
@@ -140,27 +188,6 @@
   .show-done.empty-done ~ & {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(30px);
-  }
-}
-
-.todo-toggle-button {
-  position: fixed;
-  right: 40px;
-  bottom: 17px;
-  width: auto;
-  font-size: 20px;
-  line-height: 1;
-  font-weight: bold;
-  opacity: 0.8;
-  transition: 0.3s;
-
-  &:hover,
-  .todo-open & {
-    opacity: 1;
-  }
-
-  &:active {
-    transform: none;
+    transform: translateY(-30px);
   }
 }

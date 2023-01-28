@@ -1,0 +1,91 @@
+.quote-toggle-button {
+  display: none;
+
+  @include media-hs {
+    left: 50%;
+    bottom: 21px;
+    display: block;
+    background-image: url('../assets/svg/quote.svg');
+    transform: translateX(-50%);
+  }
+}
+
+.quote-modal {
+  @include media-hs {
+    left: 50%;
+    bottom: 5px;
+    width: 800px;
+    transform: translateX(-50%);
+    @include modal;
+  }
+}
+
+.quote-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  font-style: italic;
+
+  @include media-s {
+    min-height: 170px;
+  }
+
+  @include media-hs {
+    min-height: 200px;
+    padding: 20px;
+    box-shadow: $shadow;
+  }
+
+  @media (min-width: 481px) and (max-height: 480px) {
+    min-height: 170px;
+  }
+}
+
+.quote-footer {
+  display: none;
+  @include media-hs {
+    display: block;
+    height: 60px;
+    background: $color-modal-bg2;
+  }
+}
+
+.change-quote-button {
+  flex-shrink: 0;
+  margin-bottom: 30px;
+  background-image: url('../assets/svg/reload.svg');
+
+  @include media-mm {
+    margin-bottom: 25px;
+  }
+
+  @include media-ss {
+    width: 27px;
+    height: 27px;
+    margin-bottom: 20px;
+  }
+}
+
+.quote-text {
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.2;
+
+  @include media-mm {
+    font-size: 16px;
+  }
+}
+
+.quote-author {
+  padding: 0 65px;
+  font-size: 16px;
+
+  @include media-mm {
+    font-size: 15px;
+  }
+  @include media-hs {
+    padding: 0;
+  }
+}

@@ -1,4 +1,5 @@
 import { user, saveUser } from './user.js';
+import { toggleModal } from './settings.js';
 import { audioData } from './audioData.js';
 
 export const showPlayer = () => {
@@ -13,6 +14,7 @@ export const showPlayer = () => {
   const duration = player.querySelector('.duration');
   const progressBar = player.querySelector('.progress-bar');
   const volumeBar = player.querySelector('.volume-bar');
+  const playlistBtn = player.querySelector('.playlist-button');
 
   const audio = new Audio();
   let isPlaying = false;
@@ -110,6 +112,13 @@ export const showPlayer = () => {
     }
   };
 
+  const openPlaylist = () => {
+    player.classList.toggle('playlist-open');
+    const maxHeight = parseInt(getComputedStyle(playList).maxHeight);
+    playList.style.height = player.classList.contains('playlist-open') ? playList.scrollHeight + 25 + 'px' : '';
+    playList.scrollHeight > maxHeight ? playList.classList.add('scroll') : playList.classList.remove('scroll');
+  };
+
   // -------------------------------------------------------
 
   audioData.forEach((item) => createPlayList(item));
@@ -132,4 +141,6 @@ export const showPlayer = () => {
   volumeBar.addEventListener('input', changeVolume);
   progressBar.addEventListener('input', changeTime);
   // window.addEventListener('beforeunload', saveUser);
+
+  playlistBtn.addEventListener('click', openPlaylist);
 };
