@@ -98,6 +98,6 @@ todo.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === 'Escape') changeTask(e.target);
 });
 
-window.addEventListener('beforeunload', saveTodo);
+// window.addEventListener('beforeunload', saveTodo);
 
 export { loadTodo, toggleTodo };

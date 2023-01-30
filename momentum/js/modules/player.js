@@ -112,11 +112,18 @@ export const showPlayer = () => {
     }
   };
 
-  const openPlaylist = () => {
+  const togglePlaylist = () => {
     player.classList.toggle('playlist-open');
-    const maxHeight = parseInt(getComputedStyle(playList).maxHeight);
-    playList.style.height = player.classList.contains('playlist-open') ? playList.scrollHeight + 25 + 'px' : '';
-    playList.scrollHeight > maxHeight ? playList.classList.add('scroll') : playList.classList.remove('scroll');
+
+    if (player.classList.contains('playlist-open')) {
+      playList.style.height = playList.scrollHeight + 25 + 'px';
+      setTimeout(() => playList.classList.add('scroll'), 300);
+    } else {
+      playList.style.height = '';
+      playList.classList.remove('scroll');
+    }
+    user.playlistOpen = player.classList.contains('playlist-open');
+    saveUser();
   };
 
   // -------------------------------------------------------
@@ -129,12 +136,14 @@ export const showPlayer = () => {
   activateTitle();
   changeVolume();
   updateProgress();
+  user.playlistOpen && togglePlaylist();
 
   audio.addEventListener('loadedmetadata', showData);
   audio.addEventListener('timeupdate', updateProgress);
   audio.addEventListener('ended', () => playNewAudio(1));
   nextBtn.addEventListener('click', () => playNewAudio(1));
   prevBtn.addEventListener('click', () => playNewAudio(-1));
+  playlistBtn.addEventListener('click', togglePlaylist);
   playList.addEventListener('click', playChosenAudio);
   playBtn.addEventListener('click', toggleAudio);
   volumeBtn.addEventListener('click', toggleVolume);
@@ -142,5 +151,4 @@ export const showPlayer = () => {
   progressBar.addEventListener('input', changeTime);
   // window.addEventListener('beforeunload', saveUser);
 
-  playlistBtn.addEventListener('click', openPlaylist);
 };

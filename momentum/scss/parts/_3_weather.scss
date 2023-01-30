@@ -1,18 +1,18 @@
 .weather-main {
   position: fixed;
-  z-index: 3;
   top: 32px;
   right: 35px;
-  width: 50px;
+  width: 70px;
   text-align: center;
 
   .error > & {
     display: none;
   }
 
-  @include media-mm {
+  @include media-tm {
     top: 17px;
     right: 25px;
+    width: 50px;
     text-align: right;
     opacity: 0.9;
     cursor: pointer;
@@ -36,23 +36,24 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
-  padding: 15px 75px 20px 20px;
+  padding: 15px 90px 20px 20px;
   text-align: left;
   line-height: 1.2;
 
-  .error > & {
-    padding-right: 20px;
-  }
-
-  @include media-mm {
+  @include media-tm {
     @include modal-general;
     top: 5px;
     right: -300px;
     width: 245px;
     height: auto;
+    min-height: 150px;
+    padding-right: 75px;
     gap: 12px;
     .open > & {
       right: 5px;
+    }
+    .error > & {
+      padding-right: 20px;
     }
   }
 }
@@ -60,27 +61,27 @@
 .weather-icon {
   margin-bottom: 5px;
   font-size: 44px;
-  @include media-mm {
+  @include media-tm {
     font-size: 38px;
   }
 }
 
 .weather-temp {
   font-size: 22px;
-  @include media-mm {
+  @include media-tm {
     font-size: 20px;
   }
 }
 
 .weather-city {
   display: none;
-  @include media-mm {
-    display: block;
+  @include media-tm {
+    // display: block;
     position: absolute;
     top: 8px;
     right: 50px;
     width: 180px;
-    font-size: 18px;
+    font-size: 15px;
     text-align: right;
     transition: 0.4s 0.1s;
     pointer-events: none;
@@ -108,14 +109,17 @@
     line-height: 22px;
   }
 
-  @include media-mm {
+  @include media-tm {
     gap: 10px;
+    .error & {
+      margin-top: 0;
+    }
   }
 }
 
 .city-input {
   display: block;
-  width: 165px;
+  width: 170px;
   height: 34px;
   padding: 5px;
   font-size: 20px;
@@ -137,8 +141,11 @@
     background: rgba(255, 255, 255, 0.15);
   }
 
-  @include media-mm {
+  @include media-lm {
     width: 150px;
+  }
+
+  @include media-tm {
     height: 30px;
     font-size: 18px;
     &::placeholder {

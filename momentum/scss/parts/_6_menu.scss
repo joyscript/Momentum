@@ -13,7 +13,7 @@
     }
   }
 
-  @include media-mm {
+  @include media-tm {
     left: 25px;
     bottom: 20px;
 
@@ -30,7 +30,7 @@
   width: 365px;
   padding-top: 3px;
 
-  @include media-mm {
+  @include media-tm {
     left: 5px;
     bottom: 5px;
   }
@@ -38,6 +38,7 @@
   @include media(400px) {
     width: 100%;
   }
+
 }
 
 .menu-body {
@@ -45,11 +46,11 @@
   padding: 20px;
   box-shadow: $shadow;
 
-  @include media-mm {
+  @include media-tm {
     max-height: calc(100vh - (60px + 10px));
   }
 
-  @media (max-width: 400px) and (min-height: 481px) {
+  @media (max-width: 400px) and (min-height: 550px) {
     max-height: calc(100vh - (60px + 5px + 60px));
   }
 }
@@ -68,7 +69,7 @@
   flex-wrap: wrap;
   gap: 15px;
 
-  @include media-mm {
+  @include media-tm {
     gap: 10px;
   }
 }

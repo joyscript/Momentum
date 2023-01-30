@@ -4,16 +4,26 @@
   font-size: 100px;
   letter-spacing: -4px;
 
-  @include media-mm {
+  @include media-lm {
     font-size: 70px;
   }
 
-  @include media-h(600px) {
-    font-size: 60px;
+  @include media-ms {
+    font-size: 50px;
   }
 
-  @include media-ss {
-    font-size: 42px;
+  &.gradient {
+    color: transparent;
+    background-image: linear-gradient(-225deg, #ffffff 0%, #f263ff 29%, #00e1ff 67%, #ffffff 100%);
+    background-size: 300% auto;
+    background-clip: text;
+    animation: gradient 7s linear infinite;
+  }
+}
+
+@keyframes gradient {
+  to {
+    background-position: -300% center;
   }
 }
 
@@ -21,8 +31,8 @@
   font-size: 24px;
   margin-bottom: 20px;
 
-  @include media-s {
-    font-size: 18px;
+  @include media-ms {
+    font-size: 20px;
   }
 }
 
@@ -31,30 +41,38 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  row-gap: 5px;
   max-width: 100%;
   font-size: 40px;
+  line-height: 1;
 
-  @include media-mm {
+  @include media-tm {
     font-size: 30px;
   }
 
-  @include media-s {
+  @include media-ms {
     padding: 0 15px;
-    font-size: 24px;
+    font-size: 26px;
   }
 }
 
 .name-wrapper {
   position: relative;
+  height: 60px;
   overflow: hidden;
+  @include media-tm {
+    height: 50px;
+  }
+  @include media-ms {
+    height: 36px;
+  }
 }
 
 .greeting,
 .name,
 .double {
   padding: 10px;
-
-  @include media-ss {
+  @include media-ms {
     padding: 5px;
   }
 }
@@ -65,6 +83,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   font-size: inherit;
   color: inherit;
   border: none;
@@ -88,6 +107,7 @@
 
 .double {
   min-width: 40px;
+  height: 100%;
   white-space: pre;
   visibility: hidden;
   transition: 0.5s;

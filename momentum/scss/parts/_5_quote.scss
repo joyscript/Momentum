@@ -11,20 +11,7 @@
 }
 
 .quote-modal {
-  @include media-hs {
-    left: 50%;
-    bottom: 5px;
-    width: 800px;
-    transform: translateX(-50%);
-    @include modal;
-  }
-}
-
-.quote-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: relative;
   min-height: 150px;
   font-style: italic;
 
@@ -33,13 +20,60 @@
   }
 
   @include media-hs {
-    min-height: 200px;
+    @include modal-general;
+    left: 50%;
+    bottom: -100%;
+    width: calc(100% - 150px);
+    max-width: 800px !important;
+    transform: translateX(-50%);
+    min-height: 260px;
+
+    .open > & {
+      bottom: 5px;
+    }
+  }
+
+  @media (max-width: $small) and (max-height: $small) {
+    width: calc(100% - 10px);
+  }
+
+  @media (min-width: $mob) and (max-height: $small) {
+    min-height: 230px;
+  }
+}
+
+.quote-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+
+  @include media-hs {
+    height: calc(100% - 60px);
     padding: 20px;
     box-shadow: $shadow;
   }
 
-  @media (min-width: 481px) and (max-height: 480px) {
-    min-height: 170px;
+  &.prev {
+    animation-name: fade-out;
+  }
+
+  &.next {
+    animation-name: fade-in;
+  }
+
+  &.error {
+    font-size: 16px;
+    font-style: normal;
+    opacity: 0.5;
   }
 }
 
@@ -53,18 +87,16 @@
 }
 
 .change-quote-button {
-  flex-shrink: 0;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   background-image: url('../assets/svg/reload.svg');
 
-  @include media-mm {
-    margin-bottom: 25px;
+  @include media-ms {
+    margin-bottom: 20px;
+    background-size: 28px;
   }
 
-  @include media-ss {
-    width: 27px;
-    height: 27px;
-    margin-bottom: 20px;
+  .next > & {
+    animation: rotate 0.3s linear;
   }
 }
 
@@ -73,7 +105,7 @@
   font-size: 18px;
   line-height: 1.2;
 
-  @include media-mm {
+  @include media-tm {
     font-size: 16px;
   }
 }
@@ -82,10 +114,16 @@
   padding: 0 65px;
   font-size: 16px;
 
-  @include media-mm {
+  @include media-tm {
     font-size: 15px;
   }
   @include media-hs {
     padding: 0;
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(180deg);
   }
 }

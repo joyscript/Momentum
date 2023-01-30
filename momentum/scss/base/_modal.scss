@@ -1,14 +1,20 @@
+.menu,
+.todo,
+.quote,
+.weather,
+.player {
+  z-index: 1;
+  &.open {
+    z-index: 2;
+  }
+}
+
 .modal {
   @include modal;
 }
 
 .modal-toggle-button {
   position: fixed;
-  z-index: 2;
-
-  .open > & {
-    z-index: 11;
-  }
 }
 
 .scroll {
@@ -21,10 +27,12 @@
     box-shadow: inset 0 0 1px grey;
   }
   &::-webkit-scrollbar-thumb {
-    // background: rgba(255, 255, 255, 0.2);
-    // border-radius: 10px;
-    background: rgba(166, 73, 160, 0.2);
+    background: rgba(255, 255, 255, 0.2);
   }
+}
+
+.play-list.scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .modal-button {
@@ -53,7 +61,7 @@
     }
   }
 
-  @include media-mm {
+  @include media-tm {
     width: calc((100% - 20px) / 3);
   }
 }

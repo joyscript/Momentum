@@ -3,6 +3,7 @@ import { showDateAndGreeting, timeOfDay } from './timer.js';
 import { checkValue } from './service.js';
 import { showWeather } from './weather.js';
 import { showCurQuote } from './quote.js';
+import { showCurMantra } from './mantra.js';
 import { showBackground } from './slider.js';
 import { loadTodo, toggleTodo } from './todo.js';
 
@@ -110,6 +111,7 @@ const changeLanguage = () => {
   showDateAndGreeting();
   showWeather();
   showCurQuote();
+  showCurMantra();
 };
 
 const resetError = () => {

@@ -1,36 +1,65 @@
 import { user } from './user.js';
 import { fetchAndGo } from './service.js';
 
-const quote = document.querySelector('.quote-text');
-const author = document.querySelector('.quote-author');
-const quoteBtn = document.querySelector('.change-quote-button');
+const quoteModal = document.querySelector('.quote-modal');
 
 const url = './data/quotes.json';
 const errorTexts = {
-  en: 'Something went wrong. The quote cannot be displayed ',
-  ru: 'Что-то пошло не так. Невозможно отобразить цитату.',
+  en: 'Something went wrong. The content cannot be displayed ',
+  ru: 'Что-то пошло не так. Невозможно отобразить контент.',
 };
 
-let count = 0;
+let curInd;
 let curQuote;
 
-const showCurQuote = () => {
-  quote.textContent = `"${curQuote[user.lang == 'en' ? 'text' : 'текст']}"`;
-  author.textContent = curQuote[user.lang == 'en' ? 'author' : 'автор'];
+const getRandomInd = (itemInd, data) => {
+  let i;
+  do {
+    i = Math.floor(Math.random() * data.length);
+  } while (itemInd === i);
+  return i;
 };
 
-const showError = () => (quote.textContent = errorTexts[user.lang]);
-
-const rotateBtn = () => (quoteBtn.style.transform = `rotate(${count++ * 180}deg)`);
+const insertContent = (elem) => {
+  const keys = [`${user.lang}-text`, `${user.lang}-author`];
+  elem.innerHTML = `
+    <button class="button change-quote-button"></button>
+    <div class="quote-text">"${curQuote[keys[0]]}"</div>
+    <div class="quote-author">${curQuote[keys[1]]}</div>
+  `;
+};
 
 const changeQuote = (data) => {
-  curQuote = data[Math.floor(Math.random() * data.length)];
-  showCurQuote();
-  rotateBtn();
+  curInd = getRandomInd(curInd, data);
+  curQuote = data[curInd];
+
+  const quoteBody = document.createElement('div');
+  quoteBody.classList.add('quote-body', 'next');
+  insertContent(quoteBody);
+  quoteModal.prepend(quoteBody);
+  quoteBody.nextElementSibling.classList.add('prev');
+
+  quoteBody.addEventListener(
+    'animationend',
+    () => {
+      quoteBody.nextElementSibling.remove();
+      quoteBody.classList.remove('next');
+    },
+    { once: true }
+  );
 };
 
-const showQuote = () => fetchAndGo(url, changeQuote, showError);
+const showError = (elem) => {
+  elem.textContent = errorTexts[user.lang];
+  elem.classList.add('error');
+};
 
-quoteBtn.addEventListener('click', showQuote);
+const showCurQuote = () => insertContent(quoteModal.querySelector('.quote-body'));
 
-export { showQuote, showCurQuote };
+const showQuote = () => fetchAndGo(url, changeQuote, () => showError(quoteModal.querySelector('.quote-body')));
+
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('change-quote-button')) showQuote();
+});
+
+export { showQuote, showCurQuote, getRandomInd, showError };

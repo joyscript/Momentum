@@ -32,7 +32,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 10px;
+  gap: 20px;
   min-height: 40px;
 }
 
@@ -83,10 +83,9 @@ button {
     opacity: 1;
   }
 
-  // &:active {
-  //   border: 0;
-  //   transform: scale(1.1);
-  // }
+  @include media-tm {
+    opacity: 0.9;
+  }
 }
 
 // -----------------------

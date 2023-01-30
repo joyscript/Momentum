@@ -23,6 +23,7 @@ let user = {
   playerMute: false,
   playerSong: 0,
   playerTime: 0,
+  playlistOpen: false,
 };
 
 const key = 'user-momentum-joyscript';

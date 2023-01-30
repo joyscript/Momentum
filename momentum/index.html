@@ -13,7 +13,6 @@
   <body>
     <header class="header">
       <div class="player" data-show="player" id="player">
-        <button class="button modal-toggle-button player-toggle-button"></button>
         <div class="player-modal">
           <div class="player-header">
             <div class="progress-wrapper">
@@ -34,14 +33,22 @@
           </div>
           <ul class="play-list"></ul>
         </div>
+        <button class="button modal-toggle-button player-toggle-button"></button>
+      </div>
+
+      <div class="mantra" id="mantra">
+        <div class="mantra-body">
+          <div class="mantra-text"></div>
+        </div>
+        <button class="button change-mantra-button"></button>
       </div>
 
       <div class="weather" data-show="weather" id="weather">
-        <div class="weather-main modal-toggle-button"></div>
         <div class="weather-modal">
           <input class="city-input" type="text" name="city" maxlength="20" autocomplete="off" />
           <div class="weather-data"></div>
         </div>
+        <div class="weather-main modal-toggle-button"></div>
       </div>
     </header>
 
@@ -66,20 +73,15 @@
 
     <footer class="footer">
       <div class="quote" data-show="quote" id="quote">
-        <button class="button modal-toggle-button quote-toggle-button"></button>
         <div class="quote-modal">
-          <div class="quote-body">
-            <button class="button change-quote-button"></button>
-            <div class="quote-text"></div>
-            <div class="quote-author"></div>
-          </div>
+          <div class="quote-body"></div>
           <div class="quote-footer"></div>
         </div>
+        <button class="button modal-toggle-button quote-toggle-button"></button>
       </div>
     </footer>
 
     <div class="menu" id="menu">
-      <button class="button modal-toggle-button menu-toggle-button"></button>
       <div class="modal menu-modal">
         <div class="menu-body scroll">
           <div class="menu-option">
@@ -135,10 +137,10 @@
           <a href="https://rs.school/js/" class="menu-link rss-link" target="_blank"></a>
         </div>
       </div>
+      <button class="button modal-toggle-button menu-toggle-button"></button>
     </div>
 
     <div class="todo" id="todo" data-show="todo">
-      <button class="modal-toggle-button todo-toggle-button">Todo</button>
       <div class="modal todo-modal">
         <div class="todo-header">
           <button class="modal-button switch" name="todoShow" value="all">All</button>
@@ -153,6 +155,7 @@
           <input class="todo-input modal-input" type="text" name="todoInput" maxlength="200" autocomplete="off" />
         </div>
       </div>
+      <button class="modal-toggle-button todo-toggle-button">Todo</button>
     </div>
   </body>
 </html>

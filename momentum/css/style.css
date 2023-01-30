@@ -30,7 +30,7 @@ body.lock {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 10px;
+  gap: 20px;
   min-height: 40px;
 }
 
@@ -50,12 +50,12 @@ body.lock {
   justify-content: flex-end;
   min-height: 150px;
 }
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   .footer {
     min-height: 170px;
   }
 }
-@media (max-height: 480px) {
+@media (max-height: 550px) {
   .footer {
     min-height: 30px;
   }
@@ -82,6 +82,11 @@ button {
 .button:hover {
   opacity: 1;
 }
+@media (max-width: 1023px), (max-height: 767px) {
+  .button {
+    opacity: 0.9;
+  }
+}
 
 [data-show] {
   opacity: 0;
@@ -94,9 +99,23 @@ button {
   visibility: visible;
 }
 
+.menu,
+.todo,
+.quote,
+.weather,
+.player {
+  z-index: 1;
+}
+.menu.open,
+.todo.open,
+.quote.open,
+.weather.open,
+.player.open {
+  z-index: 2;
+}
+
 .modal {
   position: fixed;
-  z-index: 1;
   max-height: calc(100vh - 40px);
   max-width: calc(100% - 40px);
   background: rgba(9, 3, 21, 0.6);
@@ -108,10 +127,7 @@ button {
   opacity: 0;
   transition: 0.3s ease-in-out;
 }
-.open > .modal {
-  z-index: 10;
-}
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .modal {
     max-height: calc(100vh - 10px);
     max-width: calc(100% - 10px);
@@ -121,7 +137,7 @@ button {
   visibility: visible;
   opacity: 1;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .modal {
     font-size: 16px;
   }
@@ -129,10 +145,6 @@ button {
 
 .modal-toggle-button {
   position: fixed;
-  z-index: 2;
-}
-.open > .modal-toggle-button {
-  z-index: 11;
 }
 
 .scroll {
@@ -145,7 +157,11 @@ button {
   box-shadow: inset 0 0 1px grey;
 }
 .scroll::-webkit-scrollbar-thumb {
-  background: rgba(166, 73, 160, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.play-list.scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .modal-button {
@@ -170,7 +186,7 @@ button {
 .modal-button.active:hover {
   filter: saturate(120%);
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .modal-button {
     width: calc((100% - 20px) / 3);
   }
@@ -226,29 +242,44 @@ button {
   font-size: 100px;
   letter-spacing: -4px;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1200px), (max-height: 767px) {
   .time {
     font-size: 70px;
   }
 }
-@media (max-height: 600px) {
+@media (max-width: 767px), (max-height: 550px) {
   .time {
-    font-size: 60px;
+    font-size: 50px;
   }
 }
-@media (max-width: 480px), (max-height: 480px) {
-  .time {
-    font-size: 42px;
+.time.gradient {
+  color: transparent;
+  background-image: linear-gradient(-225deg, #ffffff 0%, #f263ff 29%, #00e1ff 67%, #ffffff 100%);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-animation: gradient 7s linear infinite;
+          animation: gradient 7s linear infinite;
+}
+
+@-webkit-keyframes gradient {
+  to {
+    background-position: -300% center;
   }
 }
 
+@keyframes gradient {
+  to {
+    background-position: -300% center;
+  }
+}
 .date {
   font-size: 24px;
   margin-bottom: 20px;
 }
-@media (max-width: 480px) {
+@media (max-width: 767px), (max-height: 550px) {
   .date {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 
@@ -257,24 +288,37 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  row-gap: 5px;
   max-width: 100%;
   font-size: 40px;
+  line-height: 1;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .greeting-wrapper {
     font-size: 30px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 767px), (max-height: 550px) {
   .greeting-wrapper {
     padding: 0 15px;
-    font-size: 24px;
+    font-size: 26px;
   }
 }
 
 .name-wrapper {
   position: relative;
+  height: 60px;
   overflow: hidden;
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .name-wrapper {
+    height: 50px;
+  }
+}
+@media (max-width: 767px), (max-height: 550px) {
+  .name-wrapper {
+    height: 36px;
+  }
 }
 
 .greeting,
@@ -282,7 +326,7 @@ button {
 .double {
   padding: 10px;
 }
-@media (max-width: 480px), (max-height: 480px) {
+@media (max-width: 767px), (max-height: 550px) {
   .greeting,
 .name,
 .double {
@@ -296,6 +340,7 @@ button {
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   font-size: inherit;
   color: inherit;
   border: none;
@@ -330,6 +375,7 @@ button {
 
 .double {
   min-width: 40px;
+  height: 100%;
   white-space: pre;
   visibility: hidden;
   transition: 0.5s;
@@ -450,19 +496,19 @@ button {
 }
 .weather-main {
   position: fixed;
-  z-index: 3;
   top: 32px;
   right: 35px;
-  width: 50px;
+  width: 70px;
   text-align: center;
 }
 .error > .weather-main {
   display: none;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .weather-main {
     top: 17px;
     right: 25px;
+    width: 50px;
     text-align: right;
     opacity: 0.9;
     cursor: pointer;
@@ -480,27 +526,27 @@ button {
 
 .weather-modal {
   position: relative;
-  z-index: 2;
-  width: 260px;
+  width: 280px;
   height: 170px;
   background: rgba(0, 0, 0, 0.1);
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
-  padding: 15px 75px 20px 20px;
+  padding: 15px 90px 20px 20px;
   text-align: left;
   line-height: 1.2;
 }
-.error > .weather-modal {
-  padding-right: 20px;
+@media (max-width: 1200px), (max-height: 767px) {
+  .weather-modal {
+    width: 260px;
+  }
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .weather-modal {
     position: fixed;
-    z-index: 1;
     max-height: calc(100vh - 40px);
     max-width: calc(100% - 40px);
     background: rgba(9, 3, 21, 0.6);
@@ -511,21 +557,25 @@ button {
     right: -300px;
     width: 245px;
     height: auto;
+    min-height: 150px;
+    padding-right: 75px;
     gap: 12px;
   }
-  .open > .weather-modal {
-    z-index: 10;
-  }
 }
-@media (max-width: 767px) and (max-width: 767px), (max-width: 767px) and (max-height: 767px), (max-height: 767px) and (max-width: 767px), (max-height: 767px) and (max-height: 767px) {
+@media (max-width: 1023px) and (max-width: 1023px), (max-width: 1023px) and (max-height: 767px), (max-height: 767px) and (max-width: 1023px), (max-height: 767px) and (max-height: 767px) {
   .weather-modal {
     max-height: calc(100vh - 10px);
     max-width: calc(100% - 10px);
   }
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .open > .weather-modal {
     right: 5px;
+  }
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .error > .weather-modal {
+    padding-right: 20px;
   }
 }
 
@@ -533,7 +583,7 @@ button {
   margin-bottom: 5px;
   font-size: 44px;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .weather-icon {
     font-size: 38px;
   }
@@ -542,7 +592,7 @@ button {
 .weather-temp {
   font-size: 22px;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .weather-temp {
     font-size: 20px;
   }
@@ -551,14 +601,13 @@ button {
 .weather-city {
   display: none;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .weather-city {
-    display: block;
     position: absolute;
     top: 8px;
     right: 50px;
     width: 180px;
-    font-size: 18px;
+    font-size: 15px;
     text-align: right;
     transition: 0.4s 0.1s;
     pointer-events: none;
@@ -584,15 +633,18 @@ button {
   margin-top: 10px;
   line-height: 22px;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .weather-data {
     gap: 10px;
+  }
+  .error .weather-data {
+    margin-top: 0;
   }
 }
 
 .city-input {
   display: block;
-  width: 165px;
+  width: 170px;
   height: 34px;
   padding: 5px;
   font-size: 20px;
@@ -622,9 +674,13 @@ button {
 .city-input:focus {
   background: rgba(255, 255, 255, 0.15);
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1200px), (max-height: 767px) {
   .city-input {
     width: 150px;
+  }
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .city-input {
     height: 30px;
     font-size: 18px;
   }
@@ -642,7 +698,7 @@ button {
 .player-toggle-button {
   display: none;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .player-toggle-button {
     left: 25px;
     top: 20px;
@@ -658,18 +714,21 @@ button {
 
 .player-modal {
   position: relative;
-  z-index: 2;
-  width: 260px;
+  width: 280px;
   height: 170px;
   background: rgba(0, 0, 0, 0.1);
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
   height: auto;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1200px), (max-height: 767px) {
+  .player-modal {
+    width: 260px;
+  }
+}
+@media (max-width: 1023px), (max-height: 767px) {
   .player-modal {
     position: fixed;
-    z-index: 1;
     max-height: calc(100vh - 40px);
     max-width: calc(100% - 40px);
     background: rgba(9, 3, 21, 0.6);
@@ -680,17 +739,14 @@ button {
     top: 5px;
     left: -100%;
   }
-  .open > .player-modal {
-    z-index: 10;
-  }
 }
-@media (max-width: 767px) and (max-width: 767px), (max-width: 767px) and (max-height: 767px), (max-height: 767px) and (max-width: 767px), (max-height: 767px) and (max-height: 767px) {
+@media (max-width: 1023px) and (max-width: 1023px), (max-width: 1023px) and (max-height: 767px), (max-height: 767px) and (max-width: 1023px), (max-height: 767px) and (max-height: 767px) {
   .player-modal {
     max-height: calc(100vh - 10px);
     max-width: calc(100% - 10px);
   }
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .open > .player-modal {
     left: 5px;
   }
@@ -708,7 +764,7 @@ button {
 .playlist-open .player-header {
   box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.1);
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .player-header {
     height: auto;
   }
@@ -721,7 +777,7 @@ button {
   white-space: pre;
   overflow: hidden;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .song-name {
     margin-bottom: 15px;
     padding: 0 40px;
@@ -766,9 +822,9 @@ button {
 .playlist-open .play-list {
   padding: 10px 20px 15px;
 }
-@media (max-height: 480px) {
+@media (max-height: 550px) {
   .play-list {
-    min-height: calc(100vh - 10px - 170px);
+    max-height: calc(100vh - 10px - 170px);
   }
 }
 
@@ -892,7 +948,7 @@ button {
 .quote-toggle-button {
   display: none;
 }
-@media (max-height: 480px) {
+@media (max-height: 550px) {
   .quote-toggle-button {
     left: 50%;
     bottom: 21px;
@@ -902,77 +958,97 @@ button {
   }
 }
 
-@media (max-height: 480px) {
+.quote-modal {
+  position: relative;
+  min-height: 150px;
+  font-style: italic;
+}
+@media (max-width: 550px) {
   .quote-modal {
-    left: 50%;
-    bottom: 5px;
-    width: 800px;
-    transform: translateX(-50%);
+    min-height: 170px;
+  }
+}
+@media (max-height: 550px) {
+  .quote-modal {
     position: fixed;
-    z-index: 1;
     max-height: calc(100vh - 40px);
     max-width: calc(100% - 40px);
     background: rgba(9, 3, 21, 0.6);
     -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
     transition: 0.3s ease;
-    font-size: 17px;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s ease-in-out;
-  }
-  .open > .quote-modal {
-    z-index: 10;
+    left: 50%;
+    bottom: -100%;
+    width: calc(100% - 150px);
+    max-width: 800px !important;
+    transform: translateX(-50%);
+    min-height: 260px;
   }
 }
-@media (max-height: 480px) and (max-width: 767px), (max-height: 480px) and (max-height: 767px) {
+@media (max-height: 550px) and (max-width: 1023px), (max-height: 550px) and (max-height: 767px) {
   .quote-modal {
     max-height: calc(100vh - 10px);
     max-width: calc(100% - 10px);
   }
 }
-@media (max-height: 480px) {
+@media (max-height: 550px) {
   .open > .quote-modal {
-    visibility: visible;
-    opacity: 1;
+    bottom: 5px;
   }
 }
-@media (max-height: 480px) and (max-width: 767px), (max-height: 480px) and (max-height: 767px) {
+@media (max-width: 550px) and (max-height: 550px) {
   .quote-modal {
-    font-size: 16px;
+    width: calc(100% - 10px);
+  }
+}
+@media (min-width: 767px) and (max-height: 550px) {
+  .quote-modal {
+    min-height: 230px;
   }
 }
 
 .quote-body {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 150px;
-  font-style: italic;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
-@media (max-width: 480px) {
+@media (max-height: 550px) {
   .quote-body {
-    min-height: 170px;
-  }
-}
-@media (max-height: 480px) {
-  .quote-body {
-    min-height: 200px;
+    height: calc(100% - 60px);
     padding: 20px;
     box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.1);
   }
 }
-@media (min-width: 481px) and (max-height: 480px) {
-  .quote-body {
-    min-height: 170px;
-  }
+.quote-body.prev {
+  -webkit-animation-name: fade-out;
+          animation-name: fade-out;
+}
+.quote-body.next {
+  -webkit-animation-name: fade-in;
+          animation-name: fade-in;
+}
+.quote-body.error {
+  font-size: 16px;
+  font-style: normal;
+  opacity: 0.5;
 }
 
 .quote-footer {
   display: none;
 }
-@media (max-height: 480px) {
+@media (max-height: 550px) {
   .quote-footer {
     display: block;
     height: 60px;
@@ -981,21 +1057,18 @@ button {
 }
 
 .change-quote-button {
-  flex-shrink: 0;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   background-image: url("../assets/svg/reload.svg");
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 767px), (max-height: 550px) {
   .change-quote-button {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    background-size: 28px;
   }
 }
-@media (max-width: 480px), (max-height: 480px) {
-  .change-quote-button {
-    width: 27px;
-    height: 27px;
-    margin-bottom: 20px;
-  }
+.next > .change-quote-button {
+  -webkit-animation: rotate 0.3s linear;
+          animation: rotate 0.3s linear;
 }
 
 .quote-text {
@@ -1003,7 +1076,7 @@ button {
   font-size: 18px;
   line-height: 1.2;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .quote-text {
     font-size: 16px;
   }
@@ -1013,17 +1086,28 @@ button {
   padding: 0 65px;
   font-size: 16px;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .quote-author {
     font-size: 15px;
   }
 }
-@media (max-height: 480px) {
+@media (max-height: 550px) {
   .quote-author {
     padding: 0;
   }
 }
 
+@-webkit-keyframes rotate {
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(180deg);
+  }
+}
 .menu-toggle-button {
   left: 20px;
   bottom: 20px;
@@ -1037,7 +1121,7 @@ button {
 .open > .menu-toggle-button:hover {
   opacity: 1;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .menu-toggle-button {
     left: 25px;
     bottom: 20px;
@@ -1054,7 +1138,7 @@ button {
   width: 365px;
   padding-top: 3px;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .menu-modal {
     left: 5px;
     bottom: 5px;
@@ -1071,12 +1155,12 @@ button {
   padding: 20px;
   box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.1);
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .menu-body {
     max-height: calc(100vh - 70px);
   }
 }
-@media (max-width: 400px) and (min-height: 481px) {
+@media (max-width: 400px) and (min-height: 550px) {
   .menu-body {
     max-height: calc(100vh - 125px);
   }
@@ -1096,7 +1180,7 @@ button {
   flex-wrap: wrap;
   gap: 15px;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .menu-buttons {
     gap: 10px;
   }
@@ -1285,10 +1369,11 @@ button {
 .open > .todo-toggle-button:hover {
   opacity: 1;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .todo-toggle-button {
     right: 25px;
     bottom: 23px;
+    opacity: 0.9;
   }
   .open > .todo-toggle-button {
     right: 25px;
@@ -1301,7 +1386,7 @@ button {
   bottom: 20px;
   width: 320px;
 }
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .todo-modal {
     right: 5px;
     bottom: 5px;
@@ -1329,20 +1414,17 @@ button {
   transition: 0.3s;
   box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.1);
 }
-.todo-list.scroll {
-  overflow: auto;
-}
-@media (max-width: 767px), (max-height: 767px) {
+@media (max-width: 1023px), (max-height: 767px) {
   .todo-list {
     max-height: calc(100vh - 180px);
   }
 }
-@media (max-width: 400px) and (min-height: 481px) {
+@media (max-width: 400px) and (min-height: 550px) {
   .todo-list {
     max-height: calc(100vh - 235px);
   }
 }
-@media (max-height: 480px) {
+@media (max-height: 415px) {
   .todo-list {
     min-height: calc(100vh - 180px);
   }
@@ -1450,4 +1532,130 @@ button {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-30px);
+}
+
+.mantra {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 170px;
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .mantra {
+    height: auto;
+    min-height: 60px;
+    margin: 0 37px;
+  }
+}
+@media (max-width: 767px), (max-height: 550px) {
+  .mantra {
+    min-height: 52px;
+  }
+}
+
+.mantra-body {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  transition: 0.3s;
+}
+.mantra-body.error {
+  opacity: 0.5;
+}
+
+.mantra-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.2;
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+@media (max-width: 1200px), (max-height: 767px) {
+  .mantra-text {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .mantra-text {
+    font-size: 18px;
+  }
+}
+@media (max-width: 767px), (max-height: 550px) {
+  .mantra-text {
+    font-size: 16px;
+  }
+}
+.mantra-text.next {
+  -webkit-animation-name: next;
+          animation-name: next;
+}
+.mantra-text.prev {
+  pointer-events: none;
+  -webkit-animation-name: prev;
+          animation-name: prev;
+}
+
+@-webkit-keyframes next {
+  from {
+    top: -30px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes next {
+  from {
+    top: -30px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes prev {
+  from {
+    top: 0;
+    opacity: 1;
+  }
+  to {
+    top: 30px;
+    opacity: 0;
+  }
+}
+@keyframes prev {
+  from {
+    top: 0;
+    opacity: 1;
+  }
+  to {
+    top: 30px;
+    opacity: 0;
+  }
+}
+.change-mantra-button {
+  width: 50px;
+  height: 35px;
+  flex-shrink: 0;
+  background-image: url("../assets/svg/arrow.svg");
+  background-size: 20px;
+}
+@media (max-width: 767px), (max-height: 550px) {
+  .change-mantra-button {
+    height: 24px;
+    background-size: 18px;
+  }
 }/*# sourceMappingURL=style.css.map */
