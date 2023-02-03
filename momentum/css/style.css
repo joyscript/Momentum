@@ -1,3 +1,16 @@
+@charset "UTF-8";
+:root {
+  --color-main:#ffffff;
+  --color-active:#ce51f5;
+  --color-modal:#ffffff;
+  --color-modalBg:#09031599;
+  --color-btn:#828282;
+  --color-btnBg:#ffffff;
+  --color-activeBtn:#ffffff;
+  --color-input:#2d2d2d;
+  --color-inputBg:#ffffff;
+}
+
 @font-face {
   font-family: "Arial-MT";
   src: url("../assets/fonts/Arial-MT.woff");
@@ -17,7 +30,7 @@ body {
   padding: 20px;
   font-family: "Arial", sans-serif;
   font-size: 16px;
-  color: #fff;
+  color: var(--color-main);
   text-align: center;
   background: rgb(6, 8, 68);
 }
@@ -62,6 +75,7 @@ body.lock {
 }
 
 button {
+  display: block;
   color: inherit;
   font-size: inherit;
   border: 0;
@@ -99,6 +113,36 @@ button {
   visibility: visible;
 }
 
+.input {
+  display: block;
+  padding: 5px;
+  font-size: inherit;
+  text-align: left;
+  color: var(--color-main);
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+.input:focus {
+  background: rgba(255, 255, 255, 0.15);
+}
+.input::-moz-placeholder {
+  font-size: inherit;
+  color: inherit;
+  opacity: 0.6;
+}
+.input:-ms-input-placeholder {
+  font-size: inherit;
+  color: inherit;
+  opacity: 0.6;
+}
+.input::placeholder {
+  font-size: inherit;
+  color: inherit;
+  opacity: 0.6;
+}
+
 .menu,
 .todo,
 .quote,
@@ -118,7 +162,8 @@ button {
   position: fixed;
   max-height: calc(100vh - 40px);
   max-width: calc(100% - 40px);
-  background: rgba(9, 3, 21, 0.6);
+  color: var(--color-modal);
+  background: var(--color-modalBg);
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
   transition: 0.3s ease;
@@ -165,26 +210,35 @@ button {
 }
 
 .modal-button {
+  position: relative;
   width: calc((100% - 30px) / 3);
   height: 30px;
   padding: 5px;
-  color: rgb(140, 140, 140);
-  background: rgb(255, 255, 255);
+  color: var(--color-btn);
+  background: var(--color-btnBg);
   pointer-events: all;
   overflow: hidden;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 .modal-button[name=todoShow] {
   flex-grow: 1;
 }
 .modal-button:hover {
-  color: rgb(39, 1, 51);
+  filter: brightness(0.8) contrast(1.5);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 1px, rgba(0, 0, 0, 0.06) 0px 1px 2px 1px;
 }
 .modal-button.active {
-  background: rgb(206, 81, 245);
-  color: rgb(255, 255, 255);
+  background: var(--color-active);
+  color: var(--color-activeBtn);
 }
 .modal-button.active:hover {
-  filter: saturate(120%);
+  filter: brightness(0.8) contrast(1.5);
+}
+.modal-button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 @media (max-width: 1023px), (max-height: 767px) {
   .modal-button {
@@ -198,32 +252,25 @@ button {
 }
 
 .modal-input {
-  display: block;
   width: 100%;
   height: 30px;
-  padding: 5px;
-  border: none;
-  color: rgb(39, 1, 51);
-  background: rgb(255, 255, 255);
-  text-align: left;
-  outline: none;
-  font-size: inherit;
+  color: var(--color-input);
+  background: var(--color-inputBg);
   opacity: 0.9;
-  transition: 0.3s;
 }
 .modal-input:hover, .modal-input:focus {
   opacity: 1;
 }
 .modal-input::-moz-placeholder {
-  color: rgb(140, 140, 140);
+  color: var(--color-btn);
   opacity: 0.9;
 }
 .modal-input:-ms-input-placeholder {
-  color: rgb(140, 140, 140);
+  color: var(--color-btn);
   opacity: 0.9;
 }
 .modal-input::placeholder {
-  color: rgb(140, 140, 140);
+  color: var(--color-btn);
   opacity: 0.9;
 }
 .modal-input:focus::-moz-placeholder {
@@ -322,54 +369,34 @@ button {
 }
 
 .greeting,
-.name,
+.name-input,
 .double {
   padding: 10px;
 }
 @media (max-width: 767px), (max-height: 550px) {
   .greeting,
-.name,
+.name-input,
 .double {
     padding: 5px;
   }
 }
 
-.name {
+.name-input {
   position: absolute;
   z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  font-size: inherit;
-  color: inherit;
-  border: none;
-  outline: none;
-  background: transparent;
   transition: 0.4s;
 }
-.name:focus {
-  background: rgba(255, 255, 255, 0.15);
-}
-.name::-moz-placeholder {
-  color: #fff;
-  opacity: 0.6;
-}
-.name:-ms-input-placeholder {
-  color: #fff;
-  opacity: 0.6;
-}
-.name::placeholder {
-  color: #fff;
-  opacity: 0.6;
-}
-.name:focus::-moz-placeholder {
+.name-input:focus::-moz-placeholder {
   opacity: 0;
 }
-.name:focus:-ms-input-placeholder {
+.name-input:focus:-ms-input-placeholder {
   opacity: 0;
 }
-.name:focus::placeholder {
+.name-input:focus::placeholder {
   opacity: 0;
 }
 
@@ -549,7 +576,8 @@ button {
     position: fixed;
     max-height: calc(100vh - 40px);
     max-width: calc(100% - 40px);
-    background: rgba(9, 3, 21, 0.6);
+    color: var(--color-modal);
+    background: var(--color-modalBg);
     -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
     transition: 0.3s ease;
@@ -598,26 +626,6 @@ button {
   }
 }
 
-.weather-city {
-  display: none;
-}
-@media (max-width: 1023px), (max-height: 767px) {
-  .weather-city {
-    position: absolute;
-    top: 8px;
-    right: 50px;
-    width: 180px;
-    font-size: 15px;
-    text-align: right;
-    transition: 0.4s 0.1s;
-    pointer-events: none;
-  }
-  .open .weather-city {
-    opacity: 0;
-    transition: 0.3s 0s;
-  }
-}
-
 .weather-data {
   flex-grow: 1;
   display: flex;
@@ -643,36 +651,11 @@ button {
 }
 
 .city-input {
-  display: block;
   width: 170px;
   height: 34px;
-  padding: 5px;
   font-size: 20px;
   line-height: 20px;
-  color: #fff;
-  border: 0;
-  outline: 0;
-  border-bottom: 1px solid #fff;
-  background-color: transparent;
-  transition: 0.3s;
-}
-.city-input::-moz-placeholder {
-  font-size: 20px;
-  color: #fff;
-  opacity: 0.6;
-}
-.city-input:-ms-input-placeholder {
-  font-size: 20px;
-  color: #fff;
-  opacity: 0.6;
-}
-.city-input::placeholder {
-  font-size: 20px;
-  color: #fff;
-  opacity: 0.6;
-}
-.city-input:focus {
-  background: rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid var(--color-main);
 }
 @media (max-width: 1200px), (max-height: 767px) {
   .city-input {
@@ -682,15 +665,6 @@ button {
 @media (max-width: 1023px), (max-height: 767px) {
   .city-input {
     height: 30px;
-    font-size: 18px;
-  }
-  .city-input::-moz-placeholder {
-    font-size: 18px;
-  }
-  .city-input:-ms-input-placeholder {
-    font-size: 18px;
-  }
-  .city-input::placeholder {
     font-size: 18px;
   }
 }
@@ -731,7 +705,8 @@ button {
     position: fixed;
     max-height: calc(100vh - 40px);
     max-width: calc(100% - 40px);
-    background: rgba(9, 3, 21, 0.6);
+    color: var(--color-modal);
+    background: var(--color-modalBg);
     -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
     transition: 0.3s ease;
@@ -762,7 +737,7 @@ button {
   padding: 15px 20px 15px;
 }
 .playlist-open .player-header {
-  box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.15);
 }
 @media (max-width: 1023px), (max-height: 767px) {
   .player-header {
@@ -838,27 +813,34 @@ button {
   cursor: pointer;
 }
 .play-item.active {
-  color: #f480f0;
-  opacity: 0.9;
+  color: var(--color-active);
+  opacity: 1;
+  filter: brightness(120%);
 }
 .play-item:hover {
   opacity: 1;
 }
 .play-item::before {
-  content: "";
+  content: "▶";
   position: absolute;
   left: 0;
   top: 50%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
-  background-image: url("../assets/svg/play.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
+  padding-left: 1px;
+  font-size: 14px;
+  line-height: 1;
+  border: 2px solid var(--color-main);
+  border-radius: 50%;
   transform: translateY(-50%);
 }
 .play-item.active::before {
-  background-image: url("../assets/svg/play.svg");
-  filter: invert(80%) sepia(57%) saturate(5809%) hue-rotate(295deg) brightness(117%) contrast(126%);
+  color: var(--color-active);
+  border-color: var(--color-active);
 }
 .play-item.active.playing::before {
   background-image: url("../assets/svg/pause.svg");
@@ -920,7 +902,7 @@ button {
   width: 100%;
   height: 4px;
   background: rgba(255, 255, 255, 0.7);
-  background-image: linear-gradient(#b00f9d, #b00f9d);
+  background-image: linear-gradient(var(--color-active), var(--color-active));
   background-repeat: no-repeat;
   background-size: 0% 100%;
   outline: none;
@@ -933,7 +915,7 @@ button {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--color-main);
   cursor: ew-resize;
 }
 
@@ -941,7 +923,7 @@ button {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--color-main);
   cursor: ew-resize;
 }
 
@@ -973,7 +955,8 @@ button {
     position: fixed;
     max-height: calc(100vh - 40px);
     max-width: calc(100% - 40px);
-    background: rgba(9, 3, 21, 0.6);
+    color: var(--color-modal);
+    background: var(--color-modalBg);
     -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
     transition: 0.3s ease;
@@ -1028,7 +1011,7 @@ button {
   .quote-body {
     height: calc(100% - 60px);
     padding: 20px;
-    box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.15);
   }
 }
 .quote-body.prev {
@@ -1052,7 +1035,6 @@ button {
   .quote-footer {
     display: block;
     height: 60px;
-    background: rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -1136,7 +1118,6 @@ button {
   left: 20px;
   bottom: 20px;
   width: 365px;
-  padding-top: 3px;
 }
 @media (max-width: 1023px), (max-height: 767px) {
   .menu-modal {
@@ -1151,19 +1132,64 @@ button {
 }
 
 .menu-body {
-  max-height: calc(100vh - 100px);
+  position: relative;
+  height: 380px;
+  max-height: calc(100vh - 230px);
   padding: 20px;
-  box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.15);
 }
 @media (max-width: 1023px), (max-height: 767px) {
   .menu-body {
-    max-height: calc(100vh - 70px);
+    max-height: calc(100vh - 200px);
   }
 }
-@media (max-width: 400px) and (min-height: 550px) {
+@media (max-height: 550px) {
   .menu-body {
-    max-height: calc(100vh - 125px);
+    max-height: calc(100vh - 140px);
   }
+}
+@media (max-height: 550px) {
+  .menu-body {
+    max-height: calc(100vh - 140px);
+  }
+}
+
+.menu-header {
+  display: flex;
+  padding: 0 20px;
+  padding-top: 10px;
+  gap: 10px;
+}
+.menu-header .modal-button {
+  flex-grow: 1;
+  width: calc(30% + 0px);
+  display: block;
+  height: 40px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+}
+.menu-header .modal-button.active {
+  position: relative;
+  flex-shrink: 0;
+  border-top: 3px solid var(--color-main);
+  background: var(--color-bg);
+}
+
+.menu-part {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+}
+.menu-part.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .menu-option:not(:last-child) {
@@ -1171,8 +1197,8 @@ button {
 }
 
 .menu-title {
-  text-align: left;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .menu-buttons {
@@ -1291,7 +1317,7 @@ button {
 
 .custom-button {
   overflow: hidden;
-  color: rgb(206, 81, 245);
+  color: var(--color-active);
   margin-left: 15px;
 }
 .custom-button:disabled {
@@ -1299,11 +1325,45 @@ button {
   flex-basis: 0;
   margin-left: 0;
   padding: 0;
-  color: rgb(140, 140, 140);
+  color: var(--color-modal);
   pointer-events: none;
   cursor: default;
   opacity: 0.1;
   transition: 0.3s;
+}
+
+.custom-title,
+.copy-title {
+  margin: 0;
+  height: 30px;
+  overflow: hidden;
+}
+
+.custom-title {
+  height: 0;
+}
+
+.menu-colors.custom .custom-title {
+  height: 30px;
+}
+.menu-colors.custom .copy-title {
+  height: 0;
+}
+
+.color-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  text-align: left;
+}
+.color-row input {
+  width: calc((100% - 20px) / 3);
+  height: 26px;
+}
+.color-row:last-child {
+  padding-bottom: 20px;
+  border-bottom: 1px solid white;
 }
 
 .menu-footer {
@@ -1313,7 +1373,8 @@ button {
   align-items: center;
   gap: 5px;
   height: 60px;
-  background: rgba(0, 0, 0, 0.05);
+  -webkit-backdrop-filter: brightness(90%);
+          backdrop-filter: brightness(90%);
 }
 .menu-footer span {
   font-size: 15px;
@@ -1343,10 +1404,7 @@ button {
   position: absolute;
   top: 50%;
   right: 20px;
-  border-radius: 50%;
-  background-color: #fff;
-  background-image: url("../assets/svg/rss.svg");
-  background-size: 22px;
+  background-image: url("../assets/svg/rss2.svg");
   transform: translateY(-50%);
 }
 
@@ -1402,7 +1460,6 @@ button {
   display: flex;
   gap: 20px;
   padding: 20px 20px 15px;
-  background: rgba(0, 0, 0, 0.05);
 }
 
 .todo-list {
@@ -1412,7 +1469,7 @@ button {
   padding: 5px 20px 15px;
   overflow: hidden;
   transition: 0.3s;
-  box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 -5px 5px -5px rgba(255, 255, 255, 0.15);
 }
 @media (max-width: 1023px), (max-height: 767px) {
   .todo-list {
@@ -1489,11 +1546,11 @@ button {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  background: rgb(255, 255, 255);
+  background: var(--color-main);
   cursor: pointer;
 }
 .done .todo-check-button {
-  background: rgb(206, 81, 245) url("../assets/svg/check.svg") no-repeat;
+  background: var(--color-active) url("../assets/svg/check.svg") no-repeat;
   background-size: contain;
   background-position: 2px -1px;
   opacity: 1;
@@ -1511,7 +1568,6 @@ button {
 .todo-footer {
   height: 105px;
   padding: 15px 20px 60px;
-  background: rgba(0, 0, 0, 0.05);
 }
 
 .todo-clear-button {

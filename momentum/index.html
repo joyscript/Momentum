@@ -12,7 +12,7 @@
 
   <body>
     <header class="header">
-      <div class="player" data-show="player" id="player">
+      <div class="player" data-show="player" data-modal="player">
         <div class="player-modal">
           <div class="player-header">
             <div class="progress-wrapper">
@@ -36,16 +36,16 @@
         <button class="button modal-toggle-button player-toggle-button"></button>
       </div>
 
-      <div class="mantra" id="mantra">
+      <div class="mantra" data-show="mantra">
         <div class="mantra-body">
           <div class="mantra-text"></div>
         </div>
         <button class="button change-mantra-button"></button>
       </div>
 
-      <div class="weather" data-show="weather" id="weather">
+      <div class="weather" data-show="weather" data-modal="weather">
         <div class="weather-modal">
-          <input class="city-input" type="text" name="city" maxlength="20" autocomplete="off" />
+          <input class="input city-input" type="text" name="city" maxlength="20" autocomplete="off" />
           <div class="weather-data"></div>
         </div>
         <div class="weather-main modal-toggle-button"></div>
@@ -59,20 +59,20 @@
       <div class="greeting-wrapper" data-show="greeting">
         <div class="greeting"></div>
         <div class="name-wrapper">
-          <input class="name" type="text" name="name" maxlength="30" autocomplete="off" />
+          <input class="input name-input" type="text" name="name" maxlength="30" autocomplete="off" />
           <div class="double"></div>
         </div>
       </div>
 
       <div class="slider"></div>
-      <div class="slider-buttons">
+      <div class="slider-buttons" data-show="arrows">
         <button class="slider-button button slide-prev"></button>
         <button class="slider-button button slide-next"></button>
       </div>
     </main>
 
     <footer class="footer">
-      <div class="quote" data-show="quote" id="quote">
+      <div class="quote" data-show="quote" data-modal="quote">
         <div class="quote-modal">
           <div class="quote-body"></div>
           <div class="quote-footer"></div>
@@ -81,55 +81,103 @@
       </div>
     </footer>
 
-    <div class="menu" id="menu">
+    <div class="menu open" data-modal="menu">
       <div class="modal menu-modal">
-        <div class="menu-body scroll">
-          <div class="menu-option">
-            <div class="menu-title" data-trans="language">Language</div>
-            <div class="menu-buttons">
-              <button class="modal-button switch" name="lang" value="en">EN</button>
-              <button class="modal-button switch" name="lang" value="ru">RU</button>
-            </div>
-          </div>
-          <div class="menu-option">
-            <div class="menu-title" data-trans="photoSourse">Photo sourse</div>
-            <div class="menu-buttons">
-              <button class="modal-button switch" name="photoSource" value="github">GitHub</button>
-              <button class="modal-button switch" name="photoSource" value="unsplash">Unsplash</button>
-              <button class="modal-button switch" name="photoSource" value="flickr">Flickr</button>
-            </div>
-          </div>
-          <div class="menu-option tag-option">
-            <div class="menu-title" data-trans="photoTags">Photo tags</div>
-            <div class="menu-buttons">
-              <button class="modal-button switch" name="photoTag" value="night">night</button>
-              <button class="modal-button switch" name="photoTag" value="morning">morning</button>
-              <button class="modal-button switch" name="photoTag" value="afternoon">afternoon</button>
-              <button class="modal-button switch" name="photoTag" value="evening">evening</button>
-              <button class="modal-button switch" name="photoTag" value="animals">animals</button>
-              <button class="modal-button switch" name="photoTag" value="beauty">beauty</button>
-            </div>
-            <div class="menu-custom">
-              <div class="menu-input-window">
-                <input class="menu-tag-input modal-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
+        <div class="menu-header">
+          <button class="modal-button switch" name="menu" value="general">General</button>
+          <button class="modal-button switch" name="menu" value="photo">Photo</button>
+          <button class="modal-button switch" name="menu" value="style">Style</button>
+        </div>
+        <div class="menu-body">
+          <div class="menu-part scroll" data-menu="general">
+            <div class="menu-option">
+              <div class="menu-title" data-trans="language">Language</div>
+              <div class="menu-buttons">
+                <button class="modal-button switch" name="lang" value="en">EN</button>
+                <button class="modal-button switch" name="lang" value="ru">RU</button>
               </div>
-              <button class="modal-button custom-button switch" name="photoTag" value="custom" disabled>Your tag</button>
             </div>
-            <div class="menu-error"></div>
+            <div class="menu-option">
+              <div class="menu-title" data-trans="showBlocks">Show / hide</div>
+              <div class="menu-buttons">
+                <button class="modal-button" name="showBlock" value="time">Time</button>
+                <button class="modal-button" name="showBlock" value="date">Date</button>
+                <button class="modal-button" name="showBlock" value="greeting">Greeting</button>
+                <button class="modal-button" name="showBlock" value="weather">Weather</button>
+                <button class="modal-button" name="showBlock" value="quote">Quote</button>
+                <button class="modal-button" name="showBlock" value="player">Player</button>
+                <button class="modal-button" name="showBlock" value="todo">Todo</button>
+                <button class="modal-button" name="showBlock" value="mantra">Mantra</button>
+                <button class="modal-button" name="showBlock" value="arrows">Arrows</button>
+              </div>
+            </div>
+            <div class="menu-option">
+              <div class="menu-title" data-trans="autoslider">Autoslider</div>
+              <div class="menu-buttons">
+                <button class="modal-button" name="slider" value="slider">Enable</button>
+                <input class="" type="range" name="autoslider" value="autoslider" placeholder="[Enter period, s]" />
+              </div>
+            </div>
           </div>
-          <div class="menu-option">
-            <div class="menu-title" data-trans="showBlocks">Show / hide</div>
-            <div class="menu-buttons">
-              <button class="modal-button" name="showBlock" value="time">Time</button>
-              <button class="modal-button" name="showBlock" value="date">Date</button>
-              <button class="modal-button" name="showBlock" value="greeting">Greeting</button>
-              <button class="modal-button" name="showBlock" value="weather">Weather</button>
-              <button class="modal-button" name="showBlock" value="quote">Quote</button>
-              <button class="modal-button" name="showBlock" value="player">Player</button>
-              <button class="modal-button" name="showBlock" value="todo">ToDo</button>
+
+          <div class="menu-part scroll" data-menu="photo">
+            <div class="menu-option">
+              <div class="menu-title" data-trans="photoSourse">Photo sourse</div>
+              <div class="menu-buttons">
+                <button class="modal-button switch" name="photoSource" value="github">GitHub</button>
+                <button class="modal-button switch" name="photoSource" value="unsplash">Unsplash</button>
+                <button class="modal-button switch" name="photoSource" value="flickr">Flickr</button>
+              </div>
+            </div>
+            <div class="menu-option tag-option">
+              <div class="menu-title" data-trans="photoTags">Photo tags</div>
+              <div class="menu-buttons">
+                <button class="modal-button switch" name="photoTag" value="night">night</button>
+                <button class="modal-button switch" name="photoTag" value="morning">morning</button>
+                <button class="modal-button switch" name="photoTag" value="afternoon">afternoon</button>
+                <button class="modal-button switch" name="photoTag" value="evening">evening</button>
+                <button class="modal-button switch" name="photoTag" value="animals">animals</button>
+                <button class="modal-button switch" name="photoTag" value="beauty">beauty</button>
+              </div>
+              <div class="menu-custom">
+                <div class="menu-input-window">
+                  <input class="input menu-tag-input modal-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
+                </div>
+                <button class="modal-button custom-button switch" name="photoTag" value="custom" disabled>Your tag</button>
+              </div>
+              <div class="menu-error"></div>
+            </div>
+          </div>
+
+          <div class="menu-part scroll menu-colors" data-menu="style">
+            <div class="menu-option color-option">
+              <div class="menu-title custom-title">Customize colors</div>
+              <div class="menu-title copy-title">
+                <label>Copy these colors and customize<input class="copy-input" type="checkbox" /></label>
+              </div>
+              <div class="color-row"><span>Active color</span><input type="color" data-color="active" /></div>
+              <div class="color-row"><span>Background</span><input type="color" data-color="modalBg" /></div>
+              <div class="color-row">
+                <span>Background opacity</span><input type="range" data-color="alphaBg" min="0" max="255" step="1" value="1" />
+              </div>
+              <div class="color-row"><span>Active button text</span><input type="color" data-color="activeBtn" /></div>
+              <div class="color-row"><span>Text</span><input type="color" data-color="modal" /></div>
+              <!-- <div class="color-row"><span>Main color</span><input type="color" data-color="main" /></div> -->
+              <!-- <div class="color-row"><span>Inactive button</span><input type="color" data-color="btnBg" /></div> -->
+              <!-- <div class="color-row"><span>Inactive button text</span><input type="color" data-color="btn" /></div> -->
+            </div>
+
+            <div class="menu-option theme-option">
+              <div class="menu-title">Choose theme</div>
+              <div class="menu-buttons">
+                <button class="modal-button switch" name="colorTheme" value="user"></button>
+                <button class="modal-button switch" name="colorTheme" value="dark"></button>
+                <button class="modal-button switch" name="colorTheme" value="light"></button>
+              </div>
             </div>
           </div>
         </div>
+
         <div class="menu-footer">
           <span>02</span>
           <a href="https://github.com/joyscript" class="menu-link github-link" target="_blank"></a>
@@ -140,7 +188,7 @@
       <button class="button modal-toggle-button menu-toggle-button"></button>
     </div>
 
-    <div class="todo" id="todo" data-show="todo">
+    <div class="todo" data-show="todo" data-modal="todo">
       <div class="modal todo-modal">
         <div class="todo-header">
           <button class="modal-button switch" name="todoShow" value="all">All</button>
@@ -152,7 +200,7 @@
         </div>
         <button class="todo-clear-button" value="clear">Clear list</button>
         <div class="todo-footer">
-          <input class="todo-input modal-input" type="text" name="todoInput" maxlength="200" autocomplete="off" />
+          <input class="input todo-input modal-input" type="text" name="todoInput" maxlength="200" autocomplete="off" />
         </div>
       </div>
       <button class="modal-toggle-button todo-toggle-button">Todo</button>

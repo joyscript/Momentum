@@ -18,7 +18,7 @@ body {
   padding: 20px;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
-  color: #fff;
+  color: var(--color-main);
   text-align: center;
   background: rgb(6, 8, 68);
 
@@ -62,6 +62,7 @@ body {
 // ----------------------------
 
 button {
+  display: block;
   color: inherit;
   font-size: inherit;
   border: 0;
@@ -99,4 +100,28 @@ button {
 .show {
   opacity: 1;
   visibility: visible;
+}
+
+// -----------------------
+
+.input {
+  display: block;
+  padding: 5px;
+  font-size: inherit;
+  text-align: left;
+  color: var(--color-main);
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  &::placeholder {
+    font-size: inherit;
+    color: inherit;
+    opacity: 0.6;
+  }
 }

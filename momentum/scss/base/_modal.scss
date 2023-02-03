@@ -36,29 +36,41 @@
 }
 
 .modal-button {
+  position: relative;
   width: calc((100% - 30px) / 3);
   height: 30px;
   padding: 5px;
-  color: $color-text;
-  background: $color-light;
+  color: var(--color-btn);
+  background: var(--color-btnBg);
   pointer-events: all;
   overflow: hidden;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
   &[name='todoShow'] {
     flex-grow: 1;
   }
 
   &:hover {
-    color: $color-text-hover;
+    filter: brightness(0.8) contrast(1.5);
+    // box-shadow: var(--color-active) 0px 3px 3px -2px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 1px, rgba(0, 0, 0, 0.06) 0px 1px 2px 1px;
   }
 
   &.active {
-    background: $color-main;
-    color: $color-light;
+    background: var(--color-active);
+    color: var(--color-activeBtn);
 
     &:hover {
-      filter: saturate(120%);
+      filter: brightness(0.8) contrast(1.5);
+      // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     }
+  }
+
+  &:disabled{
+    pointer-events: none;
+    opacity: 0.5;
   }
 
   @include media-tm {
@@ -72,18 +84,11 @@
 }
 
 .modal-input {
-  display: block;
   width: 100%;
   height: 30px;
-  padding: 5px;
-  border: none;
-  color: $color-text-hover;
-  background: $color-light;
-  text-align: left;
-  outline: none;
-  font-size: inherit;
+  color: var(--color-input);
+  background: var(--color-inputBg);
   opacity: 0.9;
-  transition: 0.3s;
 
   &:hover,
   &:focus {
@@ -91,7 +96,7 @@
   }
 
   &::placeholder {
-    color: $color-text;
+    color: var(--color-btn);
     opacity: 0.9;
   }
 

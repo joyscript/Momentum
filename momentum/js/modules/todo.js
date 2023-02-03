@@ -1,6 +1,7 @@
-import { user, saveUser } from './user.js';
+import { user } from './user.js';
 import { checkValue } from './service.js';
 
+const todo = document.querySelector('.todo');
 const todoList = document.querySelector('.todo-list');
 const todoInput = document.querySelector('.todo-input');
 
@@ -82,7 +83,6 @@ const saveTodo = () => {
   todoList.querySelectorAll('.todo-task').forEach((task) => {
     user.todoList.push([task.textContent, task.parentElement.classList.contains('done') ? 'done' : '']);
   });
-  saveUser();
 };
 
 todoInput.addEventListener('change', addTask);
@@ -98,6 +98,4 @@ todo.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === 'Escape') changeTask(e.target);
 });
 
-// window.addEventListener('beforeunload', saveTodo);
-
-export { loadTodo, toggleTodo };
+export { loadTodo, toggleTodo, saveTodo };

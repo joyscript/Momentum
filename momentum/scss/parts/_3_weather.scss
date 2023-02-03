@@ -73,25 +73,6 @@
   }
 }
 
-.weather-city {
-  display: none;
-  @include media-tm {
-    // display: block;
-    position: absolute;
-    top: 8px;
-    right: 50px;
-    width: 180px;
-    font-size: 15px;
-    text-align: right;
-    transition: 0.4s 0.1s;
-    pointer-events: none;
-    .open & {
-      opacity: 0;
-      transition: 0.3s 0s;
-    }
-  }
-}
-
 .weather-data {
   flex-grow: 1;
   display: flex;
@@ -118,28 +99,11 @@
 }
 
 .city-input {
-  display: block;
   width: 170px;
   height: 34px;
-  padding: 5px;
   font-size: 20px;
   line-height: 20px;
-  color: #fff;
-  border: 0;
-  outline: 0;
-  border-bottom: 1px solid #fff;
-  background-color: transparent;
-  transition: 0.3s;
-
-  &::placeholder {
-    font-size: 20px;
-    color: #fff;
-    opacity: 0.6;
-  }
-
-  &:focus {
-    background: rgba(255, 255, 255, 0.15);
-  }
+  border-bottom: 1px solid var(--color-main);
 
   @include media-lm {
     width: 150px;
@@ -148,8 +112,5 @@
   @include media-tm {
     height: 30px;
     font-size: 18px;
-    &::placeholder {
-      font-size: 18px;
-    }
   }
 }

@@ -16,6 +16,8 @@ let user = {
     quote: true,
     player: true,
     todo: true,
+    mantra: true,
+    arrows: true,
   },
   todoList: [],
   todoShow: 'all',
@@ -24,6 +26,9 @@ let user = {
   playerSong: 0,
   playerTime: 0,
   playlistOpen: false,
+  menu: 'general',
+  colorTheme: 'dark',
+  customTheme: '',
 };
 
 const key = 'user-momentum-joyscript';

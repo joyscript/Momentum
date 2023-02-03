@@ -5,29 +5,45 @@ import { showWeather } from './weather.js';
 import { showCurQuote } from './quote.js';
 import { showCurMantra } from './mantra.js';
 import { showBackground } from './slider.js';
-import { loadTodo, toggleTodo } from './todo.js';
+import { loadTodo, saveTodo, toggleTodo } from './todo.js';
+import { changeTheme, saveColors } from './colors.js';
 
-const menu = document.getElementById('menu');
-const todo = document.getElementById('todo');
+const menu = document.querySelector('.menu');
 const blocks = document.querySelectorAll('[data-show]');
 const modals = document.querySelectorAll('.modal');
 const modalBtns = document.querySelectorAll('.modal-button');
 const modalInputs = document.querySelectorAll('.modal-input');
 const transItems = document.querySelectorAll('[data-trans]');
+const menuParts = menu.querySelectorAll('.menu-part');
 const tagsBlock = menu.querySelector('.tag-option');
 const customBlock = menu.querySelector('.menu-custom');
 const tagInput = menu.querySelector('.menu-tag-input');
 const customBtn = menu.querySelector('.custom-button');
 const menuError = menu.querySelector('.menu-error');
-const todoClearBtn = todo.querySelector('.todo-clear-button');
+const todoClearBtn = document.querySelector('.todo-clear-button');
 
 const transText = {
   language: ['Language', 'Язык'],
   photoSourse: ['Photo sourse', 'Фото ресурс'],
   photoTags: ['Photo tags', 'Фото тег'],
   showBlocks: ['Show / hide', 'Показать / скрыть'],
+  autoslider: ['Autoslider', 'Автослайдер'],
+  general: ['General', 'Общее'],
+  photo: ['Photo', 'Фото'],
+  style: ['Style', 'Стиль'],
   en: ['English', 'Англ.'],
   ru: ['Russian', 'Русский'],
+  time: ['Time', 'Время'],
+  date: ['Date', 'Дата'],
+  greeting: ['Name', 'Имя'],
+  weather: ['Weather', 'Погода'],
+  quote: ['Quote', 'Цитата'],
+  player: ['Player', 'Плеер'],
+  todo: ['Todo', 'Задачи'],
+  mantra: ['Mantra', 'Мантра'],
+  arrows: ['Arrows', 'Стрелочки'],
+  allBlocks: ['Show all', 'Показать все'],
+  slider: ['Autoslider', 'Автослайдер'],
   github: ['GitHub', 'GitHub'],
   unsplash: ['Unsplash', 'Unsplash'],
   flickr: ['Flickr', 'Flickr'],
@@ -38,18 +54,15 @@ const transText = {
   animals: ['Animals', 'Животные'],
   beauty: ['Beauty', 'Красота'],
   custom: ['Your tag', 'Ваш тег'],
-  time: ['Time', 'Время'],
-  date: ['Date', 'Дата'],
-  greeting: ['Name', 'Имя'],
-  weather: ['Weather', 'Погода'],
-  quote: ['Quote', 'Цитата'],
-  player: ['Player', 'Плеер'],
-  todo: ['Todo', 'Задачи'],
+  dark: ['Dark', 'Темная'],
+  light: ['Light', 'Светлая'],
+  user: ['Custom', 'Кастом'],
   all: ['All', 'Все'],
   done: ['Done', 'Выполнены'],
   clear: ['Clear list', 'Очистить'],
   todoText: ['No todos yet', 'Еще нет задач'],
   doneText: ['No completed todos', 'Нет выполненных задач'],
+  enterTag: ['Enter your tag', 'Введите ваш тег'],
   tagInput: ['[Enter your tag]', '[Введите ваш тег]'],
   todoInput: ['[Enter new todo]', '[Введите новую задачу]'],
   errorFetch: [
@@ -67,9 +80,15 @@ const changeCustomBlock = () => {
   }
 };
 
+const changeMenuPart = () => {
+  menuParts.forEach((part) => {
+    part.dataset.menu === user.menu ? part.classList.add('active') : part.classList.remove('active');
+  });
+};
+
 const changeBtns = (option) => {
   modalBtns.forEach((btn) => {
-    if (option && btn.name !== option) return;
+    if ((option && btn.name !== option) || !btn.name) return;
     const isTrue = btn.name === 'showBlock' ? user.showBlock[btn.value] : btn.value === user[btn.name];
     isTrue ? btn.classList.add('active') : btn.classList.remove('active');
   });
@@ -98,16 +117,17 @@ const translate = () => {
 
 const setUserSettings = () => {
   changeCustomBlock(); // it's important to go first!
+  changeMenuPart();
   changeBtns();
   showBlocks();
   translate();
   loadTodo();
+  changeTheme();
   saveUser();
 };
 
 const changeLanguage = () => {
   translate();
-  changeBtns('lang');
   showDateAndGreeting();
   showWeather();
   showCurQuote();
@@ -129,22 +149,15 @@ const changePhotoSourse = () => {
   }
   showBackground();
   changeCustomBlock();
-  changeBtns('photoSource');
 };
 
 const changePhotoTag = () => {
   resetError();
   showBackground();
-  changeBtns('photoTag');
-};
-
-const changeTodo = () => {
-  toggleTodo();
-  changeBtns('todoShow');
 };
 
 const handleModalClicks = (e) => {
-  if (!e.target.classList.contains('modal-button')) return;
+  if (!e.target.classList.contains('modal-button') || !e.target.name) return;
 
   const btn = e.target;
   btn.classList.toggle('active');
@@ -154,10 +167,13 @@ const handleModalClicks = (e) => {
     showBlocks();
   } else {
     user[btn.name] = btn.value;
+    if (btn.name === 'menu') changeMenuPart();
     if (btn.name === 'lang') changeLanguage();
     if (btn.name === 'photoTag') changePhotoTag();
     if (btn.name === 'photoSource') changePhotoSourse();
-    if (btn.name === 'todoShow') changeTodo();
+    if (btn.name === 'todoShow') toggleTodo();
+    if (btn.name === 'colorTheme') changeTheme();
+    changeBtns(btn.name);
   }
   saveUser();
 };
@@ -167,7 +183,7 @@ const toggleModal = (modal) => {
   document.body.classList.toggle('lock');
 
   const closeModal = (e) => {
-    if (!e.target.closest(`.${modal.id}`)) {
+    if (!e.target.closest(`.${modal.dataset.modal}`)) {
       modal.classList.remove('open');
       document.body.classList.remove('lock');
       document.body.removeEventListener('click', closeModal);
@@ -209,6 +225,12 @@ const handleError = (err) => {
   renderError();
 };
 
+const saveSettings = () => {
+  saveTodo();
+  saveColors();
+  saveUser();
+};
+
 // -----------------------------------------------------------------------
 
 modals.forEach((modal) => modal.addEventListener('click', handleModalClicks));
@@ -226,4 +248,6 @@ tagInput.addEventListener('change', () => {
 
 tagInput.addEventListener('input', () => tagInput.value === '' && tagsBlock.classList.remove('error'));
 
-export { setUserSettings, goAfterSuccess, handleError, toggleModal };
+window.addEventListener('beforeunload', saveSettings);
+
+export { setUserSettings, goAfterSuccess, handleError, toggleModal, changeBtns };

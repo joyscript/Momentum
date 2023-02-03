@@ -3,7 +3,7 @@ import { checkValue } from './service.js';
 
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
-const name = document.querySelector('.name');
+const name = document.querySelector('.name-input');
 const double = document.querySelector('.double');
 const greeting = document.querySelector('.greeting');
 

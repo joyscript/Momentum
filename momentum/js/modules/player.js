@@ -1,5 +1,4 @@
-import { user, saveUser } from './user.js';
-import { toggleModal } from './settings.js';
+import { user } from './user.js';
 import { audioData } from './audioData.js';
 
 export const showPlayer = () => {
@@ -123,7 +122,6 @@ export const showPlayer = () => {
       playList.classList.remove('scroll');
     }
     user.playlistOpen = player.classList.contains('playlist-open');
-    saveUser();
   };
 
   // -------------------------------------------------------
@@ -149,6 +147,4 @@ export const showPlayer = () => {
   volumeBtn.addEventListener('click', toggleVolume);
   volumeBar.addEventListener('input', changeVolume);
   progressBar.addEventListener('input', changeTime);
-  // window.addEventListener('beforeunload', saveUser);
-
 };
