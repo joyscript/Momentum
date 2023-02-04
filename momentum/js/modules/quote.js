@@ -23,7 +23,7 @@ const getRandomInd = (itemInd, data) => {
 const insertContent = (elem) => {
   const keys = [`${user.lang}-text`, `${user.lang}-author`];
   elem.innerHTML = `
-    <button class="button change-quote-button"></button>
+    <button class="button change-quote-button icon-reload"></button>
     <div class="quote-text">"${curQuote[keys[0]]}"</div>
     <div class="quote-author">${curQuote[keys[1]]}</div>
   `;

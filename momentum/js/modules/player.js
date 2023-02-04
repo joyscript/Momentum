@@ -22,7 +22,7 @@ export const showPlayer = () => {
   const createPlayList = (item) => {
     const li = document.createElement('li');
     li.classList.add('play-item');
-    li.textContent = item.title;
+    li.innerHTML = `<span class='icon-play'></span><span class='song-title'>${item.title}</span>`;
     playList.append(li);
   };
 
@@ -101,8 +101,8 @@ export const showPlayer = () => {
   };
 
   const playChosenAudio = (e) => {
-    if (!e.target.classList.contains('play-item')) return;
-    const ind = audioData.findIndex((item) => item.title === e.target.textContent);
+    if (!e.target.closest('play-item')) return;
+    const ind = audioData.findIndex((item) => item.title === e.target.closest('play-item').textContent);
     if (num === ind) {
       toggleAudio();
     } else {

@@ -5,7 +5,6 @@
     left: 50%;
     bottom: 21px;
     display: block;
-    background-image: url('../assets/svg/quote.svg');
     transform: translateX(-50%);
   }
 }
@@ -59,7 +58,7 @@
   @include media-hs {
     height: calc(100% - 60px);
     padding: 20px;
-    box-shadow: $shadow;
+    box-shadow: inset 0 0 15px rgba(100, 100, 100, 0.3);
   }
 
   &.prev {
@@ -77,22 +76,12 @@
   }
 }
 
-.quote-footer {
-  display: none;
-  @include media-hs {
-    display: block;
-    height: 60px;
-    // background: $color-modal-bg2;
-  }
-}
-
 .change-quote-button {
   margin-bottom: 25px;
-  background-image: url('../assets/svg/reload.svg');
 
   @include media-ms {
     margin-bottom: 20px;
-    background-size: 28px;
+    font-size: 28px;
   }
 
   .next > & {

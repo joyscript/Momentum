@@ -1,16 +1,11 @@
 .menu-toggle-button {
   left: 20px;
   bottom: 20px;
-  background: url('../assets/svg/menu.svg');
 
   .open > & {
     left: 40px;
     bottom: 35px;
     transform: rotate(90deg);
-
-    &:hover {
-      opacity: 1;
-    }
   }
 
   @include media-tm {
@@ -27,67 +22,65 @@
 .menu-modal {
   left: 20px;
   bottom: 20px;
-  width: 365px;
+  width: 370px;
 
   @include media-tm {
     left: 5px;
     bottom: 5px;
   }
 
-  @include media(400px) {
+  @include media(405px) {
     width: 100%;
   }
 }
 
 .menu-body {
   position: relative;
-  height: 380px;
-  max-height: calc(100vh - (70px + 60px + 40px + 60px));
+  height: 430px;
   padding: 20px;
-  box-shadow: $shadow;
 
   @include media-tm {
-    max-height: calc(100vh - (70px + 60px + 10px + 60px));
+    max-height: calc(100vh - (65px + 60px + 5px + 60px));
   }
 
   @include media-hs {
-    max-height: calc(100vh - (70px + 60px + 10px));
-  }
-
-  @include media-hs {
-    max-height: calc(100vh - (70px + 60px + 10px));
+    max-height: calc(100vh - (65px + 60px + 10px));
   }
 }
 
-.menu-header {
-  display: flex;
-  padding: 0 20px;
-  padding-top: 10px;
-  gap: 10px;
-  // background: var(--color-bg);
-  // backdrop-filter: brightness(120%);
+.tab-button {
+  position: relative;
+  height: 35px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--color-modal);
+  backdrop-filter: opacity(0.4);
 
-  & .modal-button {
-    flex-grow: 1;
-    width: calc(30% + 0px);
-    display: block;
-    height: 40px;
-    text-transform: uppercase;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.2);
-    // border-bottom: 5px solid transparent;
-    // border-top: 5px solid transparent;
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: var(--color-active);
+    transition: 0.3s;
+  }
 
-    &.active {
-      position: relative;
-      flex-shrink: 0;
-      // background: transparent;
-      // background: var(--color-main);
-      // border-left: 3px solid var(--color-main);
-      border-top: 3px solid var(--color-main);
-      background: var(--color-bg);
-      // border-right: 3px solid var(--color-main);
-      // border-bottom: 3px solid var(--color-main);
+  &:hover {
+    filter: none;
+    &::before {
+      width: 100%;
+    }
+  }
+
+  &.active {
+    background: transparent;
+    &::before {
+      width: 100%;
+      height: 100%;
     }
   }
 }
@@ -103,7 +96,7 @@
   visibility: hidden;
   transition: 0.3s ease-in-out;
 
-  &.active {
+  .open &.active {
     opacity: 1;
     visibility: visible;
   }
@@ -129,84 +122,31 @@
 }
 
 .menu-custom {
-  display: flex;
-  height: 0;
   margin-top: 15px;
-  opacity: 0;
+  pointer-events: none;
+  opacity: 0.3;
   transition: 0.3s;
 
   &.active {
-    height: 30px;
     opacity: 1;
-  }
-}
-
-.menu-input-window {
-  position: relative;
-  width: calc(60% + 15px);
-  height: 30px;
-  flex-grow: 1;
-  overflow: hidden;
-  background: $color-light;
-  opacity: 0.9;
-  transition: 0.3s;
-
-  &.anim {
-    opacity: 1;
-  }
-
-  &:hover {
-    opacity: 1;
+    pointer-events: all;
   }
 }
 
 .menu-tag-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-left: 10px;
-  background: transparent;
-  text-align: left;
-
-  .anim & {
-    animation: input 0.5s linear;
-  }
-
+  margin-bottom: 15px;
   .error & {
     color: red;
     outline: 1px solid red;
-    outline-offset: -1px;
-  }
-}
-
-@keyframes input {
-  0% {
-    left: 0;
-  }
-  50% {
-    left: 100%;
-    opacity: 1;
-  }
-  51% {
-    width: 0;
-    opacity: 0;
-  }
-  52% {
-    left: 0;
-    opacity: 1;
-  }
-  100% {
-    width: 100%;
   }
 }
 
 .menu-error {
   height: 0;
-  margin-top: 15px;
   text-align: left;
   color: red;
   font-size: 16px;
-  transition: height 0.3s;
+  transition: 0.2s linear;
   overflow: hidden;
   opacity: 0;
 
@@ -216,44 +156,51 @@
   }
 }
 
-.custom-button {
-  overflow: hidden;
-  color: var(--color-active);
-  margin-left: 15px;
-
-  &:disabled {
-    width: 0;
-    flex-basis: 0;
-    margin-left: 0;
-    padding: 0;
-    color: var(--color-modal);
-    pointer-events: none;
-    cursor: default;
-    opacity: 0.1;
-    transition: 0.3s;
-  }
+.menu-colors .menu-option:not(:last-child) {
+  margin-bottom: 20px;
 }
 
-.custom-title,
-.copy-title {
-  margin: 0;
-  height: 30px;
+.color-title {
+  position: relative;
+  line-height: 28px;
+  text-align: center;
   overflow: hidden;
+
+  @include media-tm {
+    line-height: 26px;
+  }
 }
 
 .custom-title {
-  height: 0;
-}
+  opacity: 0;
+  pointer-events: none;
 
-.menu-colors.custom {
-  .custom-title {
-    height: 30px;
-  }
-  .copy-title {
-    height: 0;
+  .custom & {
+    opacity: 1;
   }
 }
 
+.copy-button {
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  padding: 3px 10px;
+  white-space: pre;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 3px rgba(100, 100, 100, 0.4);
+  transform: translateX(-50%);
+  transition: 0.2s linear;
+
+  .custom & {
+    top: -100%;
+    opacity: 0;
+  }
+
+  &:hover {
+    color: $color-btn;
+    background: $color-main;
+  }
+}
 
 .color-row {
   display: flex;
@@ -262,15 +209,22 @@
   padding: 4px 0;
   text-align: left;
 
-  input {
-    width: calc((100% - 20px) / 3);
-    height: 26px;
-  }
-
   &:last-child {
-    padding-bottom: 20px;
-    border-bottom: 1px solid white;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(150, 150, 150, 0.5);
   }
+}
+
+.color-input,
+.color-range {
+  width: calc((100% - 30px) / 3);
+  @include media-tm {
+    width: calc((100% - 20px) / 3);
+  }
+}
+
+.color-input {
+  height: 26px;
 }
 
 .menu-footer {
@@ -280,7 +234,6 @@
   align-items: center;
   gap: 5px;
   height: 60px;
-  backdrop-filter: brightness(90%);
 
   span {
     font-size: 15px;
@@ -292,26 +245,23 @@
   display: inline-block;
   width: 30px;
   height: 30px;
+  font-size: 30px;
+  color: var(--color-modal);
   text-decoration: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   transition: 0.3s;
-  opacity: 0.3;
+  opacity: 0.25;
 
   &:hover {
     opacity: 0.8;
   }
 }
 
-.github-link {
-  background-image: url('../assets/svg/github.svg');
-}
-
 .rss-link {
   position: absolute;
   top: 50%;
   right: 20px;
-  background-image: url('../assets/svg/rss2.svg');
   transform: translateY(-50%);
 }

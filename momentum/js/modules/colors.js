@@ -4,26 +4,20 @@ import { changeBtns } from './settings.js';
 const root = document.querySelector(':root');
 const menuColors = document.querySelector('.menu-colors');
 const colorInputs = menuColors.querySelectorAll('input[data-color]');
-const copyInput = menuColors.querySelector('.copy-input');
+const copyBtn = menuColors.querySelector('.copy-button');
 
 const colors = {
   dark: {
-    main: '#ffffff',
     active: '#ce51f5',
     modal: '#ffffff',
     modalBg: '#09031599',
-    btn: '#828282',
-    btnBg: '#ffffff',
     activeBtn: '#ffffff',
   },
   light: {
-    main: '#ffffff',
-    active: '#58fefb',
-    modal: '#292929',
-    modalBg: '#ffffffd8',
-    btn: '#828282',
-    btnBg: '#ffffff',
-    activeBtn: '#474747',
+    active: '#419cf1',
+    modal: '#303030',
+    modalBg: '#ffffffee',
+    activeBtn: '#ffffff',
   },
   user: null,
 };
@@ -68,7 +62,6 @@ const changeColor = (input) => {
 };
 
 const copyColors = () => {
-  copyInput.checked = false;
   user.colorTheme = 'user';
   colors.user = Object.assign({}, curTheme);
   menuColors.classList.add('custom');
@@ -82,6 +75,6 @@ menuColors.addEventListener('input', (e) => {
   if (user.colorTheme === 'user') changeColor(e.target);
 });
 
-copyInput.addEventListener('change', copyColors);
+copyBtn.addEventListener('click', copyColors);
 
 export { changeTheme, saveColors };

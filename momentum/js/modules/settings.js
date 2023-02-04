@@ -28,6 +28,16 @@ const transText = {
   photoTags: ['Photo tags', 'Фото тег'],
   showBlocks: ['Show / hide', 'Показать / скрыть'],
   autoslider: ['Autoslider', 'Автослайдер'],
+  customColors: ['Сustomize colors', 'Настройте цвета'],
+  copyColors: ['Copy these colors to your theme', 'Скопируйте цвета в свою тему'],
+  activeColor: ['Active color', 'Активный цвет'],
+  background: ['Modal background', 'Фон модальных окон'],
+  bgOpacity: ['Background opacity', 'Прозрачность фона'],
+  modalText: ['Modal text', 'Текст модальных окон'],
+  btnText: ['Active button text', 'Текст активных кнопок'],
+  theme: ['Theme', 'Тема'],
+  effects: ['Effects', 'Эффекты'],
+
   general: ['General', 'Общее'],
   photo: ['Photo', 'Фото'],
   style: ['Style', 'Стиль'],
@@ -51,12 +61,15 @@ const transText = {
   morning: ['Morning', 'Утро'],
   afternoon: ['Afternoon', 'День'],
   evening: ['Evening', 'Вечер'],
+  nature: ['Nature', 'Природа'],
   animals: ['Animals', 'Животные'],
   beauty: ['Beauty', 'Красота'],
+  art: ['Art', 'Искусство'],
+  cats: ['Cats', 'Котики'],
   custom: ['Your tag', 'Ваш тег'],
   dark: ['Dark', 'Темная'],
   light: ['Light', 'Светлая'],
-  user: ['Custom', 'Кастом'],
+  user: ['Custom', 'Личная'],
   all: ['All', 'Все'],
   done: ['Done', 'Выполнены'],
   clear: ['Clear list', 'Очистить'],
@@ -74,10 +87,6 @@ const transText = {
 
 const changeCustomBlock = () => {
   user.photoSource === 'github' ? customBlock.classList.remove('active') : customBlock.classList.add('active');
-  if (user.customTag) {
-    customBtn.value = customBtn.textContent = user.customTag;
-    customBtn.removeAttribute('disabled');
-  }
 };
 
 const changeMenuPart = () => {

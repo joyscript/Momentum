@@ -84,10 +84,9 @@
   width: 50px;
   height: 35px;
   flex-shrink: 0;
-  background-image: url('../assets/svg/arrow.svg');
-  background-size: 20px;
+  font-size: 20px;
   @include media-ms {
     height: 24px;
-    background-size: 18px;
+    font-size: 18px;
   }
 }

@@ -12,9 +12,9 @@ const createTask = (task, isDone) => {
   element.classList.add('todo-item', 'trans');
   isDone && element.classList.add('done');
   element.innerHTML = `
-    <button class="button todo-check-button"></button>
+    <button class="button todo-check-button icon-check"></button>
     <div class="todo-task" contenteditable="true">${task}</div>
-    <button class="button todo-delete-button"></button>
+    <button class="button todo-delete-button icon-delete"></button>
   `;
   todoList.append(element);
   todoList.style.height = todoList.scrollHeight + 'px';

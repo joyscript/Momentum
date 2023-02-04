@@ -7,23 +7,14 @@
   letter-spacing: -1px;
   opacity: 0.8;
 
-  &:hover {
-    opacity: 1;
-  }
-
   .open > & {
     right: 40px;
     bottom: 37px;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 
   @include media-tm {
     right: 25px;
     bottom: 23px;
-    opacity: 0.9;
 
     .open > & {
       right: 25px;
@@ -50,29 +41,26 @@
 .todo-header {
   display: flex;
   gap: 20px;
-  padding: 20px 20px 15px;
-  // background: $color-modal-bg2;
 }
 
 .todo-list {
   position: relative;
   min-height: 180px;
-  max-height: calc(100vh - (65px + 105px + 40px));
+  max-height: calc(100vh - (60px + 105px + 40px));
   padding: 5px 20px 15px;
   overflow: hidden;
   transition: 0.3s;
-  box-shadow: $shadow;
 
   @include media-tm {
-    max-height: calc(100vh - (65px + 105px + 10px));
+    max-height: calc(100vh - (60px + 105px + 10px));
   }
 
   @media (max-width: 400px) and (min-height: 550px) {
-    max-height: calc(100vh - (65px + 105px + 5px + 60px));
+    max-height: calc(100vh - (60px + 105px + 5px + 60px));
   }
 
   @media (max-height: 415px) {
-    min-height: calc(100vh - (65px + 105px + 10px));
+    min-height: calc(100vh - (60px + 105px + 10px));
   }
 }
 
@@ -101,7 +89,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 3px 0;
+  padding: 5px 0;
   text-align: left;
   transition: 0.3s;
 
@@ -122,12 +110,12 @@
   display: block;
   width: 100%;
   padding: 5px;
-  line-height: 24px;
+  line-height: 20px;
   outline: none;
   overflow: hidden;
 
   &:focus {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(150, 150, 150, 0.2);
   }
 
   .done & {
@@ -140,30 +128,29 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  background: var(--color-main);
-  cursor: pointer;
+  font-size: 16px;
+  color: $color-main;
+  background: $color-main;
+  box-shadow: $shadow;
 
   .done & {
-    background: var(--color-active) url('../assets/svg/check.svg') no-repeat;
-    background-size: contain;
-    background-position: 2px -1px;
+    color: var(--color-activeBtn);
+    background: var(--color-active);
     opacity: 1;
   }
 }
 
 .todo-delete-button {
-  width: 18px;
-  height: 18px;
   flex-shrink: 0;
+  width: 17px;
+  height: 17px;
   margin-left: auto;
-  background-image: url('../assets/svg/delete.svg');
-  background-size: contain;
+  font-size: 17px;
 }
 
 .todo-footer {
   height: 105px;
   padding: 15px 20px 60px;
-  // background: $color-modal-bg2;
 }
 
 .todo-clear-button {
@@ -173,12 +160,13 @@
   padding: 0 10px;
   font-size: 15px;
   line-height: 26px;
-  color: $color-light;
+  color: var(--color-modal);
   background: rgba(255, 255, 255, 0.2);
-  opacity: 0.75;
+  box-shadow: $shadow;
 
   &:hover {
-    opacity: 0.9;
+    color: $color-btn;
+    background: $color-main;
   }
 
   .empty-all ~ &,

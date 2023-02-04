@@ -28,7 +28,6 @@ const changeWeather = (data) => {
   weatherMain.innerHTML = `
     <i class="weather-icon owf owf-${data.weather[0].id}"></i>
     <span class="weather-temp">${Math.round(data.main.temp)}°C</span>
-    <span class="weather-city">${city.value}</span>
   `;
   weatherData.innerHTML = `
     <span>${data.weather[0].description}</span>

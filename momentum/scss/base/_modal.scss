@@ -15,6 +15,14 @@
 
 .modal-toggle-button {
   position: fixed;
+
+  .open & {
+    color: var(--color-active);
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .scroll {
@@ -24,10 +32,10 @@
     width: 3px;
   }
   &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 1px grey;
+    box-shadow: inset 0 0 1px rgba(120, 120, 120, 0.4);
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(120, 120, 120, 0.4);
   }
 }
 
@@ -36,41 +44,25 @@
 }
 
 .modal-button {
-  position: relative;
   width: calc((100% - 30px) / 3);
   height: 30px;
   padding: 5px;
-  color: var(--color-btn);
-  background: var(--color-btnBg);
+  color: $color-btn;
+  background: $color-main;
+  box-shadow: $shadow;
   pointer-events: all;
-  overflow: hidden;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
   &[name='todoShow'] {
     flex-grow: 1;
   }
 
-  &:hover {
-    filter: brightness(0.8) contrast(1.5);
-    // box-shadow: var(--color-active) 0px 3px 3px -2px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 1px, rgba(0, 0, 0, 0.06) 0px 1px 2px 1px;
-  }
-
   &.active {
     background: var(--color-active);
     color: var(--color-activeBtn);
-
-    &:hover {
-      filter: brightness(0.8) contrast(1.5);
-      // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    }
   }
 
-  &:disabled{
-    pointer-events: none;
-    opacity: 0.5;
+  &:hover {
+    filter: brightness(0.8) contrast(1.5);
   }
 
   @include media-tm {
@@ -86,21 +78,29 @@
 .modal-input {
   width: 100%;
   height: 30px;
-  color: var(--color-input);
-  background: var(--color-inputBg);
-  opacity: 0.9;
+  padding-left: 10px;
+  color: $color-input;
+  background: $color-main;
+  outline: 1px solid transparent;
+  outline-offset: -1px;
 
-  &:hover,
   &:focus {
-    opacity: 1;
+    background: $color-main;
+    outline: 1px solid $color-grey;
   }
 
   &::placeholder {
-    color: var(--color-btn);
-    opacity: 0.9;
+    color: $color-btn;
+    opacity: 0.8;
   }
 
   &:focus::placeholder {
     opacity: 0;
   }
+}
+
+.modal-header,
+.modal-footer {
+  padding: 15px 20px;
+  box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
 }
