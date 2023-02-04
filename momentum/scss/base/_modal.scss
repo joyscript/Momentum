@@ -20,6 +20,10 @@
     color: var(--color-active);
   }
 
+  @include media-tm {
+    opacity: 0.9;
+  }
+
   &:hover {
     opacity: 1;
   }
@@ -37,10 +41,6 @@
   &::-webkit-scrollbar-thumb {
     background: rgba(120, 120, 120, 0.4);
   }
-}
-
-.play-list.scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .modal-button {

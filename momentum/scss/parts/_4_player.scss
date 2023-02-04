@@ -87,7 +87,7 @@
   overflow: hidden;
 
   .playlist-open & {
-    padding: 10px 20px 15px;
+    padding: 15px 20px;
   }
 
   @include media-hs {
@@ -123,10 +123,19 @@
   }
 }
 
-.play {
+.player-controls > .icon-play {
   width: 40px;
   height: 40px;
   font-size: 40px;
+}
+
+.playing.icon-play::before,
+.playing > .icon-play::before {
+  content: '\e908';
+}
+
+.mute.icon-volume::before {
+  content: '\e907';
 }
 
 .playlist-button {

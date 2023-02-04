@@ -88,11 +88,6 @@ button {
   background-position: center;
   opacity: 0.8;
 }
-@media (max-width: 1023px), (max-height: 767px) {
-  .button {
-    opacity: 0.9;
-  }
-}
 .button:hover {
   opacity: 1;
 }
@@ -233,6 +228,11 @@ button {
 .open .modal-toggle-button {
   color: var(--color-active);
 }
+@media (max-width: 1023px), (max-height: 767px) {
+  .modal-toggle-button {
+    opacity: 0.9;
+  }
+}
 .modal-toggle-button:hover {
   opacity: 1;
 }
@@ -248,10 +248,6 @@ button {
 }
 .scroll::-webkit-scrollbar-thumb {
   background: rgba(120, 120, 120, 0.4);
-}
-
-.play-list.scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .modal-button {
@@ -835,7 +831,7 @@ button {
   overflow: hidden;
 }
 .playlist-open .play-list {
-  padding: 10px 20px 15px;
+  padding: 15px 20px;
 }
 @media (max-height: 550px) {
   .play-list {
@@ -867,10 +863,19 @@ button {
   opacity: 1;
 }
 
-.play {
+.player-controls > .icon-play {
   width: 40px;
   height: 40px;
   font-size: 40px;
+}
+
+.playing.icon-play::before,
+.playing > .icon-play::before {
+  content: "\e908";
+}
+
+.mute.icon-volume::before {
+  content: "\e907";
 }
 
 .playlist-button {

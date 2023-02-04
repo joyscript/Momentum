@@ -81,10 +81,6 @@ button {
   background-position: center;
   opacity: 0.8;
 
-  @include media-tm {
-    opacity: 0.9;
-  }
-
   &:hover {
     opacity: 1;
   }
