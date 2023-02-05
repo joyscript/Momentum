@@ -1,4 +1,5 @@
 import { user } from './user.js';
+import { updateBar } from './service.js';
 import { changeBtns } from './settings.js';
 
 const root = document.querySelector(':root');
@@ -33,6 +34,7 @@ const changeColorInputs = () => {
   colorInputs.forEach((input) => {
     if (input.dataset.color === 'alphaBg') {
       input.value = parseInt(curTheme.modalBg.slice(-2), 16);
+      updateBar(input);
     } else if (input.dataset.color === 'modalBg') {
       input.value = curTheme.modalBg.slice(0, -2);
     } else {

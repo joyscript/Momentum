@@ -68,6 +68,12 @@
   @include media-tm {
     width: calc((100% - 20px) / 3);
   }
+
+  &:disabled {
+    pointer-events: none;
+    cursor: auto;
+    opacity: 0.5;
+  }
 }
 
 .switch.active {

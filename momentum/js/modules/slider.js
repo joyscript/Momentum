@@ -5,6 +5,9 @@ import { handleError, goAfterSuccess } from './settings.js';
 const slider = document.querySelector('.slider');
 const prevBtn = document.querySelector('.slide-prev');
 const nextBtn = document.querySelector('.slide-next');
+const speedInput = document.querySelector('.speed-input');
+const autosliderBtn = document.querySelector('.autoslider-button');
+const unsplashBtn = document.querySelector('.modal-button[value="unsplash"]');
 
 const unsplashKey = 'XNzUrppnWkjOt4XX7VhMokSfBd-nbanps_7kePh2oeQ';
 const flickrKey = '334110c40a5f1c9ae925a64f0815ecee';
@@ -17,6 +20,7 @@ const URL = {
 };
 
 const maxGithub = 20;
+let autoslider;
 let randNum;
 let isReady;
 
@@ -47,11 +51,6 @@ const formatRandNum = () => {
   return `${num < 9 ? '0' : ''}${num + 1}`;
 };
 
-const showAnotherSlide = (i) => {
-  if (user.photoSource === 'github') randNum += i;
-  showBackground();
-};
-
 const changeImage = (data, img) => {
   if (user.photoSource === 'unsplash') {
     data.urls.regular ? (img.src = data.urls.regular) : showBackground();
@@ -70,7 +69,7 @@ const changeImage = (data, img) => {
   if (user.tagMode === 'custom') goAfterSuccess();
 };
 
-export const showBackground = (tag = user.photoTag) => {
+const showBackground = (tag = user.photoTag) => {
   isReady = false;
   const img = new Image();
 
@@ -82,6 +81,54 @@ export const showBackground = (tag = user.photoTag) => {
   }
 };
 
+const showAnotherSlide = (i) => {
+  if (user.photoSource === 'github') randNum += i;
+  showBackground();
+};
+
+// ------------------------------------------------------------------
+
+const playAutoslider = () => {
+  autosliderBtn.value = 'on';
+  autosliderBtn.classList.add('active');
+  autosliderBtn.textContent = user.lang === 'en' ? 'On' : 'Вкл';
+  unsplashBtn.disabled = true;
+  autoslider = setInterval(() => isReady && showAnotherSlide(1), user.sliderSpeed * 1000);
+};
+
+const stopAutoslider = () => {
+  autosliderBtn.value = 'off';
+  autosliderBtn.classList.remove('active');
+  autosliderBtn.textContent = user.lang === 'en' ? 'Off' : 'Выкл';
+  unsplashBtn.disabled = false;
+  clearInterval(autoslider);
+};
+
+const toggleAutoslider = () => {
+  user.autoslider = !user.autoslider;
+  user.autoslider ? playAutoslider() : stopAutoslider();
+};
+
+const changeSpeedText = () => (speedInput.nextElementSibling.textContent = `${user.sliderSpeed}s`);
+
+const checkSpeedInput = () => {
+  if (!speedInput.value.match(/[0-9]/g)) speedInput.value = '';
+};
+
+const changeSpeed = () => {
+  user.autoslider && stopAutoslider();
+  user.sliderSpeed = +speedInput.value;
+  changeSpeedText();
+  user.autoslider && playAutoslider();
+  speedInput.value = '';
+  speedInput.blur();
+};
+
+changeSpeedText();
+user.autoslider && playAutoslider();
+
+// -------------------------------------------------------------------
+
 prevBtn.addEventListener('click', () => isReady && showAnotherSlide(-1));
 nextBtn.addEventListener('click', () => isReady && showAnotherSlide(1));
 
@@ -91,3 +138,9 @@ document.addEventListener('keydown', (e) => {
     if (e.code === 'ArrowRight') isReady && showAnotherSlide(1);
   }
 });
+
+autosliderBtn.addEventListener('click', toggleAutoslider);
+speedInput.addEventListener('input', checkSpeedInput);
+speedInput.addEventListener('change', changeSpeed);
+
+export { showBackground, stopAutoslider, playAutoslider };

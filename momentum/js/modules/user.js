@@ -31,6 +31,8 @@ let user = {
   menu: 'general',
   colorTheme: 'dark',
   customTheme: '',
+  autoslider: false,
+  sliderSpeed: 3,
 };
 
 const key = 'user-momentum-joyscript';

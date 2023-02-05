@@ -1,10 +1,10 @@
 import { user, saveUser } from './user.js';
+import { checkValue, updateBar } from './service.js';
 import { showDateAndGreeting, timeOfDay } from './timer.js';
-import { checkValue } from './service.js';
 import { showWeather } from './weather.js';
 import { showCurQuote } from './quote.js';
 import { showCurMantra } from './mantra.js';
-import { showBackground } from './slider.js';
+import { showBackground, stopAutoslider, playAutoslider } from './slider.js';
 import { loadTodo, saveTodo, toggleTodo } from './todo.js';
 import { changeTheme, saveColors } from './colors.js';
 
@@ -15,19 +15,24 @@ const modalBtns = document.querySelectorAll('.modal-button');
 const modalInputs = document.querySelectorAll('.modal-input');
 const transItems = document.querySelectorAll('[data-trans]');
 const menuParts = menu.querySelectorAll('.menu-part');
+const menuRanges = menu.querySelectorAll('.range');
 const tagsBlock = menu.querySelector('.tag-option');
 const customBlock = menu.querySelector('.menu-custom');
 const tagInput = menu.querySelector('.menu-tag-input');
 const customBtn = menu.querySelector('.custom-button');
 const menuError = menu.querySelector('.menu-error');
+const autoslider = menu.querySelector('.autoslider');
 const todoClearBtn = document.querySelector('.todo-clear-button');
 
 const transText = {
   language: ['Language', 'Язык'],
+  showBlocks: ['Show / hide', 'Показать / скрыть'],
+  music: ['Music', 'Музыка'],
   photoSourse: ['Photo sourse', 'Фото ресурс'],
   photoTags: ['Photo tags', 'Фото тег'],
-  showBlocks: ['Show / hide', 'Показать / скрыть'],
-  autoslider: ['Autoslider', 'Автослайдер'],
+  autoSlider: ['Autoslider', 'Автослайдер'],
+  sliderMessage: ['Available for GitHub and Flickr', 'Доступен для GitHub и Flickr'],
+  speed: ['Speed', 'Скорость'],
   customColors: ['Сustomize colors', 'Настройте цвета'],
   copyColors: ['Copy these colors to your theme', 'Скопируйте цвета в свою тему'],
   activeColor: ['Active color', 'Активный цвет'],
@@ -52,8 +57,9 @@ const transText = {
   todo: ['Todo', 'Задачи'],
   mantra: ['Mantra', 'Мантра'],
   arrows: ['Arrows', 'Стрелочки'],
-  allBlocks: ['Show all', 'Показать все'],
-  slider: ['Autoslider', 'Автослайдер'],
+  positive: ['Positive', 'Позитив'],
+  relax: ['Relax', 'Релакс'],
+  drive: ['Drive', 'Драйв'],
   github: ['GitHub', 'GitHub'],
   unsplash: ['Unsplash', 'Unsplash'],
   flickr: ['Flickr', 'Flickr'],
@@ -61,12 +67,12 @@ const transText = {
   morning: ['Morning', 'Утро'],
   afternoon: ['Afternoon', 'День'],
   evening: ['Evening', 'Вечер'],
-  nature: ['Nature', 'Природа'],
   animals: ['Animals', 'Животные'],
   beauty: ['Beauty', 'Красота'],
-  art: ['Art', 'Искусство'],
-  cats: ['Cats', 'Котики'],
+  on: ['On', 'Вкл'],
+  off: ['Off', 'Выкл'],
   custom: ['Your tag', 'Ваш тег'],
+
   dark: ['Dark', 'Темная'],
   light: ['Light', 'Светлая'],
   user: ['Custom', 'Личная'],
@@ -75,8 +81,8 @@ const transText = {
   clear: ['Clear list', 'Очистить'],
   todoText: ['No todos yet', 'Еще нет задач'],
   doneText: ['No completed todos', 'Нет выполненных задач'],
-  enterTag: ['Enter your tag', 'Введите ваш тег'],
   tagInput: ['[Enter your tag]', '[Введите ваш тег]'],
+  sliderInput: ['[Enter speed]', '[Введите скорость]'],
   todoInput: ['[Enter new todo]', '[Введите новую задачу]'],
   errorFetch: [
     'Something went wrong. The API is not responding. Try again later.',
@@ -151,18 +157,21 @@ const resetError = () => {
 };
 
 const changePhotoSourse = () => {
+  user.autoslider && stopAutoslider();
   resetError();
   if (user.photoSource === 'github') {
     user.photoTag = timeOfDay;
     changeBtns('photoTag');
   }
-  showBackground();
+  user.photoSource === 'unsplash' ? autoslider.classList.add('disabled') : autoslider.classList.remove('disabled');
   changeCustomBlock();
+  user.autoslider ? playAutoslider() : showBackground();
 };
 
 const changePhotoTag = () => {
+  user.autoslider && stopAutoslider();
   resetError();
-  showBackground();
+  user.autoslider ? playAutoslider() : showBackground();
 };
 
 const handleModalClicks = (e) => {
@@ -256,6 +265,10 @@ tagInput.addEventListener('change', () => {
 });
 
 tagInput.addEventListener('input', () => tagInput.value === '' && tagsBlock.classList.remove('error'));
+
+menuRanges.forEach((range) => {
+  range.addEventListener('input', () => updateBar(range));
+});
 
 window.addEventListener('beforeunload', saveSettings);
 

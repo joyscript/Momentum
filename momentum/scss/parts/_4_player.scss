@@ -127,6 +127,11 @@
   width: 40px;
   height: 40px;
   font-size: 40px;
+  opacity: 0.75;
+
+  &:hover{
+    opacity: 0.95;
+  }
 }
 
 .playing.icon-play::before,

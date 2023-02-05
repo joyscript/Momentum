@@ -36,7 +36,7 @@
 
 .menu-body {
   position: relative;
-  height: 430px;
+  height: 460px;
   padding: 20px;
 
   @include media-tm {
@@ -121,10 +121,12 @@
   }
 }
 
+// Photo ========================================================================
+
 .menu-custom {
   margin-top: 15px;
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.5;
   transition: 0.3s;
 
   &.active {
@@ -155,6 +157,57 @@
     opacity: 1;
   }
 }
+
+.autoslider.disabled {
+  pointer-events: none;
+  cursor: auto;
+  opacity: 0.5;
+}
+
+.autoslider-row {
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 15px;
+
+  .modal-button {
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+}
+
+.autoslider-button {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  line-height: 1;
+  &::before {
+    content: '\e909';
+    padding: 0 10px;
+    font-family: 'icomoon';
+    font-size: 20px;
+  }
+
+  &.active::before {
+    content: '\e908';
+  }
+
+  .disabled & {
+    pointer-events: none;
+    cursor: auto;
+  }
+}
+
+.speed-input {
+  padding-left: 7px;
+}
+
+.autoslider-message {
+  text-align: left;
+  font-size: 15px;
+  opacity: 0.4;
+}
+
+// Colors ========================================================================
 
 .menu-colors .menu-option:not(:last-child) {
   margin-bottom: 20px;
@@ -226,6 +279,8 @@
 .color-input {
   height: 26px;
 }
+
+// Footer ========================================================================
 
 .menu-footer {
   position: relative;

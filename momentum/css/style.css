@@ -146,7 +146,7 @@ button {
   display: block;
   width: 100%;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   background-image: linear-gradient(var(--color-active), var(--color-active));
   background-repeat: no-repeat;
   background-size: 50% 100%;
@@ -174,6 +174,11 @@ button {
   border-radius: 50%;
   background: var(--color-active);
   cursor: ew-resize;
+}
+
+.range:disabled {
+  pointer-events: none;
+  cursor: auto;
 }
 
 .menu,
@@ -273,6 +278,11 @@ button {
   .modal-button {
     width: calc((100% - 20px) / 3);
   }
+}
+.modal-button:disabled {
+  pointer-events: none;
+  cursor: auto;
+  opacity: 0.5;
 }
 
 .switch.active {
@@ -867,6 +877,10 @@ button {
   width: 40px;
   height: 40px;
   font-size: 40px;
+  opacity: 0.75;
+}
+.player-controls > .icon-play:hover {
+  opacity: 0.95;
 }
 
 .playing.icon-play::before,
@@ -1095,7 +1109,7 @@ button {
 
 .menu-body {
   position: relative;
-  height: 430px;
+  height: 460px;
   padding: 20px;
 }
 @media (max-width: 1023px), (max-height: 767px) {
@@ -1183,7 +1197,7 @@ button {
 .menu-custom {
   margin-top: 15px;
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.5;
   transition: 0.3s;
 }
 .menu-custom.active {
@@ -1211,6 +1225,52 @@ button {
 .error .menu-error {
   height: 36px;
   opacity: 1;
+}
+
+.autoslider.disabled {
+  pointer-events: none;
+  cursor: auto;
+  opacity: 0.5;
+}
+
+.autoslider-row {
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.autoslider-row .modal-button {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.autoslider-button {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  line-height: 1;
+}
+.autoslider-button::before {
+  content: "\e909";
+  padding: 0 10px;
+  font-family: "icomoon";
+  font-size: 20px;
+}
+.autoslider-button.active::before {
+  content: "\e908";
+}
+.disabled .autoslider-button {
+  pointer-events: none;
+  cursor: auto;
+}
+
+.speed-input {
+  padding-left: 7px;
+}
+
+.autoslider-message {
+  text-align: left;
+  font-size: 15px;
+  opacity: 0.4;
 }
 
 .menu-colors .menu-option:not(:last-child) {

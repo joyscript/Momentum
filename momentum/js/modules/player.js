@@ -1,4 +1,5 @@
 import { user } from './user.js';
+import { updateBar } from './service.js';
 import { audioData } from './audioData.js';
 
 const player = document.querySelector('.player');
@@ -67,8 +68,6 @@ const formatTime = (sec) => {
   sec = Math.floor(sec % 60).toString();
   return `${min}:${sec.padStart(2, 0)}`;
 };
-
-const updateBar = (bar) => (bar.style.backgroundSize = `${bar.value}% 100%`);
 
 const changeVolume = () => {
   audio.volume = volumeBar.value / 100;

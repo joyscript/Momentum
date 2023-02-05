@@ -81,7 +81,7 @@
       </div>
     </footer>
 
-    <div class="menu" data-modal="menu">
+    <div class="menu open" data-modal="menu">
       <div class="modal menu-modal">
         <div class="modal-header menu-header">
           <div class="menu-buttons">
@@ -113,13 +113,14 @@
                 <button class="modal-button" name="showBlock" value="arrows">Arrows</button>
               </div>
             </div>
-            <div class="menu-option">
-              <div class="menu-title" data-trans="autoslider">Autoslider</div>
+            <!-- <div class="menu-option">
+              <div class="menu-title" data-trans="music">Music</div>
               <div class="menu-buttons">
-                <button class="modal-button" name="slider" value="slider">Enable</button>
-                <input class="range" type="range" name="autoslider" value="autoslider" placeholder="[Enter period, s]" />
+                <button class="modal-button switch" name="music" value="positive">positive</button>
+                <button class="modal-button switch" name="music" value="relax">relax</button>
+                <button class="modal-button switch" name="music" value="drive">drive</button>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="menu-part scroll" data-menu="photo">
@@ -140,14 +141,20 @@
                 <button class="modal-button switch" name="photoTag" value="evening">evening</button>
                 <button class="modal-button switch" name="photoTag" value="animals">animals</button>
                 <button class="modal-button switch" name="photoTag" value="beauty">beauty</button>
-                <!-- <button class="modal-button switch" name="photoTag" value="nature">nature</button> -->
-                <!-- <button class="modal-button switch" name="photoTag" value="art">art</button> -->
-                <!-- <button class="modal-button switch" name="photoTag" value="cats">cats</button> -->
               </div>
               <div class="menu-custom">
                 <input class="input menu-tag-input modal-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
                 <div class="menu-error"></div>
               </div>
+            </div>
+            <div class="menu-option autoslider">
+              <div class="menu-title" data-trans="autoSlider">Autoslider</div>
+              <div class="menu-buttons autoslider-row">
+                <button class="modal-button autoslider-button" value="off"></button>
+                <input class="input modal-input speed-input" name="sliderInput" type="text" maxlength="3" autocomplete="off" />
+                <span>5s</span>
+              </div>
+              <p class="autoslider-message" data-trans="sliderMessage"></p>
             </div>
           </div>
 
