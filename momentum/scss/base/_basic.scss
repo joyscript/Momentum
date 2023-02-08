@@ -42,7 +42,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 25px;
   padding: 20px 0;
+  line-height: 1;
+  @include media-tm {
+    gap: 20px;
+  }
 }
 
 .footer {

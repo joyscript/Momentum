@@ -17,6 +17,7 @@ $large: 1200px;
 $tab: 1023px;
 $mob: 767px;
 $small: 550px;
+$xsmall: 360px;
 
 @mixin media-l {
   @media (max-width: $large) {
@@ -38,6 +39,12 @@ $small: 550px;
 
 @mixin media-s {
   @media (max-width: $small) {
+    @content;
+  }
+}
+
+@mixin media-x {
+  @media (max-width: $xsmall) {
     @content;
   }
 }
@@ -74,6 +81,12 @@ $small: 550px;
 
 @mixin media-ms {
   @media (max-width: $mob), (max-height: $small) {
+    @content;
+  }
+}
+
+@mixin media-sx {
+  @media (max-width: $small), (max-height: $xsmall) {
     @content;
   }
 }

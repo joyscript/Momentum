@@ -36,7 +36,6 @@ const showName = () => (user.name ? showValue() : showPlaceholder());
 const showValue = () => (double.textContent = name.value = user.name);
 
 const showPlaceholder = () => {
-  double.style.minWidth = 'min-content';
   double.textContent = name.placeholder = placeholder[user.lang];
   double.style.minWidth = double.offsetWidth + 'px';
 };

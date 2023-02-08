@@ -68,4 +68,4 @@ speedInput.addEventListener('blur', changeSpeedInputText);
 speedInput.addEventListener('input', watchSpeedInput);
 speedInput.addEventListener('change', changeSpeed);
 
-export { autosliderBtn, playAutoslider, stopAutoslider, changeAutosliderText };
+export { changeAutosliderText };

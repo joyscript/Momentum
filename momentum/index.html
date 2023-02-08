@@ -12,6 +12,11 @@
   </head>
 
   <body>
+    <div class="slider"></div>
+    <div class="slider-buttons" data-show="arrows">
+      <button class="slider-button button slide-prev"></button>
+      <button class="slider-button button slide-next"></button>
+    </div>
     <header class="header">
       <div class="player" data-show="player" data-modal="player">
         <div class="player-modal">
@@ -60,15 +65,9 @@
       <div class="greeting-wrapper" data-show="greeting">
         <div class="greeting"></div>
         <div class="name-wrapper">
-          <input class="text-input name-input" type="text" name="name" maxlength="30" autocomplete="off" />
+          <textarea class="text-input name-input" maxlength="30" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
           <div class="double"></div>
         </div>
-      </div>
-
-      <div class="slider"></div>
-      <div class="slider-buttons" data-show="arrows">
-        <button class="slider-button button slide-prev"></button>
-        <button class="slider-button button slide-next"></button>
       </div>
     </main>
 
@@ -81,7 +80,7 @@
       </div>
     </footer>
 
-    <div class="menu open" data-modal="menu">
+    <div class="menu" data-modal="menu">
       <div class="modal menu-modal">
         <div class="modal-header menu-header">
           <div class="menu-buttons">
