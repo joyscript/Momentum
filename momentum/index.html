@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/owfont-regular.css" />
     <link rel="stylesheet" href="css/icofont.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/index.js" type="module" defer></script>
+    <script src="js/index.js" type="module"></script>
   </head>
 
   <body>
@@ -46,7 +46,7 @@
 
       <div class="weather" data-show="weather" data-modal="weather">
         <div class="weather-modal">
-          <input class="input city-input" type="text" name="city" maxlength="20" autocomplete="off" />
+          <input class="text-input city-input" type="text" name="city" maxlength="20" autocomplete="off" />
           <div class="weather-data"></div>
         </div>
         <div class="weather-main modal-toggle-button"></div>
@@ -60,7 +60,7 @@
       <div class="greeting-wrapper" data-show="greeting">
         <div class="greeting"></div>
         <div class="name-wrapper">
-          <input class="input name-input" type="text" name="name" maxlength="30" autocomplete="off" />
+          <input class="text-input name-input" type="text" name="name" maxlength="30" autocomplete="off" />
           <div class="double"></div>
         </div>
       </div>
@@ -85,120 +85,118 @@
       <div class="modal menu-modal">
         <div class="modal-header menu-header">
           <div class="menu-buttons">
-            <button class="modal-button tab-button switch" name="menu" value="general">General</button>
-            <button class="modal-button tab-button switch" name="menu" value="photo">Photo</button>
-            <button class="modal-button tab-button switch" name="menu" value="style">Style</button>
+            <label class="modal-button"><input type="radio" name="menu" value="general" /><span></span></label>
+            <label class="modal-button"><input type="radio" name="menu" value="photo" /><span></span></label>
+            <label class="modal-button"><input type="radio" name="menu" value="style" /><span></span></label>
           </div>
         </div>
         <div class="menu-body">
           <div class="menu-part scroll" data-menu="general">
             <div class="menu-option">
-              <div class="menu-title" data-trans="language">Language</div>
+              <div class="menu-title" data-trans="language"></div>
               <div class="menu-buttons">
-                <button class="modal-button switch" name="lang" value="en">EN</button>
-                <button class="modal-button switch" name="lang" value="ru">RU</button>
+                <label class="modal-button"><input type="radio" name="lang" value="en" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="lang" value="ru" /><span></span></label>
               </div>
             </div>
             <div class="menu-option">
-              <div class="menu-title" data-trans="showBlocks">Show / hide</div>
+              <div class="menu-title" data-trans="showBlocks"></div>
               <div class="menu-buttons">
-                <button class="modal-button" name="showBlock" value="time">Time</button>
-                <button class="modal-button" name="showBlock" value="date">Date</button>
-                <button class="modal-button" name="showBlock" value="greeting">Greeting</button>
-                <button class="modal-button" name="showBlock" value="weather">Weather</button>
-                <button class="modal-button" name="showBlock" value="quote">Quote</button>
-                <button class="modal-button" name="showBlock" value="player">Player</button>
-                <button class="modal-button" name="showBlock" value="todo">Todo</button>
-                <button class="modal-button" name="showBlock" value="mantra">Mantra</button>
-                <button class="modal-button" name="showBlock" value="arrows">Arrows</button>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="time" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="date" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="greeting" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="weather" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="quote" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="player" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="todo" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="mantra" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="arrows" /><span></span></label>
               </div>
             </div>
-            <!-- <div class="menu-option">
-              <div class="menu-title" data-trans="music">Music</div>
+            <div class="menu-option">
+              <div class="menu-title" data-trans="music"></div>
               <div class="menu-buttons">
-                <button class="modal-button switch" name="music" value="positive">positive</button>
-                <button class="modal-button switch" name="music" value="relax">relax</button>
-                <button class="modal-button switch" name="music" value="drive">drive</button>
+                <label class="modal-button"><input type="radio" name="music" value="positive" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="music" value="relax" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="music" value="drive" /><span></span></label>
               </div>
-            </div> -->
+            </div>
           </div>
 
-          <div class="menu-part scroll" data-menu="photo">
+          <div class="menu-part scroll" data-menu="photo" data-source="github">
             <div class="menu-option">
-              <div class="menu-title" data-trans="photoSourse">Photo sourse</div>
+              <div class="menu-title" data-trans="photoSourse"></div>
               <div class="menu-buttons">
-                <button class="modal-button switch" name="photoSource" value="github">GitHub</button>
-                <button class="modal-button switch" name="photoSource" value="unsplash">Unsplash</button>
-                <button class="modal-button switch" name="photoSource" value="flickr">Flickr</button>
+                <label class="modal-button"><input type="radio" name="photoSource" value="github" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="photoSource" value="unsplash" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="photoSource" value="flickr" /><span></span></label>
               </div>
             </div>
-            <div class="menu-option tag-option">
-              <div class="menu-title" data-trans="photoTags">Photo tags</div>
+            <div class="menu-option">
+              <div class="menu-title" data-trans="photoTags"></div>
               <div class="menu-buttons">
-                <button class="modal-button switch" name="photoTag" value="night">night</button>
-                <button class="modal-button switch" name="photoTag" value="morning">morning</button>
-                <button class="modal-button switch" name="photoTag" value="afternoon">afternoon</button>
-                <button class="modal-button switch" name="photoTag" value="evening">evening</button>
-                <button class="modal-button switch" name="photoTag" value="animals">animals</button>
-                <button class="modal-button switch" name="photoTag" value="beauty">beauty</button>
+                <label class="modal-button"><input type="radio" name="photoTag" value="night" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="photoTag" value="morning" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="photoTag" value="afternoon" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="photoTag" value="evening" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="photoTag" value="nature" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="photoTag" value="animals" /><span></span></label>
               </div>
-              <div class="menu-custom">
-                <input class="input menu-tag-input modal-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
-                <div class="menu-error"></div>
+            </div>
+            <div class="menu-option custom-option">
+              <div class="menu-title" data-trans="customTag"></div>
+              <div class="menu-buttons custom-block">
+                <div class="tag-input-window">
+                  <input class="text-input modal-input tag-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
+                </div>
+                <label class="modal-button"><input class="custom-input" type="radio" name="photoTag" value="custom" /><span></span></label>
               </div>
+              <div class="tag-error"></div>
             </div>
             <div class="menu-option autoslider">
-              <div class="menu-title" data-trans="autoSlider">Autoslider</div>
-              <div class="menu-buttons autoslider-row">
-                <button class="modal-button autoslider-button" value="off"></button>
-                <input class="input modal-input speed-input" name="sliderInput" type="text" maxlength="3" autocomplete="off" />
-                <span>5s</span>
+              <div class="menu-title" data-trans="autoslider"></div>
+              <div class="menu-buttons autoslider-block">
+                <input class="text-input modal-input speed-input" name="sliderInput" type="text" maxlength="2" autocomplete="off" />
+                <label class="modal-button autoslider-button"><input type="checkbox" value="" /><span></span></label>
               </div>
               <p class="autoslider-message" data-trans="sliderMessage"></p>
             </div>
           </div>
 
-          <div class="menu-part scroll menu-colors" data-menu="style">
-            <div class="menu-option">
+          <div class="menu-part scroll style" data-menu="style">
+            <div class="menu-option color-option">
               <div class="menu-title color-title">
-                <span class="custom-title" data-trans="customColors">Сustomize colors</span>
-                <button class="copy-button" data-trans="copyColors">Click to copy these colors</button>
+                <span class="custom-title" data-trans="customColors"></span><button class="copy-button" data-trans="copyColors"></button>
               </div>
               <div class="color-row">
-                <span data-trans="activeColor">Active color</span>
-                <input class="color-input" type="color" data-color="active" />
+                <span data-trans="activeColor"></span><input class="color-input" type="color" data-color="active" />
               </div>
               <div class="color-row">
-                <span data-trans="background">Background</span>
-                <input class="color-input" type="color" data-color="modalBg" />
+                <span data-trans="background"></span><input class="color-input" type="color" data-color="modalBg" />
               </div>
               <div class="color-row">
-                <span data-trans="bgOpacity">Background opacity</span>
+                <span data-trans="bgOpacity"></span>
                 <input class="range color-range" type="range" data-color="alphaBg" min="0" max="255" step="1" />
               </div>
+              <div class="color-row"><span data-trans="modalText"></span><input class="color-input" type="color" data-color="modal" /></div>
               <div class="color-row">
-                <span data-trans="modalText">Modal windows text</span>
-                <input class="color-input" type="color" data-color="modal" />
-              </div>
-              <div class="color-row">
-                <span data-trans="btnText">Active button text</span>
-                <input class="color-input" type="color" data-color="activeBtn" />
+                <span data-trans="btnText"></span><input class="color-input" type="color" data-color="activeBtn" />
               </div>
             </div>
             <div class="menu-option">
-              <div class="menu-title" data-trans="theme">Theme</div>
+              <div class="menu-title" data-trans="theme"></div>
               <div class="menu-buttons">
-                <button class="modal-button switch" name="colorTheme" value="user"></button>
-                <button class="modal-button switch" name="colorTheme" value="dark"></button>
-                <button class="modal-button switch" name="colorTheme" value="light"></button>
+                <label class="modal-button"><input type="radio" name="colorTheme" value="user" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="colorTheme" value="dark" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="colorTheme" value="light" /><span></span></label>
               </div>
             </div>
             <div class="menu-option">
-              <div class="menu-title" data-trans="effects">Effects</div>
+              <div class="menu-title" data-trans="effects"></div>
               <div class="menu-buttons">
-                <button class="modal-button switch" name="colorTheme" value="user"></button>
-                <button class="modal-button switch" name="colorTheme" value="dark"></button>
-                <button class="modal-button switch" name="colorTheme" value="light"></button>
+                <label class="modal-button"><input type="radio" name="effect" value="1" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="effect" value="2" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="effect" value="3" /><span></span></label>
               </div>
             </div>
           </div>
@@ -217,16 +215,16 @@
     <div class="todo" data-show="todo" data-modal="todo">
       <div class="modal todo-modal">
         <div class="modal-header todo-header">
-          <button class="modal-button switch" name="todoShow" value="all">All</button>
-          <button class="modal-button switch" name="todoShow" value="done">Done</button>
+          <label class="modal-button"><input type="radio" name="todoShow" value="all" /><span></span></label>
+          <label class="modal-button"><input type="radio" name="todoShow" value="done" /><span></span></label>
         </div>
         <div class="todo-list">
           <div class="todo-text" data-trans="todoText"></div>
           <div class="done-text" data-trans="doneText"></div>
         </div>
-        <button class="todo-clear-button" value="clear">Clear list</button>
+        <button class="todo-clear-button" data-trans="clearBtn"></button>
         <div class="modal-footer todo-footer">
-          <input class="input todo-input modal-input" type="text" name="todoInput" maxlength="200" autocomplete="off" />
+          <input class="text-input modal-input todo-input" type="text" name="todoInput" maxlength="200" autocomplete="off" />
         </div>
       </div>
       <button class="modal-toggle-button todo-toggle-button">Todo</button>

@@ -1,13 +1,11 @@
-import { timeOfDay } from './timer.js';
-
 let user = {
   name: '',
-  city: '',
   lang: 'en',
+  city: 'Minsk',
+  menu: 'general',
   photoSource: 'github',
-  photoTag: timeOfDay,
+  photoTag: '',
   customTag: '',
-  tagMode: '',
   showBlock: {
     time: true,
     date: true,
@@ -16,7 +14,7 @@ let user = {
     quote: true,
     player: true,
     todo: true,
-    mantra: true,
+    mantra: false,
     arrows: true,
   },
   player: {
@@ -28,11 +26,10 @@ let user = {
   },
   todoList: [],
   todoShow: 'all',
-  menu: 'general',
   colorTheme: 'dark',
   customTheme: '',
-  autoslider: false,
-  sliderSpeed: 3,
+  sliderSpeed: '3',
+  music: 'positive',
 };
 
 const key = 'user-momentum-joyscript';
@@ -43,4 +40,4 @@ const saveUser = () => localStorage.setItem(key, JSON.stringify(user));
 
 getUser();
 
-export { user, getUser, saveUser };
+export { user, saveUser };

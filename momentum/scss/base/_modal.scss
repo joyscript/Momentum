@@ -44,60 +44,66 @@
 }
 
 .modal-button {
+  display: block;
   width: calc((100% - 30px) / 3);
   height: 30px;
-  padding: 5px;
-  color: $color-btn;
-  background: $color-main;
-  box-shadow: $shadow;
-  pointer-events: all;
-
-  &[name='todoShow'] {
-    flex-grow: 1;
-  }
-
-  &.active {
-    background: var(--color-active);
-    color: var(--color-activeBtn);
-  }
-
-  &:hover {
-    filter: brightness(0.8) contrast(1.5);
-  }
 
   @include media-tm {
     width: calc((100% - 20px) / 3);
   }
 
-  &:disabled {
-    pointer-events: none;
-    cursor: auto;
-    opacity: 0.5;
+  span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    line-height: 20px;
+    color: $color-btn;
+    background: $color-main;
+    box-shadow: $shadow;
+    transition: 0.3s;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(0.8) contrast(1.5);
+    }
   }
 }
 
-.switch.active {
+[type='radio'],
+[type='checkbox'] {
+  display: none;
+}
+
+[type='radio']:checked + span,
+[type='checkbox']:checked + span {
+  color: var(--color-activeBtn);
+  background: var(--color-active);
+}
+
+[type='radio']:checked + span {
   pointer-events: none;
-  cursor: default;
+  cursor: auto;
 }
 
 .modal-input {
   width: 100%;
   height: 30px;
-  padding-left: 10px;
+  padding-left: 8px;
   color: $color-input;
   background: $color-main;
-  outline: 1px solid transparent;
+  outline: 1px solid $color-grey;
   outline-offset: -1px;
 
   &:focus {
     background: $color-main;
-    outline: 1px solid $color-grey;
+    outline: 1px solid var(--color-active);
   }
 
   &::placeholder {
     color: $color-btn;
-    opacity: 0.8;
+    opacity: 0.9;
   }
 
   &:focus::placeholder {
@@ -108,5 +114,6 @@
 .modal-header,
 .modal-footer {
   padding: 15px 20px;
+  // backdrop-filter: opacity(0.3);
   box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
 }

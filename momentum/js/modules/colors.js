@@ -1,13 +1,12 @@
 import { user } from './user.js';
-import { updateBar } from './service.js';
-import { changeBtns } from './settings.js';
+import { updateBar } from './common.js';
 
 const root = document.querySelector(':root');
-const menuColors = document.querySelector('.menu-colors');
-const colorInputs = menuColors.querySelectorAll('input[data-color]');
-const copyBtn = menuColors.querySelector('.copy-button');
+const colorOption = document.querySelector('.color-option');
+const colorInputs = colorOption.querySelectorAll('input[data-color]');
+const copyBtn = colorOption.querySelector('.copy-button');
 
-const colors = {
+const themes = {
   dark: {
     active: '#ce51f5',
     modal: '#ffffff',
@@ -17,20 +16,29 @@ const colors = {
   light: {
     active: '#419cf1',
     modal: '#303030',
-    modalBg: '#ffffffee',
+    modalBg: '#ffffffdd',
     activeBtn: '#ffffff',
   },
-  user: null,
 };
 
-let curTheme = colors[user.colorTheme];
-colors.user = user.customTheme || Object.assign({}, curTheme);
-
-const toggleColorInputs = () => {
-  colorInputs.forEach((input) => (input.disabled = user.colorTheme !== 'user'));
+const setTheme = () => {
+  if (!user.customTheme) user.customTheme = Object.assign({}, themes[user.colorTheme]);
+  changeTheme();
 };
 
-const changeColorInputs = () => {
+const changeTheme = () => {
+  const curTheme = user.colorTheme === 'user' ? user.customTheme : themes[user.colorTheme];
+  user.colorTheme === 'user' ? colorOption.classList.add('custom') : colorOption.classList.remove('custom');
+  cnahgeRootColors(curTheme);
+  changeColorInputs(curTheme);
+  changeInputsState();
+};
+
+const cnahgeRootColors = (curTheme) => {
+  for (let key in curTheme) root.style.setProperty(`--color-${key}`, curTheme[key]);
+};
+
+const changeColorInputs = (curTheme) => {
   colorInputs.forEach((input) => {
     if (input.dataset.color === 'alphaBg') {
       input.value = parseInt(curTheme.modalBg.slice(-2), 16);
@@ -43,40 +51,41 @@ const changeColorInputs = () => {
   });
 };
 
-const changeTheme = () => {
-  curTheme = colors[user.colorTheme];
-  user.colorTheme === 'user' ? menuColors.classList.add('custom') : menuColors.classList.remove('custom');
-  for (let key in curTheme) root.style.setProperty(`--color-${key}`, curTheme[key]);
-  changeColorInputs();
-  toggleColorInputs();
+const changeInputsState = () => {
+  colorInputs.forEach((input) => (input.disabled = user.colorTheme !== 'user'));
 };
 
 const changeColor = (input) => {
-  if (input.dataset.color === 'alphaBg' || input.dataset.color === 'modalBg') {
-    input.dataset.color === 'alphaBg'
-      ? (colors.user.modalBg = colors.user.modalBg.slice(0, -2) + parseInt(input.value).toString(16).padStart(2, '0'))
-      : (colors.user.modalBg = input.value + colors.user.modalBg.slice(-2));
-    root.style.setProperty(`--color-modalBg`, colors.user.modalBg);
+  input.dataset.color.match('Bg') ? changeModalBgColor(input) : changeSimpleColor(input);
+};
+
+const changeModalBgColor = (input) => {
+  let modalBg = user.customTheme.modalBg;
+  if (input.dataset.color === 'alphaBg') {
+    updateBar(input);
+    modalBg = modalBg.slice(0, -2) + parseInt(input.value).toString(16).padStart(2, '0');
   } else {
-    colors.user[input.dataset.color] = input.value;
-    root.style.setProperty(`--color-${input.dataset.color}`, input.value);
+    modalBg = input.value + user.customTheme.modalBg.slice(-2);
   }
+  root.style.setProperty(`--color-modalBg`, modalBg);
+  user.customTheme.modalBg = modalBg;
+};
+
+const changeSimpleColor = (input) => {
+  user.customTheme[input.dataset.color] = input.value;
+  root.style.setProperty(`--color-${input.dataset.color}`, input.value);
 };
 
 const copyColors = () => {
+  user.customTheme = Object.assign({}, themes[user.colorTheme]);
   user.colorTheme = 'user';
-  colors.user = Object.assign({}, curTheme);
-  menuColors.classList.add('custom');
-  changeBtns('colorTheme');
-  toggleColorInputs();
+  colorOption.classList.add('custom');
+  changeInputsState();
 };
 
-const saveColors = () => (user.customTheme = colors.user);
+// ------------------------------------------------------
 
-menuColors.addEventListener('input', (e) => {
-  if (user.colorTheme === 'user') changeColor(e.target);
-});
-
+colorOption.addEventListener('input', (e) => changeColor(e.target));
 copyBtn.addEventListener('click', copyColors);
 
-export { changeTheme, saveColors };
+export { setTheme, changeTheme };

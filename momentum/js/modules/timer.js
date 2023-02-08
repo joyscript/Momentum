@@ -1,5 +1,5 @@
-import { user, saveUser } from './user.js';
-import { checkValue } from './service.js';
+import { user } from './user.js';
+import { checkValue } from './common.js';
 
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
@@ -44,7 +44,6 @@ const showPlaceholder = () => {
 const changeName = () => {
   user.name = double.textContent = name.value = checkValue(name.value);
   user.name ? (double.style.minWidth = '') : showPlaceholder();
-  saveUser();
 };
 
 const showDateAndGreeting = () => {
@@ -59,10 +58,12 @@ const showTimeAndGreeting = () => {
   setInterval(showTime, 1000);
 };
 
+// -------------------------------------------
+
 name.addEventListener('input', () => (double.textContent = name.value));
 name.addEventListener('change', changeName);
 name.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === 'Escape') e.target.blur();
 });
 
-export { showTimeAndGreeting, showDateAndGreeting, timeOfDay };
+export { timeOfDay, showDateAndGreeting, showTimeAndGreeting };

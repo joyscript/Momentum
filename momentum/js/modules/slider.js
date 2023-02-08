@@ -1,13 +1,11 @@
 import { user } from './user.js';
-import { fetchAndGo } from './service.js';
-import { handleError, goAfterSuccess } from './settings.js';
+import { timeOfDay } from './timer.js';
+import { fetchAndGo } from './common.js';
+import { tagInput, handleError, goAfterSuccess } from './photo.js';
 
 const slider = document.querySelector('.slider');
 const prevBtn = document.querySelector('.slide-prev');
 const nextBtn = document.querySelector('.slide-next');
-const speedInput = document.querySelector('.speed-input');
-const autosliderBtn = document.querySelector('.autoslider-button');
-const unsplashBtn = document.querySelector('.modal-button[value="unsplash"]');
 
 const unsplashKey = 'XNzUrppnWkjOt4XX7VhMokSfBd-nbanps_7kePh2oeQ';
 const flickrKey = '334110c40a5f1c9ae925a64f0815ecee';
@@ -20,38 +18,39 @@ const URL = {
 };
 
 const maxGithub = 20;
-let autoslider;
 let randNum;
 let isReady;
 
 const getRandNum = (max) => (randNum = Math.floor(Math.random() * max + 1));
-if (user.photoSource === 'github') getRandNum(maxGithub);
+
+if (!user.photoTag) user.photoTag = timeOfDay;
+getRandNum(maxGithub);
 
 const startAnimation = (img) => {
   slider.prepend(img);
   img.classList.add('fade-in');
   img.nextElementSibling && img.nextElementSibling.classList.add('fade-out');
-  [prevBtn, nextBtn].forEach((btn) => btn.classList.add('disabled'));
+  [prevBtn, nextBtn].forEach((btn) => btn.classList.add('invisible'));
 };
 
 const endAnimation = (img) => {
   img.nextElementSibling && img.nextElementSibling.remove();
-  [prevBtn, nextBtn].forEach((btn) => btn.classList.remove('disabled'));
+  [prevBtn, nextBtn].forEach((btn) => btn.classList.remove('invisible'));
   isReady = true;
 };
 
 const animateImage = (img) => {
   img.addEventListener('load', () => startAnimation(img), { once: true });
   img.addEventListener('animationend', () => endAnimation(img), { once: true });
-  console.log(randNum, 'Image: ', img.src);
+  console.log(randNum, user.photoTag, img.src);
 };
 
 const formatRandNum = () => {
   let num = (maxGithub + randNum) % maxGithub;
-  return `${num < 9 ? '0' : ''}${num + 1}`;
+  return (num + 1).toString().padStart(2, '0');
 };
 
-const changeImage = (data, img) => {
+const changeApiImage = (data, img) => {
   if (user.photoSource === 'unsplash') {
     data.urls.regular ? (img.src = data.urls.regular) : showBackground();
   }
@@ -63,10 +62,12 @@ const changeImage = (data, img) => {
     do {
       getRandNum(photos.length - 1);
     } while (!(photos[randNum]['url_l'] && photos[randNum]['width_l'] > photos[randNum]['height_l']));
+
     img.src = photos[randNum]['url_l'];
   }
+
   animateImage(img);
-  if (user.tagMode === 'custom') goAfterSuccess();
+  if (tagInput.value) goAfterSuccess();
 };
 
 const showBackground = (tag = user.photoTag) => {
@@ -77,7 +78,7 @@ const showBackground = (tag = user.photoTag) => {
     img.src = URL.github(formatRandNum());
     animateImage(img);
   } else {
-    fetchAndGo(URL[user.photoSource](tag), (data) => changeImage(data, img), handleError);
+    fetchAndGo(URL[user.photoSource](tag), (data) => changeApiImage(data, img), handleError);
   }
 };
 
@@ -86,61 +87,9 @@ const showAnotherSlide = (i) => {
   showBackground();
 };
 
-// ------------------------------------------------------------------
-
-const playAutoslider = () => {
-  autosliderBtn.value = 'on';
-  autosliderBtn.classList.add('active');
-  autosliderBtn.textContent = user.lang === 'en' ? 'On' : 'Вкл';
-  unsplashBtn.disabled = true;
-  autoslider = setInterval(() => isReady && showAnotherSlide(1), user.sliderSpeed * 1000);
-};
-
-const stopAutoslider = () => {
-  autosliderBtn.value = 'off';
-  autosliderBtn.classList.remove('active');
-  autosliderBtn.textContent = user.lang === 'en' ? 'Off' : 'Выкл';
-  unsplashBtn.disabled = false;
-  clearInterval(autoslider);
-};
-
-const toggleAutoslider = () => {
-  user.autoslider = !user.autoslider;
-  user.autoslider ? playAutoslider() : stopAutoslider();
-};
-
-const changeSpeedText = () => (speedInput.nextElementSibling.textContent = `${user.sliderSpeed}s`);
-
-const checkSpeedInput = () => {
-  if (!speedInput.value.match(/[0-9]/g)) speedInput.value = '';
-};
-
-const changeSpeed = () => {
-  user.autoslider && stopAutoslider();
-  user.sliderSpeed = +speedInput.value;
-  changeSpeedText();
-  user.autoslider && playAutoslider();
-  speedInput.value = '';
-  speedInput.blur();
-};
-
-changeSpeedText();
-user.autoslider && playAutoslider();
-
 // -------------------------------------------------------------------
 
 prevBtn.addEventListener('click', () => isReady && showAnotherSlide(-1));
 nextBtn.addEventListener('click', () => isReady && showAnotherSlide(1));
 
-document.addEventListener('keydown', (e) => {
-  if (e.target.tagName !== 'INPUT' && e.target.contentEditable !== 'true') {
-    if (e.code === 'ArrowLeft') isReady && showAnotherSlide(-1);
-    if (e.code === 'ArrowRight') isReady && showAnotherSlide(1);
-  }
-});
-
-autosliderBtn.addEventListener('click', toggleAutoslider);
-speedInput.addEventListener('input', checkSpeedInput);
-speedInput.addEventListener('change', changeSpeed);
-
-export { showBackground, stopAutoslider, playAutoslider };
+export { showBackground, showAnotherSlide };

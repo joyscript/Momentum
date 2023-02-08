@@ -1,9 +1,9 @@
 import { user } from './user.js';
-import { checkValue } from './service.js';
+import { checkValue } from './common.js';
 
 const todo = document.querySelector('.todo');
-const todoList = document.querySelector('.todo-list');
-const todoInput = document.querySelector('.todo-input');
+const todoList = todo.querySelector('.todo-list');
+const todoInput = todo.querySelector('.todo-input');
 
 const maxHeight = parseInt(getComputedStyle(todoList).maxHeight);
 
@@ -34,7 +34,7 @@ const addTask = () => {
     todoInput.blur();
     return;
   }
-  createTask(task, user.todoShow === 'done' ? 'done' : '');
+  createTask(task);
   todoInput.value = '';
   checkTodoList();
 };
@@ -73,8 +73,9 @@ const loadTodo = () => {
   user.todoShow === 'done' ? toggleTodo() : checkTodoList();
 };
 
-const toggleTodo = () => {
-  user.todoShow === 'done' ? todoList.classList.add('show-done') : todoList.classList.remove('show-done');
+const toggleTodo = (btn) => {
+  if(btn) user.todoShow = btn.previousElementSibling.id;
+  user.todoShow === 'done' ? todo.classList.add('show-done') : todo.classList.remove('show-done');
   checkTodoList();
 };
 
@@ -85,9 +86,12 @@ const saveTodo = () => {
   });
 };
 
+// ---------------------------------------------
+
 todoInput.addEventListener('change', addTask);
 
 todo.addEventListener('click', (e) => {
+  if (e.target.classList.contains('modal-button')) toggleTodo(e.target);
   if (e.target.classList.contains('todo-check-button')) toggleTask(e.target.parentElement);
   if (e.target.classList.contains('todo-delete-button')) deleteTask(e.target.parentElement);
   if (e.target.classList.contains('todo-clear-button')) clearList();
@@ -98,4 +102,4 @@ todo.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === 'Escape') changeTask(e.target);
 });
 
-export { loadTodo, toggleTodo, saveTodo };
+export { loadTodo, saveTodo };

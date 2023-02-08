@@ -1,6 +1,6 @@
 import { user } from './user.js';
-import { fetchAndGo } from './service.js';
-import { getRandomInd, showError } from './quote.js';
+import { fetchAndGo } from './common.js';
+import { removePrevElement, showError } from './quote.js';
 
 const mantraBody = document.querySelector('.mantra-body');
 const mantraBtn = document.querySelector('.change-mantra-button');
@@ -11,7 +11,7 @@ let curInd = 0;
 let curMantra;
 let mantras;
 
-const shuffle = (array) => {
+const shuffleArr = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
@@ -20,12 +20,12 @@ const shuffle = (array) => {
 };
 
 const handleData = (data) => {
-  mantras = shuffle(data);
+  mantras = shuffleArr(data);
   changeMantra(data);
 };
 
 const showCurMantra = () => {
-  document.querySelector('.mantra-text').textContent = curMantra[user.lang];
+  mantraBody.querySelector('.mantra-text').textContent = curMantra[user.lang];
 };
 
 const changeMantra = () => {
@@ -35,18 +35,9 @@ const changeMantra = () => {
   mantraText.classList.add('mantra-text', 'next');
   mantraText.textContent = curMantra[user.lang];
   mantraBody.append(mantraText);
-
   mantraText.previousElementSibling.classList.add('prev');
   mantraBody.style.height = mantraText.offsetHeight + 'px';
-
-  mantraText.addEventListener(
-    'animationend',
-    () => {
-      mantraText.previousElementSibling.remove();
-      mantraText.classList.remove('next');
-    },
-    { once: true }
-  );
+  mantraText.addEventListener('animationend', () => removePrevElement(mantraText), { once: true });
 };
 
 const showMantra = () => fetchAndGo(url, handleData, () => showError(mantraBody));

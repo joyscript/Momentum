@@ -1,5 +1,5 @@
 import { user } from './user.js';
-import { fetchAndGo } from './service.js';
+import { fetchAndGo } from './common.js';
 
 const quoteModal = document.querySelector('.quote-modal');
 
@@ -12,11 +12,11 @@ const errorTexts = {
 let curInd;
 let curQuote;
 
-const getRandomInd = (itemInd, data) => {
+const getRandomInd = (data) => {
   let i;
   do {
     i = Math.floor(Math.random() * data.length);
-  } while (itemInd === i);
+  } while (curInd === i);
   return i;
 };
 
@@ -29,24 +29,21 @@ const insertContent = (elem) => {
   `;
 };
 
+const removePrevElement = (elem) => {
+  elem.previousElementSibling.remove();
+  elem.classList.remove('next');
+};
+
 const changeQuote = (data) => {
-  curInd = getRandomInd(curInd, data);
+  curInd = getRandomInd(data);
   curQuote = data[curInd];
 
   const quoteBody = document.createElement('div');
   quoteBody.classList.add('quote-body', 'next');
   insertContent(quoteBody);
-  quoteModal.prepend(quoteBody);
-  quoteBody.nextElementSibling.classList.add('prev');
-
-  quoteBody.addEventListener(
-    'animationend',
-    () => {
-      quoteBody.nextElementSibling.remove();
-      quoteBody.classList.remove('next');
-    },
-    { once: true }
-  );
+  quoteModal.append(quoteBody);
+  quoteBody.previousElementSibling.classList.add('prev');
+  quoteBody.addEventListener('animationend', () => removePrevElement(quoteBody), { once: true });
 };
 
 const showError = (elem) => {
@@ -58,8 +55,8 @@ const showCurQuote = () => insertContent(quoteModal.querySelector('.quote-body')
 
 const showQuote = () => fetchAndGo(url, changeQuote, () => showError(quoteModal.querySelector('.quote-body')));
 
-document.addEventListener('click', (e) => {
+quoteModal.addEventListener('click', (e) => {
   if (e.target.classList.contains('change-quote-button')) showQuote();
 });
 
-export { showQuote, showCurQuote, getRandomInd, showError };
+export { showQuote, showCurQuote, removePrevElement, showError };

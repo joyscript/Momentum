@@ -1,5 +1,5 @@
 import { user } from './user.js';
-import { updateBar } from './service.js';
+import { updateBar } from './common.js';
 import { audioData } from './audioData.js';
 
 const player = document.querySelector('.player');

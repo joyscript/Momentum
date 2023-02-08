@@ -58,9 +58,9 @@
   top: 50%;
   height: 60px;
   margin-top: -30px;
-  transition: opacity 1s ease-in-out, transform 0.5s;
+  transition: opacity 1s ease-in-out, transform 0.3s;
 
-  &.disabled {
+  &.invisible {
     opacity: 0;
   }
 
