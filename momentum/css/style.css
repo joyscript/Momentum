@@ -56,6 +56,21 @@ body.lock {
     gap: 20px;
   }
 }
+@media (max-height: 550px) {
+  .main {
+    gap: 15px;
+  }
+}
+@media (max-width: 360px) {
+  .main {
+    gap: 15px;
+  }
+}
+@media (max-height: 360px) {
+  .main {
+    gap: 10px;
+  }
+}
 
 .footer {
   flex-basis: 30%;
@@ -346,7 +361,7 @@ button {
 }
 @media (max-width: 1200px) {
   .time {
-    font-size: 96px;
+    font-size: 94px;
   }
 }
 @media (max-width: 1023px), (max-height: 767px) {
@@ -534,7 +549,9 @@ button {
 .slider::after {
   content: "";
   z-index: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 20, 0.3);
+  -webkit-backdrop-filter: contrast(1.05);
+          backdrop-filter: contrast(1.05);
 }
 
 .fade-in,
@@ -579,7 +596,7 @@ button {
   margin-top: -30px;
   transition: opacity 1s ease-in-out, transform 0.3s;
 }
-.slider-button.invisible {
+.animation .slider-button {
   opacity: 0;
 }
 .slider-button:hover {
@@ -1229,10 +1246,13 @@ button {
 
 .custom-option {
   position: relative;
+}
+
+.custom-block {
   transition: 0.3s;
 }
-[data-source=github] .custom-option {
-  opacity: 0.4;
+[data-source=github] .custom-block {
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -1268,7 +1288,7 @@ button {
 .tag-input.anim {
   animation: input 0.8s linear;
 }
-.error .tag-input {
+.error-tag .tag-input {
   color: red;
   outline: 1px solid red;
 }
@@ -1307,7 +1327,7 @@ button {
   opacity: 0;
   visibility: hidden;
 }
-.error + .tag-error {
+.error-tag + .tag-error, .error-fetch + .tag-error {
   bottom: -22px;
   opacity: 1;
   visibility: visible;
@@ -1324,18 +1344,15 @@ button {
   cursor: auto;
 }
 
-.autoslider {
-  transition: 0.3s;
-}
-[data-source=unsplash] .autoslider {
-  pointer-events: none;
-  opacity: 0.5;
-  cursor: auto;
-}
-
 .autoslider-block {
   flex-wrap: nowrap;
   margin-bottom: 8px;
+  transition: 0.3s;
+}
+[data-source=unsplash] .autoslider-block {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: auto;
 }
 
 .autoslider-button {
@@ -1378,7 +1395,13 @@ button {
 .autoslider-message {
   text-align: left;
   font-size: 15px;
-  opacity: 0.4;
+  opacity: 0.5;
+}
+
+.animation [data-menu=photo] .modal-button:not(.autoslider-button),
+.animation [name=photoSource],
+.animation [name=photoTag] {
+  pointer-events: none;
 }
 
 .menu-colors .menu-option:not(:last-child) {

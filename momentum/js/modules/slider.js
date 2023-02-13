@@ -1,6 +1,6 @@
 import { user } from './user.js';
 import { timeOfDay } from './timer.js';
-import { fetchAndGo } from './common.js';
+import { fetchAndGo, shuffleArr } from './common.js';
 import { tagInput, handleError, goAfterSuccess } from './photo.js';
 
 const slider = document.querySelector('.slider');
@@ -9,19 +9,34 @@ const nextBtn = document.querySelector('.slide-next');
 
 const unsplashKey = 'XNzUrppnWkjOt4XX7VhMokSfBd-nbanps_7kePh2oeQ';
 const flickrKey = '334110c40a5f1c9ae925a64f0815ecee';
+const galleries = {
+  night: ['72157721528777010', []],
+  morning: ['72157721476873279', []],
+  afternoon: ['72157721528783175', []],
+  evening: ['72157721487545247', []],
+  nature: ['72157721489294757', []],
+  animals: ['72157721530560185', []],
+};
 
 const URL = {
   github: (num) => `https://raw.githubusercontent.com/joyscript/stage1-tasks/assets/images/${user.photoTag}/${num}.jpg`,
   unsplash: (tag) => `https://api.unsplash.com/photos/random?orientation=landscape&query=${tag}&client_id=${unsplashKey}`,
-  flickr: (tag) =>
-    `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrKey}&tags=${tag}&extras=url_l&format=json&nojsoncallback=1`,
+  flickr: (tag) => {
+    const beginning = 'https://www.flickr.com/services/rest/?method=flickr';
+    const ending = 'extras=url_l,url_h&format=json&nojsoncallback=1';
+    return galleries[tag]
+      ? `${beginning}.galleries.getPhotos&api_key=${flickrKey}&gallery_id=${galleries[tag]}&${ending}`
+      : `${beginning}.photos.search&api_key=${flickrKey}&tags=${tag}&${ending}`;
+  },
 };
 
 const maxGithub = 20;
 let randNum;
 let isReady;
 
-const getRandNum = (max) => (randNum = Math.floor(Math.random() * max + 1));
+const getRandNum = (max) => (randNum = Math.floor(Math.random() * max));
+const fitRandNum = (max) => (randNum = (max + randNum) % max);
+const formatRandNum = () => (randNum + 1).toString().padStart(2, '0');
 
 if (!user.photoTag) user.photoTag = timeOfDay;
 getRandNum(maxGithub);
@@ -30,52 +45,60 @@ const startAnimation = (img) => {
   slider.prepend(img);
   img.classList.add('fade-in');
   img.nextElementSibling && img.nextElementSibling.classList.add('fade-out');
-  [prevBtn, nextBtn].forEach((btn) => btn.classList.add('invisible'));
 };
 
 const endAnimation = (img) => {
   img.nextElementSibling && img.nextElementSibling.remove();
-  [prevBtn, nextBtn].forEach((btn) => btn.classList.remove('invisible'));
+  document.body.classList.remove('animation');
   isReady = true;
 };
 
 const animateImage = (img) => {
+  isReady = false;
+  document.body.classList.add('animation');
   img.addEventListener('load', () => startAnimation(img), { once: true });
   img.addEventListener('animationend', () => endAnimation(img), { once: true });
-  console.log(randNum, user.photoTag, img.src);
+  console.log(randNum, tagInput.value ? tagInput.value : user.photoTag, img.src);
 };
 
-const formatRandNum = () => {
-  let num = (maxGithub + randNum) % maxGithub;
-  return (num + 1).toString().padStart(2, '0');
+const isGoodPhoto = (photo) => {
+  return (photo['url_h'] && photo['width_h'] > photo['height_h']) || (photo['url_l'] && photo['width_l'] > photo['height_l']);
+};
+
+const getGoodSize = (image) => (window.innerWidth < 600 ? image['url_l'] : image['url_h'] || image['url_l']);
+
+const getFlickrImage = (data) => {
+  const photos = data.photos.photo;
+
+  if (galleries[user.photoTag]) {
+    const gallery = (galleries[user.photoTag][1] = photos.map((item) => getGoodSize(item)));
+    shuffleArr(gallery);
+    fitRandNum(gallery.length);
+  } else {
+    if (data.photos.pages === 1 && photos.length < 50) throw new Error();
+    for (let i = 0; i < photos.length; i++) {
+      getRandNum(photos.length);
+      console.log(i.toString(), randNum, photos[randNum]);
+      if (isGoodPhoto(photos[randNum])) break;
+    }
+  }
+  if (!isGoodPhoto(photos[randNum])) throw new Error();
+  return getGoodSize(photos[randNum]);
 };
 
 const changeApiImage = (data, img) => {
-  if (user.photoSource === 'unsplash') {
-    data.urls.regular ? (img.src = data.urls.regular) : showBackground();
-  }
-
-  if (user.photoSource === 'flickr') {
-    const photos = data.photos.photo;
-    if (!photos.length) throw new Error();
-
-    do {
-      getRandNum(photos.length - 1);
-    } while (!(photos[randNum]['url_l'] && photos[randNum]['width_l'] > photos[randNum]['height_l']));
-
-    img.src = photos[randNum]['url_l'];
-  }
-
+  if (user.photoSource === 'unsplash') data.urls.regular ? (img.src = data.urls.regular) : showBackground();
+  if (user.photoSource === 'flickr') img.src = getFlickrImage(data);
   animateImage(img);
   if (tagInput.value) goAfterSuccess();
 };
 
 const showBackground = (tag = user.photoTag) => {
-  isReady = false;
   const img = new Image();
 
-  if (user.photoSource === 'github') {
-    img.src = URL.github(formatRandNum());
+  if (user.photoSource === 'github' || (user.photoSource === 'flickr' && galleries[tag] && galleries[tag][1].length)) {
+    fitRandNum(user.photoSource === 'github' ? 20 : galleries[tag][1].length);
+    img.src = user.photoSource === 'github' ? URL.github(formatRandNum()) : galleries[tag][1][randNum];
     animateImage(img);
   } else {
     fetchAndGo(URL[user.photoSource](tag), (data) => changeApiImage(data, img), handleError);
@@ -83,7 +106,7 @@ const showBackground = (tag = user.photoTag) => {
 };
 
 const showAnotherSlide = (i) => {
-  if (user.photoSource === 'github') randNum += i;
+  if (user.photoSource === 'github' || (user.photoSource === 'flickr' && galleries[user.photoTag])) randNum += i;
   showBackground();
 };
 

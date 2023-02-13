@@ -70,7 +70,7 @@ const transText = {
 
   // textInputs ----------------
   tagInput: ['[Enter your tag]', '[Введите ваш тег]'],
-  sliderInput: ['[Enter speed, 2 - 99 s]', '[Введите скорость, 2-99s]'],
+  sliderInput: ['[Enter speed, 3 - 99 s]', '[Введите скорость, 3-99s]'],
   todoInput: ['[Enter new todo]', '[Введите новую задачу]'],
 };
 

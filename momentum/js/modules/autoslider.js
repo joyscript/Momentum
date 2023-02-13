@@ -47,7 +47,7 @@ const changeSpeedInputText = () => {
 };
 
 const changeSpeed = () => {
-  if (speedInput.value < 2) speedInput.value = 2;
+  if (speedInput.value < 3) speedInput.value = 3;
   autosliderBtn.checked && stopAutoslider();
   user.sliderSpeed = +speedInput.value;
   autosliderBtn.checked && setTimeout(playAutoslider, 1000);

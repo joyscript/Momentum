@@ -11,8 +11,8 @@ const customBtn = photoPart.querySelector('.custom-input');
 const githubBtn = photoPart.querySelector('[value="github"]');
 
 const errors = {
-  en: ['Sorry, there are no such images', 'API is not responding now, try later'],
-  ru: ['Извините, нет таких изображений', 'API не отвечает, попробуйте позже.'],
+  en: ['Sorry, there are no such images', 'API is not responding now, try later.'],
+  ru: ['Извините, нет таких изображений', 'API сейчас не отвечает, зайдите позже.'],
 };
 
 photoPart.dataset.source = user.photoSource;
@@ -36,7 +36,8 @@ const changeGithubTag = () => {
 };
 
 const clearCustomBlock = () => {
-  customBlock.classList.remove('error');
+  customBlock.classList.remove('error-tag');
+  customBlock.classList.remove('error-fetch');
   tagInput.value = '';
 };
 
@@ -49,6 +50,7 @@ const addCustomTag = () => {
 
 const goAfterSuccess = () => {
   user.photoTag = user.customTag = tagInput.value;
+  customBlock.classList.remove('error');
   animateInput();
   changeCustomButton();
 };
@@ -67,8 +69,9 @@ const changeCustomButton = () => {
 
 const handleError = () => {
   if (!tagInput.value && user.photoSource !== 'github') goToGithub();
-  customBlock.classList.add('error');
+  customBlock.classList.add(tagInput.value ? 'error-tag' : 'error-fetch');
   showTagError();
+  setTimeout(clearCustomBlock, 3000);
 };
 
 const goToGithub = () => {
@@ -81,7 +84,7 @@ const showTagError = () => (tagError.textContent = errors[user.lang][tagInput.va
 
 const watchTagInput = () => {
   if (!tagInput.value.match(/^[a-zA-Zа-яА-Я]*$/)) tagInput.value = tagInput.value.slice(0, -1);
-  !tagInput.value && customBlock.classList.remove('error');
+  !tagInput.value && customBlock.classList.remove('error-tag');
 };
 
 // -------------------------------------------

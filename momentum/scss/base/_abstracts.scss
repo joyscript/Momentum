@@ -67,6 +67,12 @@ $xsmall: 360px;
   }
 }
 
+@mixin media-hx {
+  @media (max-height: $xsmall) {
+    @content;
+  }
+}
+
 @mixin media-lm {
   @media (max-width: $large), (max-height: $mob) {
     @content;

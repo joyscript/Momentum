@@ -48,6 +48,15 @@ body {
   @include media-tm {
     gap: 20px;
   }
+  @include media-hs {
+    gap: 15px;
+  }
+  @include media-x {
+    gap: 15px;
+  }
+  @include media-hx {
+    gap: 10px;
+  }
 }
 
 .footer {

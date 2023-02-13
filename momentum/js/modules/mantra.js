@@ -1,5 +1,5 @@
 import { user } from './user.js';
-import { fetchAndGo } from './common.js';
+import { fetchAndGo, shuffleArr } from './common.js';
 import { removePrevElement, showError } from './quote.js';
 
 const mantraBody = document.querySelector('.mantra-body');
@@ -10,14 +10,6 @@ const url = './data/mantra.json';
 let curInd = 0;
 let curMantra;
 let mantras;
-
-const shuffleArr = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
 
 const handleData = (data) => {
   mantras = shuffleArr(data);

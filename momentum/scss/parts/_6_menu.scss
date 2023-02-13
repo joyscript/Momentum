@@ -130,10 +130,13 @@
 
 .custom-option {
   position: relative;
+}
+
+.custom-block {
   transition: 0.3s;
 
   [data-source='github'] & {
-    opacity: 0.4;
+    opacity: 0.5;
     pointer-events: none;
   }
 }
@@ -172,7 +175,7 @@
     animation: input 0.8s linear;
   }
 
-  .error & {
+  .error-tag & {
     color: red;
     outline: 1px solid red;
   }
@@ -213,7 +216,8 @@
   opacity: 0;
   visibility: hidden;
 
-  .error + & {
+  .error-tag + &,
+  .error-fetch + & {
     bottom: -22px;
     opacity: 1;
     visibility: visible;
@@ -232,7 +236,9 @@
 
 // -----------------------------
 
-.autoslider {
+.autoslider-block {
+  flex-wrap: nowrap;
+  margin-bottom: 8px;
   transition: 0.3s;
 
   [data-source='unsplash'] & {
@@ -240,11 +246,6 @@
     opacity: 0.5;
     cursor: auto;
   }
-}
-
-.autoslider-block {
-  flex-wrap: nowrap;
-  margin-bottom: 8px;
 }
 
 .autoslider-button {
@@ -293,7 +294,13 @@
 .autoslider-message {
   text-align: left;
   font-size: 15px;
-  opacity: 0.4;
+  opacity: 0.5;
+}
+
+.animation [data-menu='photo'] .modal-button:not(.autoslider-button),
+.animation [name='photoSource'],
+.animation [name='photoTag'] {
+  pointer-events: none;
 }
 
 // Colors ========================================================================
