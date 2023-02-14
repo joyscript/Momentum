@@ -80,7 +80,7 @@
       </div>
     </footer>
 
-    <div class="menu" data-modal="menu">
+    <div class="menu open" data-modal="menu">
       <div class="modal menu-modal">
         <div class="modal-header menu-header">
           <div class="menu-buttons">
@@ -162,7 +162,7 @@
             </div>
           </div>
 
-          <div class="menu-part scroll style" data-menu="style">
+          <div class="menu-part scroll" data-menu="style">
             <div class="menu-option color-option">
               <div class="menu-title color-title">
                 <span class="custom-title" data-trans="customColors"></span><button class="copy-button" data-trans="copyColors"></button>
@@ -175,11 +175,15 @@
               </div>
               <div class="color-row">
                 <span data-trans="bgOpacity"></span>
-                <input class="range color-range" type="range" data-color="alphaBg" min="0" max="255" step="1" />
+                <input class="range color-range" type="range" data-color="modalBgAlpha" min="0" max="255" step="1" />
               </div>
               <div class="color-row"><span data-trans="modalText"></span><input class="color-input" type="color" data-color="modal" /></div>
               <div class="color-row">
                 <span data-trans="btnText"></span><input class="color-input" type="color" data-color="activeBtn" />
+              </div>
+              <div class="color-row">
+                <span data-trans="overlay"></span>
+                <input class="range color-range" type="range" data-color="overlayAlpha" min="0" max="153" step="1" />
               </div>
             </div>
             <div class="menu-option">

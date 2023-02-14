@@ -19,8 +19,11 @@ const galleries = {
 };
 
 const URL = {
-  github: (num) => `https://raw.githubusercontent.com/joyscript/stage1-tasks/assets/images/${user.photoTag}/${num}.jpg`,
   unsplash: (tag) => `https://api.unsplash.com/photos/random?orientation=landscape&query=${tag}&client_id=${unsplashKey}`,
+  github: (num) => {
+    const ending = window.innerWidth > 1920 ? `large/${num}.webp` : `${num}.jpg`;
+    return `https://raw.githubusercontent.com/joyscript/stage1-tasks/assets/images/${user.photoTag}/${ending}`;
+  },
   flickr: (tag) => {
     const beginning = 'https://www.flickr.com/services/rest/?method=flickr';
     const ending = 'extras=url_l,url_h&format=json&nojsoncallback=1';

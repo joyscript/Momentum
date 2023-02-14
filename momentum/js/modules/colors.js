@@ -12,12 +12,14 @@ const themes = {
     modal: '#ffffff',
     modalBg: '#09031599',
     activeBtn: '#ffffff',
+    overlay: '#00001445',
   },
   light: {
     active: '#419cf1',
     modal: '#303030',
     modalBg: '#ffffffdd',
     activeBtn: '#ffffff',
+    overlay: '#00001445',
   },
 };
 
@@ -40,8 +42,9 @@ const cnahgeRootColors = (curTheme) => {
 
 const changeColorInputs = (curTheme) => {
   colorInputs.forEach((input) => {
-    if (input.dataset.color === 'alphaBg') {
-      input.value = parseInt(curTheme.modalBg.slice(-2), 16);
+    if (input.dataset.color.match('Alpha')) {
+      const color = input.dataset.color.replace('Alpha', '');
+      input.value = parseInt(curTheme[color].slice(-2), 16);
       updateBar(input);
     } else if (input.dataset.color === 'modalBg') {
       input.value = curTheme.modalBg.slice(0, -2);
@@ -56,19 +59,25 @@ const changeInputsState = () => {
 };
 
 const changeColor = (input) => {
-  input.dataset.color.match('Bg') ? changeModalBgColor(input) : changeSimpleColor(input);
+  if (input.dataset.color.match('Alpha')) {
+    changeAlphaColor(input);
+  } else if (input.dataset.color === 'modalBg') {
+    changeModalBgColor(input);
+  } else {
+    changeSimpleColor(input);
+  }
+};
+
+const changeAlphaColor = (input) => {
+  updateBar(input);
+  const color = input.dataset.color.replace('Alpha', '');
+  user.customTheme[color] = user.customTheme[color].slice(0, -2) + parseInt(input.value).toString(16).padStart(2, '0');
+  root.style.setProperty(`--color-${color}`, user.customTheme[color]);
 };
 
 const changeModalBgColor = (input) => {
-  let modalBg = user.customTheme.modalBg;
-  if (input.dataset.color === 'alphaBg') {
-    updateBar(input);
-    modalBg = modalBg.slice(0, -2) + parseInt(input.value).toString(16).padStart(2, '0');
-  } else {
-    modalBg = input.value + user.customTheme.modalBg.slice(-2);
-  }
-  root.style.setProperty(`--color-modalBg`, modalBg);
-  user.customTheme.modalBg = modalBg;
+  user.customTheme.modalBg = input.value + user.customTheme.modalBg.slice(-2);
+  root.style.setProperty(`--color-modalBg`, user.customTheme.modalBg);
 };
 
 const changeSimpleColor = (input) => {

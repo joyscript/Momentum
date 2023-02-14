@@ -28,6 +28,7 @@ const transText = {
   bgOpacity: ['Background opacity', 'Прозрачность фона'],
   modalText: ['Modal text', 'Текст модальных окон'],
   btnText: ['Active button text', 'Текст активных кнопок'],
+  overlay: ['Overlay opacity', 'Затемнение фона'],
   theme: ['Theme', 'Тема'],
   effects: ['Effects', 'Эффекты'],
   todoText: ['No todos yet', 'Еще нет задач'],

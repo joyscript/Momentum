@@ -3,6 +3,7 @@
   --color-modal: #ffffff;
   --color-modalBg: #09031599;
   --color-activeBtn: #ffffff;
+  --color-overlay: #00001445;
 }
 
 @font-face {
@@ -549,9 +550,7 @@ button {
 .slider::after {
   content: "";
   z-index: 0;
-  background: rgba(0, 0, 20, 0.3);
-  -webkit-backdrop-filter: contrast(1.05);
-          backdrop-filter: contrast(1.05);
+  background: var(--color-overlay);
 }
 
 .fade-in,
@@ -1154,7 +1153,7 @@ button {
 
 .menu-body {
   position: relative;
-  height: 450px;
+  height: 460px;
   padding: 20px;
 }
 @media (max-width: 1023px), (max-height: 767px) {
@@ -1226,6 +1225,14 @@ button {
 
 .menu-option:not(:last-child) {
   margin-bottom: 30px;
+}
+
+[data-menu=photo] .menu-option:not(:last-child) {
+  margin-bottom: 25px;
+}
+
+[data-menu=style] .menu-option:not(:last-child) {
+  margin-bottom: 20px;
 }
 
 .menu-title {
@@ -1402,10 +1409,6 @@ button {
 .animation [name=photoSource],
 .animation [name=photoTag] {
   pointer-events: none;
-}
-
-.menu-colors .menu-option:not(:last-child) {
-  margin-bottom: 20px;
 }
 
 .color-title {

@@ -36,7 +36,7 @@
 
 .menu-body {
   position: relative;
-  height: 450px;
+  height: 460px;
   padding: 20px;
 
   @include media-tm {
@@ -109,6 +109,14 @@
 
 .menu-option:not(:last-child) {
   margin-bottom: 30px;
+}
+
+[data-menu='photo'] .menu-option:not(:last-child) {
+  margin-bottom: 25px;
+}
+
+[data-menu='style'] .menu-option:not(:last-child) {
+  margin-bottom: 20px;
 }
 
 .menu-title {
@@ -304,10 +312,6 @@
 }
 
 // Colors ========================================================================
-
-.menu-colors .menu-option:not(:last-child) {
-  margin-bottom: 20px;
-}
 
 .color-title {
   position: relative;
