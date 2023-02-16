@@ -6,6 +6,7 @@ const weatherMain = weather.querySelector('.weather-main');
 const weatherData = weather.querySelector('.weather-data');
 const city = weather.querySelector('.city-input');
 
+const defaultCity = { en: 'Minsk', ru: 'Минск' };
 const placeholder = { en: '[Enter city]', ru: '[Введите город]' };
 const windText = { en: 'Wind speed', ru: 'Скорость ветра' };
 const humidText = { en: 'Humidity', ru: 'Влажность' };
@@ -16,7 +17,7 @@ const errorText = {
 
 const getURL = () => {
   const key = '4bb428ba7924feb431066c5f16731af7';
-  return `https://api.openweathermap.org/data/2.5/weather?q=${user.city}&lang=${user.lang}&appid=${key}&units=metric`;
+  return `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${user.lang}&appid=${key}&units=metric`;
 };
 
 const renderWeather = (data) => {
@@ -49,7 +50,7 @@ const changeWeather = () => {
 };
 
 const showWeather = () => {
-  city.value = user.city;
+  city.value = user.city || defaultCity[user.lang];
   city.placeholder = placeholder[user.lang];
   fetchAndGo(getURL(), renderWeather, renderError);
 };

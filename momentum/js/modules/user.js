@@ -1,7 +1,7 @@
 let user = {
   name: '',
+  city: '',
   lang: 'en',
-  city: 'Minsk',
   menu: 'general',
   photoSource: 'github',
   photoTag: '',
