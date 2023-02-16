@@ -179,10 +179,11 @@
   }
 
   &:after {
-    content: '\2606';
+    content: '\2713';
     right: 0;
     width: 30px;
     text-align: center;
+    font-size: 19px;
     opacity: 0;
   }
 
@@ -207,9 +208,6 @@
     }
     &:before {
       content: '\e908';
-    }
-    &:before,
-    &:after {
       animation: rotateBtn 3s infinite linear;
     }
   }

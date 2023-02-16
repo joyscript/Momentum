@@ -985,10 +985,11 @@ button {
   left: 0;
 }
 .play-item:after {
-  content: "☆";
+  content: "✓";
   right: 0;
   width: 30px;
   text-align: center;
+  font-size: 19px;
   opacity: 0;
 }
 .play-item.active {
@@ -1010,8 +1011,6 @@ button {
 }
 .play-item.active.playing:before {
   content: "\e908";
-}
-.play-item.active.playing:before, .play-item.active.playing:after {
   animation: rotateBtn 3s infinite linear;
 }
 .play-item:hover {
@@ -1840,15 +1839,17 @@ button {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 170px;
+  padding-top: 30px;
 }
 @media (max-width: 1023px), (max-height: 767px) {
   .mantra {
+    justify-content: center;
     height: auto;
     min-height: 60px;
     margin: 0 37px;
+    padding-top: 0;
   }
 }
 @media (max-width: 767px), (max-height: 550px) {
