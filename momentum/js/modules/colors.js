@@ -5,20 +5,21 @@ const root = document.querySelector(':root');
 const colorOption = document.querySelector('.color-option');
 const colorInputs = colorOption.querySelectorAll('input[data-color]');
 const copyBtn = colorOption.querySelector('.copy-button');
+const userThemeBtn = document.querySelector('input[value="user"]');
 
 const themes = {
   dark: {
-    active: '#ce51f5',
+    active: '#d700ff',
     modal: '#ffffff',
-    modalBg: '#09031599',
     activeBtn: '#ffffff',
+    modalBg: '#09031599',
     overlay: '#00001445',
   },
   light: {
-    active: '#419cf1',
+    active: '#00ffe1',
     modal: '#303030',
+    activeBtn: '#303030',
     modalBg: '#ffffffdd',
-    activeBtn: '#ffffff',
     overlay: '#00001445',
   },
 };
@@ -89,6 +90,7 @@ const copyColors = () => {
   user.customTheme = Object.assign({}, themes[user.colorTheme]);
   user.colorTheme = 'user';
   colorOption.classList.add('custom');
+  userThemeBtn.checked = true;
   changeInputsState();
 };
 
