@@ -22,9 +22,9 @@
         <div class="player-modal">
           <div class="player-header">
             <div class="progress-wrapper">
-              <div class="song-name"></div>
+              <div class="song-name-wrapper"><span></span></div>
               <input class="range progress-bar" type="range" min="0" max="100" step="0.1" />
-              <div class="song-time"><span class="current-time"></span><span></span><span class="duration"></span></div>
+              <div class="song-time"><span class="current-time"></span><span class="duration"></span></div>
             </div>
             <div class="player-controls">
               <button class="button icon-play-prev"></button>
@@ -80,7 +80,7 @@
       </div>
     </footer>
 
-    <div class="menu open" data-modal="menu">
+    <div class="menu" data-modal="menu">
       <div class="modal menu-modal">
         <div class="modal-header menu-header">
           <div class="menu-buttons">
@@ -113,11 +113,11 @@
               </div>
             </div>
             <div class="menu-option">
-              <div class="menu-title" data-trans="music"></div>
+              <div class="menu-title" data-trans="effects"></div>
               <div class="menu-buttons">
-                <label class="modal-button"><input type="radio" name="music" value="positive" /><span></span></label>
-                <label class="modal-button"><input type="radio" name="music" value="relax" /><span></span></label>
-                <label class="modal-button"><input type="radio" name="music" value="drive" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="effect" value="1" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="effect" value="2" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="effect" value="3" /><span></span></label>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@
                 <label class="modal-button"><input type="radio" name="photoSource" value="flickr" /><span></span></label>
               </div>
             </div>
-            <div class="menu-option">
+            <div class="menu-option tag-option">
               <div class="menu-title" data-trans="photoTags"></div>
               <div class="menu-buttons">
                 <label class="modal-button"><input type="radio" name="photoTag" value="night" /><span></span></label>
@@ -141,9 +141,6 @@
                 <label class="modal-button"><input type="radio" name="photoTag" value="nature" /><span></span></label>
                 <label class="modal-button"><input type="radio" name="photoTag" value="animals" /><span></span></label>
               </div>
-            </div>
-            <div class="menu-option custom-option">
-              <div class="menu-title" data-trans="customTag"></div>
               <div class="menu-buttons custom-block">
                 <div class="tag-input-window">
                   <input class="text-input modal-input tag-input" name="tagInput" type="text" maxlength="30" autocomplete="off" />
@@ -192,14 +189,6 @@
                 <label class="modal-button"><input type="radio" name="colorTheme" value="user" /><span></span></label>
                 <label class="modal-button"><input type="radio" name="colorTheme" value="dark" /><span></span></label>
                 <label class="modal-button"><input type="radio" name="colorTheme" value="light" /><span></span></label>
-              </div>
-            </div>
-            <div class="menu-option">
-              <div class="menu-title" data-trans="effects"></div>
-              <div class="menu-buttons">
-                <label class="modal-button"><input type="radio" name="effect" value="1" /><span></span></label>
-                <label class="modal-button"><input type="radio" name="effect" value="2" /><span></span></label>
-                <label class="modal-button"><input type="radio" name="effect" value="3" /><span></span></label>
               </div>
             </div>
           </div>

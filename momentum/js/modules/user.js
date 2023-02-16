@@ -29,7 +29,6 @@ let user = {
   colorTheme: 'dark',
   customTheme: '',
   sliderSpeed: '3',
-  music: 'positive',
 };
 
 const key = 'user-momentum-joyscript';

@@ -14,7 +14,7 @@
 
   @include media-tm {
     @include modal-general;
-    width: 300px;
+    width: 290px;
     top: 5px;
     left: -100%;
     .open > & {
@@ -38,18 +38,73 @@
   }
 }
 
-.song-name {
-  height: 32px;
-  font-size: 18px;
-  line-height: 25px;
-  white-space: pre;
+.song-name-wrapper {
+  position: relative;
+  height: 31px;
   overflow: hidden;
 
   @include media-tm {
-    margin-bottom: 15px;
-    padding: 0 40px;
-    font-size: 16px;
-    line-height: 32px;
+    height: 50px;
+  }
+}
+
+.song-name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  line-height: 27px;
+  white-space: pre;
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+
+  &.prev {
+    animation-name: slide-to-right;
+  }
+
+  &.next {
+    animation-name: slide-from-left;
+  }
+
+  @include media-tm {
+    padding: 0 45px;
+    font-size: 17px;
+    line-height: 20px;
+  }
+
+  & > span:last-child {
+    display: block;
+    font-size: 14px;
+    opacity: 0;
+
+    @include media-tm {
+      opacity: 0.7;
+    }
+  }
+}
+
+@keyframes slide-to-right {
+  from {
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+@keyframes slide-from-left {
+  from {
+    opacity: 0;
+    left: -100%;
+  }
+  to {
+    opacity: 1;
+    left: 0;
   }
 }
 
@@ -87,7 +142,7 @@
   overflow: hidden;
 
   .playlist-open & {
-    padding: 15px 20px;
+    padding: 15px 20px 7px;
   }
 
   @include media-hs {
@@ -96,30 +151,117 @@
 }
 
 .play-item {
-  display: flex;
-  align-items: center;
-  padding: 5px 0;
+  position: relative;
+  height: 33px;
+  padding-left: 30px;
   list-style: none;
+  line-height: 1;
   opacity: 0.8;
+  transition: 0.2s linear;
+  white-space: nowrap;
   cursor: pointer;
-  transition: 0.3s;
 
-  .icon-play {
-    margin-right: 10px;
+  &:before,
+  &::after {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
     font-size: 20px;
+    transition: 0.2s linear;
+  }
+
+  &:before {
+    content: '\e909';
+    font-family: 'icomoon';
+    left: 0;
+  }
+
+  &:after {
+    content: '\2606';
+    right: 0;
+    width: 30px;
+    text-align: center;
+    opacity: 0;
   }
 
   &.active {
-    color: var(--color-active);
-    opacity: 0.9;
+    opacity: 1;
+    text-shadow: 0 0 1px var(--color-active);
 
     .song-title {
-      text-shadow: 0 0 1px var(--color-active);
+      border-bottom: 1px solid var(--color-active);
+    }
+    &:after {
+      opacity: 1;
+    }
+  }
+
+  &.active.playing {
+    text-shadow: none;
+    animation: animText 1.5s infinite linear;
+
+    .song-title {
+      border-bottom: 1px solid transparent;
+    }
+    &:before {
+      content: '\e908';
+    }
+    &:before,
+    &:after {
+      animation: rotateBtn 3s infinite linear;
     }
   }
 
   &:hover {
     opacity: 1;
+    .song-title {
+      transform: translate3d(0, -4px, 0);
+    }
+    .song-singer {
+      opacity: 1;
+    }
+  }
+
+  @include media-tm {
+    height: 36px;
+  }
+}
+
+.song-title,
+.song-singer {
+  transition: 0.2s linear;
+}
+
+.song-title {
+  display: inline-block;
+  border-bottom: 1px solid transparent;
+  transform: translate3d(0, 3px, 0);
+}
+
+.song-singer {
+  display: block;
+  font-size: 14px;
+  transform: translate3d(0, -3px, 0);
+  opacity: 0;
+}
+
+@keyframes rotateBtn {
+  to {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+@keyframes animText {
+  0% {
+    color: $color-main;
+  }
+  50% {
+    color: var(--color-active);
+  }
+  100% {
+    color: $color-main;
   }
 }
 
@@ -129,13 +271,12 @@
   font-size: 40px;
   opacity: 0.75;
 
-  &:hover{
+  &:hover {
     opacity: 0.95;
   }
 }
 
-.playing.icon-play::before,
-.playing > .icon-play::before {
+.playing.icon-play::before {
   content: '\e908';
 }
 
@@ -160,7 +301,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 14px;
+    font-size: 12px;
     transition: 0.3s;
     transform: translate(-50%, -50%);
 

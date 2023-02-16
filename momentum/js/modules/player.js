@@ -1,6 +1,7 @@
 import { user } from './user.js';
 import { updateBar } from './common.js';
 import { audioData } from './audioData.js';
+import { removePrevElement } from './quote.js';
 
 const player = document.querySelector('.player');
 const playList = player.querySelector('.play-list');
@@ -8,7 +9,7 @@ const playBtn = player.querySelector('.icon-play');
 const prevBtn = player.querySelector('.icon-play-prev');
 const nextBtn = player.querySelector('.icon-play-next');
 const volumeBtn = player.querySelector('.icon-volume');
-const songName = player.querySelector('.song-name');
+const songName = player.querySelector('.song-name-wrapper');
 const curTime = player.querySelector('.current-time');
 const duration = player.querySelector('.duration');
 const progressBar = player.querySelector('.progress-bar');
@@ -22,7 +23,7 @@ let num = 0;
 const createPlayList = (item) => {
   const li = document.createElement('li');
   li.classList.add('play-item');
-  li.innerHTML = `<span class='icon-play'></span><span class='song-title'>${item.title}</span>`;
+  li.innerHTML = `<span class='song-title'>${item.title}</span><span class='song-singer'>${item.singer}</span>`;
   playList.append(li);
 };
 
@@ -45,28 +46,40 @@ const activateTitle = () => {
   playList.children[num].classList.add('active');
 };
 
-const playNewAudio = (i) => {
-  if (i) {
-    pauseAudio();
-    num = (audioData.length + num + i) % audioData.length;
-  }
+const changeAudio = () => {
   audio.src = audioData[num].src;
   user.player.song = num;
   activateTitle();
-  playAudio();
 };
 
-const showData = () => {
-  songName.textContent = audioData[num].title;
-  duration.textContent = formatTime(audio.duration);
+const playNewAudio = (i) => {
+  num = (audioData.length + num + i) % audioData.length;
+  changeAudio();
+  if (isPlaying) playAudio();
 };
-
-const showCurTime = () => (curTime.textContent = formatTime(audio.currentTime));
 
 const formatTime = (sec) => {
   const min = Math.floor(sec / 60);
   sec = Math.floor(sec % 60).toString();
   return `${min}:${sec.padStart(2, 0)}`;
+};
+
+const showCurTime = () => (curTime.textContent = formatTime(audio.currentTime));
+
+const showDuration = () => (duration.textContent = formatTime(audio.duration));
+
+const showSongName = () => {
+  const curSong = document.createElement('div');
+  curSong.classList.add('song-name', 'next');
+  curSong.innerHTML = `<span>${audioData[num].title}</span><span>${audioData[num].singer}</span>`;
+  songName.append(curSong);
+  curSong.previousElementSibling && curSong.previousElementSibling.classList.add('prev');
+  curSong.addEventListener('animationend', () => removePrevElement(curSong), { once: true });
+};
+
+const showData = () => {
+  showSongName();
+  showDuration();
 };
 
 const changeVolume = () => {
@@ -103,13 +116,13 @@ const updateProgress = () => {
 
 const playChosenAudio = (e) => {
   if (!e.target.closest('.play-item')) return;
-  const ind = audioData.findIndex((item) => item.title === e.target.closest('.play-item').textContent);
+  const ind = audioData.findIndex((item) => item.title === e.target.closest('.play-item').firstElementChild.textContent);
   if (num === ind) {
     toggleAudio();
   } else {
-    pauseAudio();
     num = ind;
-    playNewAudio();
+    changeAudio();
+    playAudio();
   }
 };
 
@@ -117,7 +130,7 @@ const togglePlaylist = () => {
   player.classList.toggle('playlist-open');
 
   if (player.classList.contains('playlist-open')) {
-    playList.style.height = playList.scrollHeight + 30 + 'px';
+    playList.style.height = playList.scrollHeight + 22 + 'px';
     setTimeout(() => playList.classList.add('scroll'), 300);
   } else {
     playList.style.height = '';
@@ -128,7 +141,7 @@ const togglePlaylist = () => {
 
 // -------------------------------------------------------
 
-export const showPlayer = () => {
+const showPlayer = () => {
   audioData.forEach((item) => createPlayList(item));
   num = user.player.song;
   audio.src = audioData[num].src;
@@ -151,3 +164,5 @@ playBtn.addEventListener('click', toggleAudio);
 volumeBtn.addEventListener('click', toggleVolume);
 volumeBar.addEventListener('input', changeVolume);
 progressBar.addEventListener('input', changeTime);
+
+export { showPlayer };

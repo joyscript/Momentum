@@ -63,6 +63,7 @@
     box-shadow: $shadow;
     transition: 0.3s;
     overflow: hidden;
+    white-space: pre;
     cursor: pointer;
 
     &:hover {

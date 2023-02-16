@@ -73,19 +73,19 @@ const getGoodSize = (image) => (window.innerWidth < 600 ? image['url_l'] : image
 const getFlickrImage = (data) => {
   const photos = data.photos.photo;
 
-  if (galleries[user.photoTag]) {
+  if (galleries[user.photoTag] && !tagInput.value) {
     const gallery = (galleries[user.photoTag][1] = photos.map((item) => getGoodSize(item)));
     shuffleArr(gallery);
     fitRandNum(gallery.length);
   } else {
-    if (data.photos.pages === 1 && photos.length < 50) throw new Error();
+    if (data.photos.pages == 1 && photos.length < 50) throw new Error();
     for (let i = 0; i < photos.length; i++) {
       getRandNum(photos.length);
       console.log(i.toString(), randNum, photos[randNum]);
       if (isGoodPhoto(photos[randNum])) break;
     }
+    if (!isGoodPhoto(photos[randNum])) throw new Error();
   }
-  if (!isGoodPhoto(photos[randNum])) throw new Error();
   return getGoodSize(photos[randNum]);
 };
 

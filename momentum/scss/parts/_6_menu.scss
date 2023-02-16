@@ -36,10 +36,11 @@
 
 .menu-body {
   position: relative;
-  height: 460px;
+  height: 420px;
   padding: 20px;
 
   @include media-tm {
+    height: 390px;
     max-height: calc(100vh - (65px + 60px + 5px + 60px));
   }
 
@@ -111,14 +112,6 @@
   margin-bottom: 30px;
 }
 
-[data-menu='photo'] .menu-option:not(:last-child) {
-  margin-bottom: 25px;
-}
-
-[data-menu='style'] .menu-option:not(:last-child) {
-  margin-bottom: 20px;
-}
-
 .menu-title {
   margin-bottom: 10px;
   text-align: left;
@@ -136,16 +129,21 @@
 
 // Photo ========================================================================
 
-.custom-option {
+.tag-option {
   position: relative;
 }
 
 .custom-block {
+  margin-top: 15px;
   transition: 0.3s;
 
   [data-source='github'] & {
     opacity: 0.5;
     pointer-events: none;
+  }
+
+  @include media-tm {
+    margin-top: 10px;
   }
 }
 
@@ -220,7 +218,7 @@
   color: red;
   font-size: 16px;
   line-height: 1;
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
   opacity: 0;
   visibility: hidden;
 

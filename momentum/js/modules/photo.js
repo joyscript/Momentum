@@ -20,7 +20,7 @@ customBtn.disabled = !user.customTag;
 customBtn.value = user.customTag || 'custom';
 
 const changePhoto = () => {
-  if (customBlock.classList.contains('error')) clearCustomBlock();
+  clearCustomBlock();
   if (!document.body.classList.contains('autoslider-play')) showBackground();
 };
 
@@ -36,8 +36,7 @@ const changeGithubTag = () => {
 };
 
 const clearCustomBlock = () => {
-  customBlock.classList.remove('error-tag');
-  customBlock.classList.remove('error-fetch');
+  customBlock.classList.remove('error-tag', 'error-fetch');
   tagInput.value = '';
 };
 
@@ -50,7 +49,6 @@ const addCustomTag = () => {
 
 const goAfterSuccess = () => {
   user.photoTag = user.customTag = tagInput.value;
-  customBlock.classList.remove('error');
   animateInput();
   changeCustomButton();
 };
@@ -82,10 +80,7 @@ const goToGithub = () => {
 
 const showTagError = () => (tagError.textContent = errors[user.lang][tagInput.value ? 0 : 1]);
 
-const watchTagInput = () => {
-  if (!tagInput.value.match(/^[a-zA-Zа-яА-Я]*$/)) tagInput.value = tagInput.value.slice(0, -1);
-  !tagInput.value && customBlock.classList.remove('error-tag');
-};
+const watchTagInput = () => !tagInput.value && customBlock.classList.remove('error-tag');
 
 // -------------------------------------------
 

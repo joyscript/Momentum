@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --color-active: #ce51f5;
   --color-modal: #ffffff;
@@ -106,9 +107,6 @@ button {
   width: 30px;
   height: 30px;
   font-size: 30px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
   opacity: 0.8;
 }
 .button:hover {
@@ -292,6 +290,7 @@ button {
   box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.4);
   transition: 0.3s;
   overflow: hidden;
+  white-space: pre;
   cursor: pointer;
 }
 .modal-button span:hover {
@@ -593,6 +592,9 @@ button {
   top: 50%;
   height: 60px;
   margin-top: -30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   transition: opacity 1s ease-in-out, transform 0.3s;
 }
 .animation .slider-button {
@@ -813,7 +815,7 @@ button {
             backdrop-filter: blur(20px);
     overflow: hidden;
     transition: 0.3s ease;
-    width: 300px;
+    width: 290px;
     top: 5px;
     left: -100%;
   }
@@ -847,22 +849,74 @@ button {
   }
 }
 
-.song-name {
-  height: 32px;
-  font-size: 18px;
-  line-height: 25px;
-  white-space: pre;
+.song-name-wrapper {
+  position: relative;
+  height: 31px;
   overflow: hidden;
 }
 @media (max-width: 1023px), (max-height: 767px) {
-  .song-name {
-    margin-bottom: 15px;
-    padding: 0 40px;
-    font-size: 16px;
-    line-height: 32px;
+  .song-name-wrapper {
+    height: 50px;
   }
 }
 
+.song-name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  line-height: 27px;
+  white-space: pre;
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.song-name.prev {
+  animation-name: slide-to-right;
+}
+.song-name.next {
+  animation-name: slide-from-left;
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .song-name {
+    padding: 0 45px;
+    font-size: 17px;
+    line-height: 20px;
+  }
+}
+.song-name > span:last-child {
+  display: block;
+  font-size: 14px;
+  opacity: 0;
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .song-name > span:last-child {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slide-to-right {
+  from {
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+@keyframes slide-from-left {
+  from {
+    opacity: 0;
+    left: -100%;
+  }
+  to {
+    opacity: 1;
+    left: 0;
+  }
+}
 .song-time {
   display: flex;
   justify-content: space-between;
@@ -897,7 +951,7 @@ button {
   overflow: hidden;
 }
 .playlist-open .play-list {
-  padding: 15px 20px;
+  padding: 15px 20px 7px;
 }
 @media (max-height: 550px) {
   .play-list {
@@ -906,29 +960,109 @@ button {
 }
 
 .play-item {
-  display: flex;
-  align-items: center;
-  padding: 5px 0;
+  position: relative;
+  height: 33px;
+  padding-left: 30px;
   list-style: none;
+  line-height: 1;
   opacity: 0.8;
+  transition: 0.2s linear;
+  white-space: nowrap;
   cursor: pointer;
-  transition: 0.3s;
 }
-.play-item .icon-play {
-  margin-right: 10px;
+.play-item:before, .play-item::after {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
   font-size: 20px;
+  transition: 0.2s linear;
+}
+.play-item:before {
+  content: "\e909";
+  font-family: "icomoon";
+  left: 0;
+}
+.play-item:after {
+  content: "☆";
+  right: 0;
+  width: 30px;
+  text-align: center;
+  opacity: 0;
 }
 .play-item.active {
-  color: var(--color-active);
-  opacity: 0.9;
+  opacity: 1;
+  text-shadow: 0 0 1px var(--color-active);
 }
 .play-item.active .song-title {
-  text-shadow: 0 0 1px var(--color-active);
+  border-bottom: 1px solid var(--color-active);
+}
+.play-item.active:after {
+  opacity: 1;
+}
+.play-item.active.playing {
+  text-shadow: none;
+  animation: animText 1.5s infinite linear;
+}
+.play-item.active.playing .song-title {
+  border-bottom: 1px solid transparent;
+}
+.play-item.active.playing:before {
+  content: "\e908";
+}
+.play-item.active.playing:before, .play-item.active.playing:after {
+  animation: rotateBtn 3s infinite linear;
 }
 .play-item:hover {
   opacity: 1;
 }
+.play-item:hover .song-title {
+  transform: translate3d(0, -4px, 0);
+}
+.play-item:hover .song-singer {
+  opacity: 1;
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .play-item {
+    height: 36px;
+  }
+}
 
+.song-title,
+.song-singer {
+  transition: 0.2s linear;
+}
+
+.song-title {
+  display: inline-block;
+  border-bottom: 1px solid transparent;
+  transform: translate3d(0, 3px, 0);
+}
+
+.song-singer {
+  display: block;
+  font-size: 14px;
+  transform: translate3d(0, -3px, 0);
+  opacity: 0;
+}
+
+@keyframes rotateBtn {
+  to {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+@keyframes animText {
+  0% {
+    color: #ffffff;
+  }
+  50% {
+    color: var(--color-active);
+  }
+  100% {
+    color: #ffffff;
+  }
+}
 .player-controls > .icon-play {
   width: 40px;
   height: 40px;
@@ -939,8 +1073,7 @@ button {
   opacity: 0.95;
 }
 
-.playing.icon-play::before,
-.playing > .icon-play::before {
+.playing.icon-play::before {
   content: "\e908";
 }
 
@@ -966,7 +1099,7 @@ button {
   position: absolute;
   top: 50%;
   left: 50%;
-  font-size: 14px;
+  font-size: 12px;
   transition: 0.3s;
   transform: translate(-50%, -50%);
 }
@@ -1153,11 +1286,12 @@ button {
 
 .menu-body {
   position: relative;
-  height: 460px;
+  height: 420px;
   padding: 20px;
 }
 @media (max-width: 1023px), (max-height: 767px) {
   .menu-body {
+    height: 390px;
     max-height: calc(100vh - 190px);
   }
 }
@@ -1227,14 +1361,6 @@ button {
   margin-bottom: 30px;
 }
 
-[data-menu=photo] .menu-option:not(:last-child) {
-  margin-bottom: 25px;
-}
-
-[data-menu=style] .menu-option:not(:last-child) {
-  margin-bottom: 20px;
-}
-
 .menu-title {
   margin-bottom: 10px;
   text-align: left;
@@ -1251,16 +1377,22 @@ button {
   }
 }
 
-.custom-option {
+.tag-option {
   position: relative;
 }
 
 .custom-block {
+  margin-top: 15px;
   transition: 0.3s;
 }
 [data-source=github] .custom-block {
   opacity: 0.5;
   pointer-events: none;
+}
+@media (max-width: 1023px), (max-height: 767px) {
+  .custom-block {
+    margin-top: 10px;
+  }
 }
 
 .tag-input-window {
@@ -1330,7 +1462,7 @@ button {
   color: red;
   font-size: 16px;
   line-height: 1;
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
   opacity: 0;
   visibility: hidden;
 }
