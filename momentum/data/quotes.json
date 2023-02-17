@@ -2,13 +2,13 @@
   {
     "en-text": "It’s not the years in your life that count. It’s the life in your years.",
     "en-author": "Abraham Lincoln",
-    "ru-text": "Жизнь меряется не тем, сколько в ней лет, а тем, сколько в этих годах настоящей жизни",
+    "ru-text": "Жизнь меряется не тем, сколько в ней лет, а тем, сколько в этих годах настоящей жизни.",
     "ru-author": "Авраам Линкольн"
   },
   {
     "en-text": "A person who never made a mistake never tried anything new.",
     "en-author": "Albert Einstein",
-    "ru-text": "Никогда не делает ошибок только тот, кто не пробует ничего нового",
+    "ru-text": "Никогда не делает ошибок только тот, кто не пробует ничего нового.",
     "ru-author": "Альберт Эйнштейн"
   },
   {
@@ -20,7 +20,19 @@
   {
     "en-text": "Strive not to be a success, but rather to be of value.",
     "en-author": "Albert Einstein",
-    "ru-text": "Стремитесь не к успеху, а к ценностям, которые он дает​",
+    "ru-text": "Стремитесь не к успеху, а к ценностям, которые он дает.​",
+    "ru-author": "Альберт Эйнштейн"
+  },
+  {
+    "en-text": "Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.",
+    "en-author": "Albert Einstein",
+    "ru-text": "Воображение важнее знаний. Знания ограничены. Воображение постигает мир.",
+    "ru-author": "Альберт Эйнштейн"
+  },
+  {
+    "en-text": "A clever person solves a problem. A wise person avoids it.",
+    "en-author": "Albert Einstein",
+    "ru-text": "Умный человек решает проблему. Мудрый человек избегает ее.",
     "ru-author": "Альберт Эйнштейн"
   },
   {
@@ -32,13 +44,13 @@
   {
     "en-text": "The most difficult thing is the decision to act, the rest is merely tenacity.",
     "en-author": "Amelia Earhart",
-    "ru-text": "Сложнее всего начать действовать, все остальное зависит только от упорства",
+    "ru-text": "Сложнее всего начать действовать, все остальное зависит только от упорства.",
     "ru-author": "Амелия Эрхарт"
   },
   {
     "en-text": "How wonderful it is that nobody need wait a single moment before starting to improve the world.",
     "en-author": "Anne Frank",
-    "ru-text": "Как прекрасно, что не нужно ждать ни минуты, чтобы начать делать мир лучше",
+    "ru-text": "Как прекрасно, что не нужно ждать ни минуты, чтобы начать делать мир лучше.",
     "ru-author": "Анна Франк"
   },
   {
@@ -50,19 +62,19 @@
   {
     "en-text": "There is only one way to avoid criticism: do nothing, say nothing, and be nothing.",
     "en-author": "Aristotle",
-    "ru-text": "Есть только один способ избежать критики: ничего не делайте, ничего не говорите и будьте никем",
+    "ru-text": "Есть только один способ избежать критики: ничего не делайте, ничего не говорите и будьте никем.",
     "ru-author": "Аристотель"
   },
   {
     "en-text": "Start where you are. Use what you have. Do what you can.",
     "en-author": "Arthur Ashe",
-    "ru-text": "Начните оттуда, где вы сейчас находитесь. Используйте то, что у вас есть. Делайте то,что можете",
+    "ru-text": "Начните оттуда, где вы сейчас находитесь. Используйте то, что у вас есть. Делайте то,что можете.",
     "ru-author": "Артур Эш"
   },
   {
-    "en-text": "Nothing is impossible, the word itself says, I’m possible!.",
+    "en-text": "Nothing is impossible, the word itself says, I’m possible!",
     "en-author": "Audrey Hepburn",
-    "ru-text": "Нет ничего невозможного. В самом этом слове заключена возможность!.",
+    "ru-text": "Нет ничего невозможного. В самом этом слове заключена возможность!",
     "ru-author": "Одри Хепбёрн"
   },
   {
@@ -102,13 +114,31 @@
     "ru-author": "Будда"
   },
   {
+    "en-text": "Peace comes from within. Do not seek it without",
+    "en-author": "Buddha",
+    "ru-text": "Гармония приходит изнутри. Не ищите ее снаружи.",
+    "ru-author": "Будда"
+  },
+  {
+    "en-text": "Work out your own salvation. Do not depend on others.",
+    "en-author": "Buddha",
+    "ru-text": "Спасайте себя сами. Не полагайтесь на других.",
+    "ru-author": "Будда"
+  },
+  {
+    "en-text": "The cosmos is within us. We are made of star-stuff. We are a way for the universe to know itself.",
+    "en-author": "Carl Sagan",
+    "ru-text": "Космос внутри нас. Мы сделаны из звездного вещества. Мы - это способ вселенной познать саму себя.",
+    "ru-author": "Карл Саган"
+  },
+  {
     "en-text": "Life is 10% what happens to me and 90% of how I react to it.",
     "en-author": "Charles Swindoll",
     "ru-text": "Жизнь - это 10%, что с тобой про­ис­хо­дит, и 90%, как ты к это­му отне­сешь­ся.",
     "ru-author": "Чарльз Свиндолл"
   },
   {
-    "en-text": "A day without laughter is a day wasted .",
+    "en-text": "A day without laughter is a day wasted.",
     "en-author": "Charlie Chaplin",
     "ru-text": "День без смеха это напрасно прожитый день.",
     "ru-author": "Чарли Чаплин"
@@ -122,7 +152,7 @@
   {
     "en-text": "The person who says it cannot be done should not interrupt the person who is doing it.",
     "en-author": "Chinese Proverb",
-    "ru-text": "Человек, который говорит, что это невозможно сделать, не должен прерывать человека, который это делает",
+    "ru-text": "Человек, который говорит, что это невозможно сделать, не должен прерывать человека, который это делает.",
     "ru-author": "Китайская пословица"
   },
   {
@@ -132,9 +162,15 @@
     "ru-author": "Китайская пословица"
   },
   {
+    "en-text": "Learning is a weightless treasure you can always carry easily.",
+    "en-author": "Chinese Proverb",
+    "ru-text": "Обучение - это невесомое сокровище, которое вы всегда можете легко носить с собой.",
+    "ru-author": "Китайская пословица"
+  },
+  {
     "en-text": "You can never cross the ocean until you have the courage to lose sight of the shore.",
     "en-author": "Christopher Columbus",
-    "ru-text": "Вы никогда не пересечете океан, если не наберетесь мужества потерять берег из виду",
+    "ru-text": "Вы никогда не пересечете океан, если не наберетесь мужества потерять берег из виду.",
     "ru-author": "Христофор Колумб"
   },
   {
@@ -146,13 +182,13 @@
   {
     "en-text": "It does not matter how slowly you go as long as you do not stop.",
     "en-author": "Confucius",
-    "ru-text": "Не столь важно, как медленно ты идешь, как то, как долго ты идешь, не останавливаясь",
+    "ru-text": "Не столь важно, как медленно ты идешь, как то, как долго ты идешь, не останавливаясь.",
     "ru-author": "Конфуций"
   },
   {
     "en-text": "Everything has beauty, but not everyone can see.",
     "en-author": "Confucius",
-    "ru-text": "У всего есть своя красота, но не каждый может ее увидеть",
+    "ru-text": "У всего есть своя красота, но не каждый может ее увидеть.",
     "ru-author": "Конфуций"
   },
   {
@@ -164,7 +200,7 @@
   {
     "en-text": "Remember that not getting what you want is sometimes a wonderful stroke of luck.",
     "en-author": "Dalai Lama",
-    "ru-text": "Запомните, что не достичь успеха – иногда тоже большая удача",
+    "ru-text": "Запомните, что не достичь успеха – иногда тоже большая удача.",
     "ru-author": "Далай Лама"
   },
   {
@@ -182,19 +218,25 @@
   {
     "en-text": "We become what we think about.",
     "en-author": "Earl Nightingale",
-    "ru-text": "Мы становимся тем, о чем мы думаем",
+    "ru-text": "Мы становимся тем, о чем мы думаем.",
     "ru-author": "Эрл Найтингейл"
   },
   {
     "en-text": "Remember no one can make you feel inferior without your consent.",
     "en-author": "Eleanor Roosevelt",
-    "ru-text": "Запомните, никто не может заставить вас чувствовать себя неполноценным без вашего на то согласия",
+    "ru-text": "Запомните, никто не может заставить вас чувствовать себя неполноценным без вашего на то согласия.",
     "ru-author": "Элеонор Рузвельт"
+  },
+  {
+    "en-text": "The more we value things outside our control, the less control we have.",
+    "en-author": "Epictetus",
+    "ru-text": "Чем больше мы ценим вещи, находящиеся вне нашего контроля, тем меньше у нас контроля.",
+    "ru-author": "Эпиктет"
   },
   {
     "en-text": "I attribute my success to this: I never gave or took any excuse.",
     "en-author": "Florence Nightingale",
-    "ru-text": "Своим успехом я обязана тому, что никогда не оправдывалась и не принимала оправданий от других",
+    "ru-text": "Своим успехом я обязана тому, что никогда не оправдывалась и не принимала оправданий от других.",
     "ru-author": "Флоренс Найтингейл"
   },
   {
@@ -206,7 +248,7 @@
   {
     "en-text": "The best revenge is massive success.",
     "en-author": "Frank Sinatra",
-    "ru-text": "Лучшая месть – огромный успех",
+    "ru-text": "Лучшая месть – огромный успех.",
     "ru-author": "Фрэнк Синатра"
   },
   {
@@ -227,6 +269,7 @@
     "ru-text": "Никогда не поздно стать тем, кем ты мог бы быть.",
     "ru-author": "Джордж Эллиот"
   },
+
   {
     "en-text": "Time is free, but it’s priceless.",
     "en-author": "Harvey MacKay",
@@ -242,7 +285,7 @@
   {
     "en-text": "Fall seven times and stand up eight.",
     "en-author": "Japanese Proverb",
-    "ru-text": "Упади семь раз и восемь раз поднимись",
+    "ru-text": "Упади семь раз и восемь раз поднимись.",
     "ru-author": "Японская поговорка"
   },
   {
@@ -260,13 +303,19 @@
   {
     "en-text": "Either you run the day, or the day runs you.",
     "en-author": "Jim Rohn",
-    "ru-text": "Либо вы управляете вашим днем, либо день управляет вами",
+    "ru-text": "Либо вы управляете вашим днем, либо день управляет вами.",
+    "ru-author": "Джим Рон"
+  },
+  {
+    "en-text": "Your life doesn’t get better by chance, it gets better by change.",
+    "en-author": "Jim Rohn",
+    "ru-text": "Ваша жизнь не становится лучше случайно, она становится лучше благодаря переменам.",
     "ru-author": "Джим Рон"
   },
   {
     "en-text": "Whatever you can do, or dream you can, begin it. Boldness has genius, power and magic in it.",
     "en-author": "Johann Wolfgang von Goethe",
-    "ru-text": "Что бы ты ни мог сделать и о чем бы ты не мечтал, начни это. В смелости есть гений, мощь и волшебство",
+    "ru-text": "Что бы ты ни мог сделать и о чем бы ты не мечтал, начни это. В смелости есть гений, мощь и волшебство.",
     "ru-author": "Иоганн Вольфганг Гете"
   },
   {
@@ -278,7 +327,7 @@
   {
     "en-text": "Life is what happens to you while you’re busy making other plans.",
     "en-author": "John Lennon",
-    "ru-text": "Жизнь - это то, что с тобой происходит, пока ты строишь планы",
+    "ru-text": "Жизнь - это то, что с тобой происходит, пока ты строишь планы.",
     "ru-author": "Джон Леннон"
   },
   {
@@ -290,19 +339,19 @@
   {
     "en-text": "Life isn’t about getting and having, it’s about giving and being.",
     "en-author": "Kevin Kruse",
-    "ru-text": "Жизнь не в том, чтобы получать и иметь, она в том, чтобы отдавать и быть",
+    "ru-text": "Жизнь не в том, чтобы получать и иметь, она в том, чтобы отдавать и быть.",
     "ru-author": "Кевин Круз"
   },
   {
     "en-text": "When I let go of what I am, I become what I might be.",
     "en-author": "Lao Tzu",
-    "ru-text": "Когда я освобождаюсь от того, кто я есть, я становлюсь тем, кем я могу быть",
+    "ru-text": "Когда я освобождаюсь от того, кто я есть, я становлюсь тем, кем я могу быть.",
     "ru-author": "Лао Цзы"
   },
   {
     "en-text": "If the wind will not serve, take to the oars.",
     "en-author": "Latin Proverb",
-    "ru-text": "Если нет ветра, беритесь за вёсла",
+    "ru-text": "Если нет ветра, беритесь за вёсла.",
     "ru-author": "Латинская поговорка"
   },
   {
@@ -326,13 +375,13 @@
   {
     "en-text": "The two most important days in your life are the day you are born and the day you find out why.",
     "en-author": "Mark Twain",
-    "ru-text": "Два самых важных дня в твоей жизни: день, когда ты появился на свет, и день, когда понял, зачем",
+    "ru-text": "Два самых важных дня в твоей жизни: день, когда ты появился на свет, и день, когда понял, зачем.",
     "ru-author": "Марк Твен"
   },
   {
     "en-text": "Our lives begin to end the day we become silent about things that matter.",
     "en-author": "Martin Luther King Jr.",
-    "ru-text": "Наша жизнь начинает подходить к концу, когда мы перестаём говорить о действительно важных вещах",
+    "ru-text": "Наша жизнь начинает подходить к концу, когда мы перестаём говорить о действительно важных вещах.",
     "ru-author": "Мартин Лютер Кинг-младший"
   },
   {
@@ -342,15 +391,21 @@
     "ru-author": "Майя Анжелоу"
   },
   {
+    "en-text": "Don't be afraid to fail. Be afraid not to try.",
+    "en-author": "Michael Jordan",
+    "ru-text": "Не бойтесь потерпеть неудачу. Бойтесь не пробовать.",
+    "ru-author": "Майкл Джордан"
+  },
+  {
     "en-text": "Whatever the mind of man can conceive and believe, it can achieve.",
     "en-author": "Napoleon Hill",
-    "ru-text": "Что разум человека может постигнуть и во что он может поверить, того он способен достичь",
+    "ru-text": "Что разум человека может постигнуть и во что он может поверить, того он способен достичь.",
     "ru-author": "Наполеон Хилл"
   },
   {
     "en-text": "You become what you believe.",
     "en-author": "Oprah Winfrey",
-    "ru-text": "Ты становишься тем, во что веришь",
+    "ru-text": "Ты становишься тем, во что веришь.",
     "ru-author": "Опра Уинфри"
   },
   {
@@ -368,7 +423,7 @@
   {
     "en-text": "The only person you are destined to become is the person you decide to be.",
     "en-author": "Ralph Waldo Emerson",
-    "ru-text": "Человек, которым вам суждено стать – это только тот человек, которым вы сами решите стать",
+    "ru-text": "Человек, которым вам суждено стать – это только тот человек, которым вы сами решите стать.",
     "ru-author": "Ральф Уолдо Эмерсон"
   },
   {
@@ -376,6 +431,12 @@
     "en-author": "Robert Frost",
     "ru-text": "Две дороги расходились в лесу, и я выбрал ту, по которой меньше ездили, И это все изменило.",
     "ru-author": "Роберт Фрост"
+  },
+  {
+    "en-text": "Yesterday I was clever, so I wanted to change the world. Today I am wise, so I am changing myself.",
+    "en-author": "Rumi",
+    "ru-text": "Вчера я был умным, поэтому я хотел изменить мир. Сегодня я мудр, поэтому меняю себя.",
+    "ru-author": "Руми"
   },
   {
     "en-text": "While we are postponing, life speeds by.",
@@ -392,31 +453,37 @@
   {
     "en-text": "I am not a product of my circumstances. I am a product of my decisions.",
     "en-author": "Stephen Covey",
-    "ru-text": "Я не жертва обстоятельств, я - результат моих решений",
+    "ru-text": "Я не жертва обстоятельств, я - результат моих решений.",
     "ru-author": "Стивен Кови"
   },
   {
     "en-text": "The only way to do great work is to love what you do.",
     "en-author": "Steve Jobs",
-    "ru-text": "Единственный способ сделать что-то очень хорошо – любить то, что ты делаешь",
+    "ru-text": "Единственный способ сделать что-то очень хорошо – любить то, что ты делаешь.",
     "ru-author": "Стив Джобс"
   },
   {
     "en-text": "Your time is limited, so don’t waste it living someone else’s life.",
     "en-author": "Steve Jobs",
-    "ru-text": "Ваше время ограничено, не тратьте его, живя чужой жизнью",
+    "ru-text": "Ваше время ограничено, не тратьте его, живя чужой жизнью.",
     "ru-author": "Стив Джобс"
+  },
+  {
+    "en-text": "Be so good they can't ignore you.",
+    "en-author": "Steve Martin",
+    "ru-text": "Будь так хорош, что они не смогут тебя игнорировать.",
+    "ru-author": "Стив Мартин"
   },
   {
     "en-text": "Do what you can, where you are, with what you have.",
     "en-author": "Teddy Roosevelt",
-    "ru-text": "Делай все, что можешь, там, где ты находишься, используя все, что имеешь",
+    "ru-text": "Делай все, что можешь, там, где ты находишься, используя все, что имеешь.",
     "ru-author": "Теодор Рузвельт"
   },
   {
     "en-text": "Believe you can and you’re halfway there.",
     "en-author": "Theodore Roosevelt",
-    "ru-text": "Стоит только поверить, что вы можете – и вы уже на полпути к цели",
+    "ru-text": "Стоит только поверить, что вы можете – и вы уже на полпути к цели.",
     "ru-author": "Теодор Рузвельт"
   },
   {
@@ -440,19 +507,19 @@
   {
     "en-text": "Winning isn’t everything, but wanting to win is.",
     "en-author": "Vince Lombardi",
-    "ru-text": "Победа - это еще не все, все - это постоянное желание побеждать",
+    "ru-text": "Победа - это еще не все, все - это постоянное желание побеждать.",
     "ru-author": "Винс Ломбарди"
   },
   {
     "en-text": "I would rather die of passion than of boredom.",
     "en-author": "Vincent van Gogh",
-    "ru-text": "Я лучше умру от страсти, чем от скуки",
+    "ru-text": "Я лучше умру от страсти, чем от скуки.",
     "ru-author": "Винсент ван Гог"
   },
   {
     "en-text": "Definiteness of purpose is the starting point of all achievement.",
     "en-author": "W. Clement Stone",
-    "ru-text": "Определенность цели - отправная точка всех достижений",
+    "ru-text": "Определенность цели - отправная точка всех достижений.",
     "ru-author": "Уильям Клемент Стоун"
   },
   {
@@ -464,13 +531,19 @@
   {
     "en-text": "Eighty percent of success is showing up.",
     "en-author": "Woody Allen",
-    "ru-text": "80% успеха - это появиться в нужном месте в нужное время",
+    "ru-text": "80% успеха - это появиться в нужном месте в нужное время.",
     "ru-author": "Вуди Аллен"
   },
   {
     "en-text": "If you can dream it, you can achieve it.",
     "en-author": "Zig Ziglar",
     "ru-text": "Если вы можете мечтать об этом, вы можете достичь этого.",
+    "ru-author": "Зиг Зиглар"
+  },
+  {
+    "en-text": "You don't have to be great to start, but you have to start to be great.",
+    "en-author": "Zig Ziglar",
+    "ru-text": "Вам не обязательно быть великим, чтобы начать, но вы должны начать, чтобы быть великим.",
     "ru-author": "Зиг Зиглар"
   }
 ]
