@@ -16,7 +16,7 @@ const themes = {
     overlay: '#00001445',
   },
   light: {
-    active: '#00ffe1',
+    active: '#00fafa',
     modal: '#303030',
     activeBtn: '#303030',
     modalBg: '#ffffffdd',

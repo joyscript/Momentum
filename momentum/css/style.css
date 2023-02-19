@@ -30,12 +30,9 @@ body {
   text-align: center;
   background: rgb(6, 8, 68);
 }
-body.lock {
-  overflow: hidden;
-}
 
 .header {
-  flex-basis: 30%;
+  flex-basis: 25%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -49,13 +46,13 @@ body.lock {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 20px;
   padding: 20px 0;
   line-height: 1;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 360px) {
   .main {
-    gap: 20px;
+    gap: 15px;
   }
 }
 @media (max-height: 550px) {
@@ -63,19 +60,15 @@ body.lock {
     gap: 15px;
   }
 }
-@media (max-width: 360px) {
-  .main {
-    gap: 15px;
-  }
-}
 @media (max-height: 360px) {
   .main {
     gap: 10px;
+    padding: 5px 0;
   }
 }
 
 .footer {
-  flex-basis: 30%;
+  flex-basis: 25%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -88,7 +81,7 @@ body.lock {
 }
 @media (max-height: 550px) {
   .footer {
-    min-height: 30px;
+    min-height: 0;
   }
 }
 
@@ -225,7 +218,7 @@ button {
   opacity: 0;
   transition: 0.3s ease-in-out;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .modal {
     max-height: calc(100vh - 10px);
     max-width: calc(100% - 10px);
@@ -235,7 +228,7 @@ button {
   visibility: visible;
   opacity: 1;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .modal {
     font-size: 16px;
   }
@@ -247,7 +240,7 @@ button {
 .open .modal-toggle-button {
   color: var(--color-active);
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .modal-toggle-button {
     opacity: 0.9;
   }
@@ -274,7 +267,7 @@ button {
   width: calc((100% - 30px) / 3);
   height: 30px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .modal-button {
     width: calc((100% - 20px) / 3);
   }
@@ -347,30 +340,37 @@ button {
   box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
 }
 
-.time,
+.time-wrapper,
 .greeting-wrapper {
-  flex: 0 0 40%;
+  flex: 0 0 42%;
+}
+
+.time-wrapper {
+  display: flex;
+  align-items: flex-end;
 }
 
 .time {
-  display: flex;
-  align-items: flex-end;
+  position: relative;
+  padding: 10px 25px 15px;
   font-family: "Arial-MT";
   font-size: 110px;
   letter-spacing: -4px;
+  transition: 0s;
 }
 @media (max-width: 1200px) {
   .time {
     font-size: 94px;
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .time {
     font-size: 90px;
   }
 }
 @media (max-width: 767px), (max-height: 550px) {
   .time {
+    padding: 10px 15px;
     font-size: 70px;
   }
 }
@@ -384,13 +384,24 @@ button {
     font-size: 54px;
   }
 }
-.time.gradient {
+@media (max-height: 360px) {
+  .time {
+    padding: 5px 15px;
+  }
+}
+.time[data-effect=gradient] {
   color: transparent;
-  background-image: linear-gradient(-225deg, #ffffff 0%, #f263ff 29%, #00e1ff 67%, #ffffff 100%);
+  background-image: linear-gradient(-225deg, #ffffff 0%, #ff63fa 29%, #00e1ff 67%, #ffffff 100%);
   background-size: 300% auto;
   -webkit-background-clip: text;
           background-clip: text;
-  animation: gradient 15s linear infinite;
+  animation: gradient 5s linear infinite;
+}
+.time[data-effect=glow] {
+  font-family: Verdana, sans-serif;
+  color: #00ffff;
+  background: rgba(0, 0, 0, 0.5);
+  animation: glow 1s linear infinite alternate;
 }
 
 @keyframes gradient {
@@ -398,10 +409,20 @@ button {
     background-position: -300% center;
   }
 }
+@keyframes glow {
+  0% {
+    filter: hue-rotate(0deg);
+    text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff;
+  }
+  100% {
+    filter: hue-rotate(360deg);
+    text-shadow: none;
+  }
+}
 .date {
   font-size: 26px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .date {
     font-size: 24px;
   }
@@ -419,7 +440,7 @@ button {
   align-items: flex-start;
   align-content: flex-start;
   max-width: 100%;
-  padding: 0 15px;
+  padding: 5px 15px;
   font-size: 44px;
 }
 @media (max-width: 1200px) {
@@ -427,7 +448,7 @@ button {
     font-size: 40px;
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .greeting-wrapper {
     font-size: 36px;
   }
@@ -439,7 +460,13 @@ button {
 }
 @media (max-width: 550px), (max-height: 360px) {
   .greeting-wrapper {
+    padding: 0 15px;
     font-size: 26px;
+  }
+}
+@media (max-height: 360px) {
+  .greeting-wrapper {
+    font-size: 22px;
   }
 }
 
@@ -452,7 +479,7 @@ button {
     height: 60px;
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .name-wrapper {
     height: 56px;
   }
@@ -637,7 +664,7 @@ button {
 .error > .weather-main {
   display: none;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .weather-main {
     top: 17px;
     right: 25px;
@@ -675,7 +702,7 @@ button {
     width: 260px;
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .weather-modal {
     position: fixed;
     max-height: calc(100vh - 40px);
@@ -695,18 +722,18 @@ button {
     gap: 12px;
   }
 }
-@media (max-width: 1023px) and (max-width: 1023px), (max-width: 1023px) and (max-height: 767px), (max-height: 767px) and (max-width: 1023px), (max-height: 767px) and (max-height: 767px) {
+@media (max-width: 1024px) and (max-width: 1024px), (max-width: 1024px) and (max-height: 767px), (max-height: 767px) and (max-width: 1024px), (max-height: 767px) and (max-height: 767px) {
   .weather-modal {
     max-height: calc(100vh - 10px);
     max-width: calc(100% - 10px);
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .open > .weather-modal {
     right: 5px;
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .error > .weather-modal {
     padding-right: 20px;
   }
@@ -716,7 +743,7 @@ button {
   margin-bottom: 5px;
   font-size: 44px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .weather-icon {
     font-size: 38px;
   }
@@ -725,7 +752,7 @@ button {
 .weather-temp {
   font-size: 22px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .weather-temp {
     font-size: 20px;
   }
@@ -746,7 +773,7 @@ button {
   margin-top: 10px;
   line-height: 22px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .weather-data {
     gap: 10px;
   }
@@ -766,7 +793,7 @@ button {
     width: 150px;
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .city-input {
     height: 30px;
     font-size: 18px;
@@ -781,7 +808,7 @@ button {
 .player-toggle-button {
   display: none;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .player-toggle-button {
     left: 25px;
     top: 20px;
@@ -804,7 +831,7 @@ button {
     width: 260px;
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .player-modal {
     position: fixed;
     max-height: calc(100vh - 40px);
@@ -820,13 +847,13 @@ button {
     left: -100%;
   }
 }
-@media (max-width: 1023px) and (max-width: 1023px), (max-width: 1023px) and (max-height: 767px), (max-height: 767px) and (max-width: 1023px), (max-height: 767px) and (max-height: 767px) {
+@media (max-width: 1024px) and (max-width: 1024px), (max-width: 1024px) and (max-height: 767px), (max-height: 767px) and (max-width: 1024px), (max-height: 767px) and (max-height: 767px) {
   .player-modal {
     max-height: calc(100vh - 10px);
     max-width: calc(100% - 10px);
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .open > .player-modal {
     left: 5px;
   }
@@ -842,7 +869,7 @@ button {
   padding: 15px 20px 15px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .player-header {
     height: auto;
     box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
@@ -854,7 +881,7 @@ button {
   height: 31px;
   overflow: hidden;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .song-name-wrapper {
     height: 50px;
   }
@@ -879,7 +906,7 @@ button {
 .song-name.next {
   animation-name: slide-from-left;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .song-name {
     padding: 0 45px;
     font-size: 18px;
@@ -891,7 +918,7 @@ button {
   font-size: 14px;
   opacity: 0;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .song-name > span:last-child {
     opacity: 0.7;
   }
@@ -1022,7 +1049,7 @@ button {
 .play-item:hover .song-singer {
   opacity: 1;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .play-item {
     height: 36px;
   }
@@ -1089,7 +1116,7 @@ button {
   border-radius: 20%;
   opacity: 0.75;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .playlist-button {
     border-color: var(--color-modal);
   }
@@ -1147,7 +1174,7 @@ button {
     min-height: 260px;
   }
 }
-@media (max-height: 550px) and (max-width: 1023px), (max-height: 550px) and (max-height: 767px) {
+@media (max-height: 550px) and (max-width: 1024px), (max-height: 550px) and (max-height: 767px) {
   .quote-modal {
     max-height: calc(100vh - 10px);
     max-width: calc(100% - 10px);
@@ -1220,7 +1247,7 @@ button {
   font-size: 18px;
   line-height: 1.2;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .quote-text {
     font-size: 16px;
   }
@@ -1230,7 +1257,7 @@ button {
   padding: 0 65px;
   font-size: 16px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .quote-author {
     font-size: 15px;
   }
@@ -1255,7 +1282,7 @@ button {
   bottom: 35px;
   transform: rotate(90deg);
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .menu-toggle-button {
     left: 25px;
     bottom: 20px;
@@ -1271,7 +1298,7 @@ button {
   bottom: 20px;
   width: 370px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .menu-modal {
     left: 5px;
     bottom: 5px;
@@ -1288,7 +1315,7 @@ button {
   height: 420px;
   padding: 20px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .menu-body {
     height: 390px;
     max-height: calc(100vh - 190px);
@@ -1370,7 +1397,7 @@ button {
   flex-wrap: wrap;
   gap: 15px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .menu-buttons {
     gap: 10px;
   }
@@ -1388,7 +1415,7 @@ button {
   opacity: 0.5;
   pointer-events: none;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .custom-block {
     margin-top: 10px;
   }
@@ -1548,7 +1575,7 @@ button {
   text-align: center;
   overflow: hidden;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .color-title {
     line-height: 26px;
   }
@@ -1598,7 +1625,7 @@ button {
 .color-range {
   width: calc((100% - 30px) / 3);
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .color-input,
   .color-range {
     width: calc((100% - 20px) / 3);
@@ -1665,7 +1692,7 @@ button {
   right: 40px;
   bottom: 37px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .todo-toggle-button {
     right: 25px;
     bottom: 23px;
@@ -1681,7 +1708,7 @@ button {
   bottom: 20px;
   width: 320px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .todo-modal {
     right: 5px;
     bottom: 5px;
@@ -1710,7 +1737,7 @@ button {
   overflow: hidden;
   transition: 0.3s;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .todo-list {
     max-height: calc(100vh - 175px);
   }
@@ -1843,7 +1870,7 @@ button {
   height: 170px;
   padding-top: 30px;
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .mantra {
     justify-content: center;
     height: auto;
@@ -1885,7 +1912,7 @@ button {
     font-size: 20px;
   }
 }
-@media (max-width: 1023px), (max-height: 767px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .mantra-text {
     font-size: 18px;
   }

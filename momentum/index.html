@@ -59,7 +59,9 @@
     </header>
 
     <main class="main">
-      <div class="time" data-show="time"></div>
+      <div class="time-wrapper">
+        <div class="time" data-show="time" data-effect=""></div>
+      </div>
       <div class="date" data-show="date"></div>
 
       <div class="greeting-wrapper" data-show="greeting">
@@ -104,20 +106,20 @@
                 <label class="modal-button"><input type="checkbox" name="showBlock" value="time" /><span></span></label>
                 <label class="modal-button"><input type="checkbox" name="showBlock" value="date" /><span></span></label>
                 <label class="modal-button"><input type="checkbox" name="showBlock" value="greeting" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="player" /><span></span></label>
                 <label class="modal-button"><input type="checkbox" name="showBlock" value="weather" /><span></span></label>
                 <label class="modal-button"><input type="checkbox" name="showBlock" value="quote" /><span></span></label>
-                <label class="modal-button"><input type="checkbox" name="showBlock" value="player" /><span></span></label>
                 <label class="modal-button"><input type="checkbox" name="showBlock" value="todo" /><span></span></label>
-                <label class="modal-button"><input type="checkbox" name="showBlock" value="mantra" /><span></span></label>
                 <label class="modal-button"><input type="checkbox" name="showBlock" value="arrows" /><span></span></label>
+                <label class="modal-button"><input type="checkbox" name="showBlock" value="mantra" /><span></span></label>
               </div>
             </div>
             <div class="menu-option">
               <div class="menu-title" data-trans="effects"></div>
               <div class="menu-buttons">
-                <label class="modal-button"><input type="radio" name="effect" value="1" /><span></span></label>
-                <label class="modal-button"><input type="radio" name="effect" value="2" /><span></span></label>
-                <label class="modal-button"><input type="radio" name="effect" value="3" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="effect" value="none" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="effect" value="gradient" /><span></span></label>
+                <label class="modal-button"><input type="radio" name="effect" value="glow" /><span></span></label>
               </div>
             </div>
           </div>

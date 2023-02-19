@@ -21,14 +21,10 @@ body {
   color: $color-main;
   text-align: center;
   background: rgb(6, 8, 68);
-
-  &.lock {
-    overflow: hidden;
-  }
 }
 
 .header {
-  flex-basis: 30%;
+  flex-basis: 25%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -42,25 +38,24 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 20px;
   padding: 20px 0;
   line-height: 1;
-  @include media-tm {
-    gap: 20px;
+
+  @include media-x {
+    gap: 15px;
   }
   @include media-hs {
     gap: 15px;
   }
-  @include media-x {
-    gap: 15px;
-  }
   @include media-hx {
     gap: 10px;
+    padding: 5px 0;
   }
 }
 
 .footer {
-  flex-basis: 30%;
+  flex-basis: 25%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -69,7 +64,7 @@ body {
     min-height: 170px;
   }
   @include media-hs {
-    min-height: 30px;
+    min-height: 0;
   }
 }
 

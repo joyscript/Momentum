@@ -1,14 +1,20 @@
-.time,
+.time-wrapper,
 .greeting-wrapper {
-  flex: 0 0 40%;
+  flex: 0 0 42%;
+}
+
+.time-wrapper {
+  display: flex;
+  align-items: flex-end;
 }
 
 .time {
-  display: flex;
-  align-items: flex-end;
+  position: relative;
+  padding: 10px 25px 15px;
   font-family: 'Arial-MT';
   font-size: 110px;
   letter-spacing: -4px;
+  transition: 0s;
 
   @include media-l {
     font-size: 94px;
@@ -17,6 +23,7 @@
     font-size: 90px;
   }
   @include media-ms {
+    padding: 10px 15px;
     font-size: 70px;
   }
   @include media-sx {
@@ -25,19 +32,40 @@
   @include media-x {
     font-size: 54px;
   }
+  @include media-hx {
+    padding: 5px 15px;
+  }
 
-  &.gradient {
+  &[data-effect='gradient'] {
     color: transparent;
-    background-image: linear-gradient(-225deg, #ffffff 0%, #f263ff 29%, #00e1ff 67%, #ffffff 100%);
+    background-image: linear-gradient(-225deg, #ffffff 0%, #ff63fa 29%, #00e1ff 67%, #ffffff 100%);
     background-size: 300% auto;
     background-clip: text;
-    animation: gradient 15s linear infinite;
+    animation: gradient 5s linear infinite;
+  }
+
+  &[data-effect='glow'] {
+    font-family: Verdana, sans-serif;
+    color: #00ffff;
+    background: rgba(0, 0, 0, 0.5);
+    animation: glow 1s linear infinite alternate;
   }
 }
 
 @keyframes gradient {
   to {
     background-position: -300% center;
+  }
+}
+
+@keyframes glow {
+  0% {
+    filter: hue-rotate(0deg);
+    text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff;
+  }
+  100% {
+    filter: hue-rotate(360deg);
+    text-shadow: none;
   }
 }
 
@@ -58,7 +86,7 @@
   align-items: flex-start;
   align-content: flex-start;
   max-width: 100%;
-  padding: 0 15px;
+  padding: 5px 15px;
   font-size: 44px;
 
   @include media-l {
@@ -71,7 +99,11 @@
     font-size: 30px;
   }
   @include media-sx {
+    padding: 0 15px;
     font-size: 26px;
+  }
+  @include media-hx {
+    font-size: 22px;
   }
 }
 

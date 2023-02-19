@@ -1,4 +1,5 @@
 import { user, saveUser } from './user.js';
+import { decorateTimer } from './timer.js';
 import { loadTodo, saveTodo } from './todo.js';
 import { setTheme, changeTheme } from './colors.js';
 import { changePhoto, changePhotoSourse } from './photo.js';
@@ -31,9 +32,10 @@ const handleMenuClicks = (e) => {
   const input = e.target.previousElementSibling;
   input.name === 'showBlock' ? (user.showBlock[input.value] = !input.checked) : (user[input.name] = input.value);
 
-  if (input.name === 'showBlock') showBlocks();
   if (input.name === 'menu') changeMenuPart();
   if (input.name === 'lang') changeLanguage();
+  if (input.name === 'showBlock') showBlocks();
+  if (input.name === 'effect') decorateTimer();
   if (input.name === 'photoTag') changePhoto();
   if (input.name === 'photoSource') changePhotoSourse();
   if (input.name === 'colorTheme') changeTheme();

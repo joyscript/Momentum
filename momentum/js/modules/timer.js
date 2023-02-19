@@ -45,10 +45,13 @@ const changeName = () => {
   user.name ? (double.style.minWidth = '') : showPlaceholder();
 };
 
+const decorateTimer = () => (time.dataset.effect = user.effect);
+
 const showDateAndGreeting = () => {
   showDate();
   showName();
   showGreeting();
+  decorateTimer();
 };
 
 const showTimeAndGreeting = () => {
@@ -65,4 +68,4 @@ name.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === 'Escape') e.target.blur();
 });
 
-export { timeOfDay, showDateAndGreeting, showTimeAndGreeting };
+export { timeOfDay, showDateAndGreeting, showTimeAndGreeting, decorateTimer };
