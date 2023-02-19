@@ -50,12 +50,7 @@ body {
   padding: 20px 0;
   line-height: 1;
 }
-@media (max-width: 360px) {
-  .main {
-    gap: 15px;
-  }
-}
-@media (max-height: 550px) {
+@media (max-width: 1024px), (max-height: 767px) {
   .main {
     gap: 15px;
   }
@@ -356,7 +351,7 @@ button {
   font-family: "Arial-MT";
   font-size: 110px;
   letter-spacing: -4px;
-  transition: 0s;
+  transition: 0.3s;
 }
 @media (max-width: 1200px) {
   .time {
@@ -440,7 +435,7 @@ button {
   align-items: flex-start;
   align-content: flex-start;
   max-width: 100%;
-  padding: 5px 15px;
+  padding: 10px 15px;
   font-size: 44px;
 }
 @media (max-width: 1200px) {
@@ -455,17 +450,18 @@ button {
 }
 @media (max-width: 767px), (max-height: 550px) {
   .greeting-wrapper {
+    padding: 5px 15px;
     font-size: 30px;
   }
 }
 @media (max-width: 550px), (max-height: 360px) {
   .greeting-wrapper {
-    padding: 0 15px;
     font-size: 26px;
   }
 }
 @media (max-height: 360px) {
   .greeting-wrapper {
+    padding: 0 15px;
     font-size: 22px;
   }
 }
@@ -1876,12 +1872,13 @@ button {
     height: auto;
     min-height: 60px;
     margin: 0 37px;
-    padding-top: 0;
+    padding-top: 12px;
   }
 }
 @media (max-width: 767px), (max-height: 550px) {
   .mantra {
     min-height: 52px;
+    padding-top: 0;
   }
 }
 

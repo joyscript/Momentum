@@ -42,10 +42,7 @@ body {
   padding: 20px 0;
   line-height: 1;
 
-  @include media-x {
-    gap: 15px;
-  }
-  @include media-hs {
+  @include media-tm {
     gap: 15px;
   }
   @include media-hx {

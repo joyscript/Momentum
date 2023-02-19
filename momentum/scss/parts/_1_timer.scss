@@ -14,7 +14,7 @@
   font-family: 'Arial-MT';
   font-size: 110px;
   letter-spacing: -4px;
-  transition: 0s;
+  transition: 0.3s;
 
   @include media-l {
     font-size: 94px;
@@ -86,7 +86,7 @@
   align-items: flex-start;
   align-content: flex-start;
   max-width: 100%;
-  padding: 5px 15px;
+  padding: 10px 15px;
   font-size: 44px;
 
   @include media-l {
@@ -96,13 +96,14 @@
     font-size: 36px;
   }
   @include media-ms {
+    padding: 5px 15px;
     font-size: 30px;
   }
   @include media-sx {
-    padding: 0 15px;
     font-size: 26px;
   }
   @include media-hx {
+    padding: 0 15px;
     font-size: 22px;
   }
 }
