@@ -31,6 +31,7 @@
 
 .scroll {
   overflow: auto !important;
+  scrollbar-width: thin;
 
   &::-webkit-scrollbar {
     width: 3px;

@@ -49,6 +49,9 @@ body {
   gap: 20px;
   padding: 20px 0;
   line-height: 1;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 @media (max-width: 1024px), (max-height: 767px) {
   .main {
@@ -246,6 +249,7 @@ button {
 
 .scroll {
   overflow: auto !important;
+  scrollbar-width: thin;
 }
 .scroll::-webkit-scrollbar {
   width: 3px;

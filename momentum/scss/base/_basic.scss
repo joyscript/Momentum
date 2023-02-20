@@ -41,6 +41,7 @@ body {
   gap: 20px;
   padding: 20px 0;
   line-height: 1;
+  user-select: none;
 
   @include media-tm {
     gap: 15px;

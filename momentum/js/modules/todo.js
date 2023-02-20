@@ -74,7 +74,7 @@ const loadTodo = () => {
 };
 
 const toggleTodo = (btn) => {
-  if(btn) user.todoShow = btn.previousElementSibling.id;
+  if(btn) user.todoShow = btn.value;
   user.todoShow === 'done' ? todo.classList.add('show-done') : todo.classList.remove('show-done');
   checkTodoList();
 };
@@ -91,10 +91,10 @@ const saveTodo = () => {
 todoInput.addEventListener('change', addTask);
 
 todo.addEventListener('click', (e) => {
-  if (e.target.classList.contains('modal-button')) toggleTodo(e.target);
-  if (e.target.classList.contains('todo-check-button')) toggleTask(e.target.parentElement);
-  if (e.target.classList.contains('todo-delete-button')) deleteTask(e.target.parentElement);
-  if (e.target.classList.contains('todo-clear-button')) clearList();
+  if (e.target.matches('[name="todoShow"]')) toggleTodo(e.target);
+  if (e.target.matches('.todo-check-button')) toggleTask(e.target.parentElement);
+  if (e.target.matches('.todo-delete-button')) deleteTask(e.target.parentElement);
+  if (e.target.matches('.todo-clear-button')) clearList();
 });
 
 todo.addEventListener('keydown', (e) => {

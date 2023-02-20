@@ -28,9 +28,9 @@ const changeBtns = () => {
 };
 
 const handleMenuClicks = (e) => {
-  if (!e.target.matches('.modal-button span') || e.target.closest('.autoslider-button')) return;
-  const input = e.target.previousElementSibling;
-  input.name === 'showBlock' ? (user.showBlock[input.value] = !input.checked) : (user[input.name] = input.value);
+  if (!e.target.matches('.modal-button > input') || e.target.closest('.autoslider-button')) return;
+  const input = e.target;
+  input.name === 'showBlock' ? (user.showBlock[input.value] = input.checked) : (user[input.name] = input.value);
 
   if (input.name === 'menu') changeMenuPart();
   if (input.name === 'lang') changeLanguage();
