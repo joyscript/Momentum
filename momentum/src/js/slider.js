@@ -1,5 +1,5 @@
 import { user } from './user.js';
-import { timeOfDay, timesOfDay } from './timer.js';
+import { timesOfDay, getTimeOfDay } from './timer.js';
 import { fetchAndGo, shuffleArr } from './common.js';
 import { tagInput, handleError, goAfterSuccess } from './photo.js';
 
@@ -41,7 +41,7 @@ const getRandNum = (max) => (randNum = Math.floor(Math.random() * max));
 const fitRandNum = (max) => (randNum = (max + randNum) % max);
 const formatRandNum = () => (randNum + 1).toString().padStart(2, '0');
 
-if (!user.photoTag || timesOfDay.includes(user.photoTag)) user.photoTag = timeOfDay;
+if (!user.photoTag || timesOfDay.includes(user.photoTag)) user.photoTag = getTimeOfDay();
 getRandNum(maxGithub);
 
 const startAnimation = (img) => {

@@ -1,5 +1,5 @@
 import { user } from './user.js';
-import { timeOfDay } from './timer.js';
+import { getTimeOfDay } from './timer.js';
 import { checkValue } from './common.js';
 import { showBackground } from './slider.js';
 
@@ -31,8 +31,8 @@ const changePhotoSourse = () => {
 };
 
 const changeGithubTag = () => {
-  user.photoTag = timeOfDay;
-  photoPart.querySelector(`[value="${timeOfDay}"]`).checked = true;
+  user.photoTag = getTimeOfDay();
+  photoPart.querySelector(`[value="${user.photoTag}"]`).checked = true;
 };
 
 const clearCustomBlock = () => {

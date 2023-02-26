@@ -7,10 +7,9 @@ const name = document.querySelector('.name-input');
 const double = document.querySelector('.double');
 const greeting = document.querySelector('.greeting');
 
-const now = new Date();
-const partOfDay = Math.floor(now.getHours() / 6);
 const timesOfDay = ['night', 'morning', 'afternoon', 'evening'];
-const timeOfDay = timesOfDay[partOfDay];
+const getPartOfDay = () => Math.floor(new Date().getHours() / 6);
+const getTimeOfDay = () => timesOfDay[getPartOfDay()];
 
 const locale = { en: 'en-US', ru: 'ru-RU' };
 const placeholder = { en: '[Enter name]', ru: '[Введите имя]' };
@@ -20,15 +19,15 @@ const showTime = () => {
   const nowString = new Date().toLocaleTimeString();
   time.textContent = nowString;
   if (nowString === '00:00:00') showDate();
-  if (nowString.slice(0, 2) % 6 === 0) showGreeting();
+  if (nowString.match(/^(00|06|12|18):00:00$/)) showGreeting();
 };
 
 const showDate = () => {
-  date.textContent = now.toLocaleDateString(locale[user.lang], { weekday: 'long', month: 'long', day: 'numeric' });
+  date.textContent = new Date().toLocaleDateString(locale[user.lang], { weekday: 'long', month: 'long', day: 'numeric' });
 };
 
 const showGreeting = () => {
-  greeting.textContent = user.lang == 'en' ? `Good ${timeOfDay},` : greetingsRU[partOfDay];
+  greeting.textContent = user.lang == 'en' ? `Good ${getTimeOfDay()},` : greetingsRU[getPartOfDay()];
 };
 
 const showName = () => (user.name ? showValue() : showPlaceholder());
@@ -68,4 +67,4 @@ name.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === 'Escape') e.target.blur();
 });
 
-export { timeOfDay, timesOfDay, showDateAndGreeting, showTimeAndGreeting, decorateTimer };
+export { timesOfDay, getTimeOfDay, showDateAndGreeting, showTimeAndGreeting, decorateTimer };
