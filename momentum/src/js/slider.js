@@ -21,7 +21,7 @@ const galleries = {
 const URL = {
   unsplash: (tag) => `https://api.unsplash.com/photos/random?orientation=landscape&query=${tag}&client_id=${unsplashKey}`,
   github: (num) => {
-    const ending = window.innerWidth > 1920 ? `large/${num}.webp` : `${num}.jpg`;
+    const ending = window.innerWidth > 1920 ? `large/${num}.webp` : `${num}.webp`;
     return `https://raw.githubusercontent.com/joyscript/stage1-tasks/assets/images/${user.photoTag}/${ending}`;
   },
   flickr: (tag) => {

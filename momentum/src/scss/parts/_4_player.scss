@@ -14,9 +14,11 @@
 
   @include media-tm {
     @include modal-general;
-    width: 290px;
     top: 5px;
     left: -350px;
+    width: 290px;
+    max-height: calc(100vh - 5px * 2);
+    max-width: calc(100% - 5px * 2);
     .open > & {
       left: 5px;
     }
@@ -154,7 +156,7 @@
 
 .play-item {
   position: relative;
-  height: 33px;
+  height: 35px;
   padding-left: 30px;
   list-style: none;
   line-height: 1;
@@ -225,10 +227,6 @@
     .song-singer {
       opacity: 1;
     }
-  }
-
-  @include media-tm {
-    height: 36px;
   }
 }
 
