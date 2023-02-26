@@ -16,7 +16,7 @@
     @include modal-general;
     width: 290px;
     top: 5px;
-    left: -100%;
+    left: -350px;
     .open > & {
       left: 5px;
     }
@@ -140,9 +140,11 @@
   text-align: left;
   transition: 0.3s;
   overflow: hidden;
+  opacity: 0;
 
   .playlist-open & {
     padding: 15px 20px 7px;
+    opacity: 1;
   }
 
   @include media-hs {
@@ -184,12 +186,12 @@
     width: 30px;
     text-align: center;
     font-size: 19px;
+    color: var(--color-active);
     opacity: 0;
   }
 
   &.active {
     opacity: 1;
-    text-shadow: 0 0 1px var(--color-active);
 
     .song-title {
       border-bottom: 1px solid var(--color-active);
@@ -209,6 +211,9 @@
     &:before {
       content: '\e908';
       animation: rotateBtn 3s infinite linear;
+    }
+    &:after {
+      color: inherit;
     }
   }
 

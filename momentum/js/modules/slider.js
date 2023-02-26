@@ -1,5 +1,5 @@
 import { user } from './user.js';
-import { timeOfDay } from './timer.js';
+import { timeOfDay, timesOfDay } from './timer.js';
 import { fetchAndGo, shuffleArr } from './common.js';
 import { tagInput, handleError, goAfterSuccess } from './photo.js';
 
@@ -41,7 +41,7 @@ const getRandNum = (max) => (randNum = Math.floor(Math.random() * max));
 const fitRandNum = (max) => (randNum = (max + randNum) % max);
 const formatRandNum = () => (randNum + 1).toString().padStart(2, '0');
 
-if (!user.photoTag) user.photoTag = timeOfDay;
+if (!user.photoTag || timesOfDay.includes(user.photoTag)) user.photoTag = timeOfDay;
 getRandNum(maxGithub);
 
 const startAnimation = (img) => {
@@ -61,7 +61,7 @@ const animateImage = (img) => {
   document.body.classList.add('animation');
   img.addEventListener('load', () => startAnimation(img), { once: true });
   img.addEventListener('animationend', () => endAnimation(img), { once: true });
-  console.log(randNum, tagInput.value ? tagInput.value : user.photoTag, img.src);
+  console.log(tagInput.value ? tagInput.value : user.photoTag, img.src);
 };
 
 const isGoodPhoto = (photo) => {
@@ -81,7 +81,7 @@ const getFlickrImage = (data) => {
     if (data.photos.pages == 1 && photos.length < 50) throw new Error();
     for (let i = 0; i < photos.length; i++) {
       getRandNum(photos.length);
-      console.log(i.toString(), randNum, photos[randNum]);
+      // console.log(i.toString(), randNum, photos[randNum]);
       if (isGoodPhoto(photos[randNum])) break;
     }
     if (!isGoodPhoto(photos[randNum])) throw new Error();

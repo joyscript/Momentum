@@ -49,7 +49,7 @@ const transText = {
   player: ['Player', 'Плеер'],
   todo: ['Todo', 'Задачи'],
   mantra: ['Mantra', 'Мантра'],
-  arrows: ['Arrows', 'Стрелочки'],
+  arrows: ['Arrows', 'Стрелки'],
   gradient: ['Gradient', 'Градиент'],
   glow: ['Glow', 'Сияние'],
   none: ['None', 'Нет'],

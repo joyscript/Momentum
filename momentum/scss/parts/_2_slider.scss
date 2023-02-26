@@ -57,44 +57,44 @@
   position: absolute;
   z-index: 1;
   top: 50%;
+  width: 50px;
   height: 60px;
   margin-top: -30px;
-  background-size: contain;
+  background-size: 30px;
   background-repeat: no-repeat;
-  background-position: center;
   transition: opacity 1s ease-in-out, transform 0.3s;
 
   .animation & {
     opacity: 0;
   }
-
-  &:hover {
-    transform: scale(1.1);
-  }
 }
 
 .slide-prev {
-  left: 20px;
+  left: 0;
   background-image: url('../assets/svg/slider-prev.svg');
+  background-position: 20px center;
+  transform-origin: left center;
 }
 
 .slide-next {
-  right: 20px;
+  right: 0;
   background-image: url('../assets/svg/slider-next.svg');
+  background-position: 0 center;
+  transform-origin: right center;
 }
 
 @media (max-width: 480px) {
-  .slider__button {
-    width: 25px;
+  .slider-button {
+    width: 40px;
   }
 
   .slide-prev {
-    left: 10px;
-    background-position-x: left;
+    background-position: 10px center;
   }
+}
 
-  .slide-next {
-    right: 10px;
-    background-position-x: right;
+@media (any-hover: hover) {
+  .slider-button:hover {
+    transform: scale(1.1);
   }
 }

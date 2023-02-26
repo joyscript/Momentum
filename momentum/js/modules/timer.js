@@ -68,4 +68,4 @@ name.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === 'Escape') e.target.blur();
 });
 
-export { timeOfDay, showDateAndGreeting, showTimeAndGreeting, decorateTimer };
+export { timeOfDay, timesOfDay, showDateAndGreeting, showTimeAndGreeting, decorateTimer };
