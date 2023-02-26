@@ -9,8 +9,7 @@
   src: url('../assets/fonts/owfont-regular.eot?v=1.0.0');
   src: url('../assets/fonts/owfont-regular.eot?#iefix&v=1.0.0') format('embedded-opentype'),
 	   url('../assets/fonts/owfont-regular.woff') format('woff'),
-	   url('../assets/fonts/owfont-regular.ttf') format('truetype'),
-	   url('../assets/fonts/owfont-regular.svg#owf-regular') format('svg');
+	   url('../assets/fonts/owfont-regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -83,11 +82,11 @@
 
 /* owfont uses the Unicode Private Use Area (PUA) to ensure screen
    readers do not read off random characters that represent icons */
-   
+
 /*   Weather Condition Codes    */
-   
+
 /*   Thunderstorm - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -    */
-   
+
 /* thunderstorm with light rain */
 .owf-200:before,
 .owf-200-d:before,

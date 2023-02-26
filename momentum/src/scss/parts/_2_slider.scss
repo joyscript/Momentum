@@ -71,14 +71,14 @@
 
 .slide-prev {
   left: 0;
-  background-image: url('../assets/svg/slider-prev.svg');
+  background-image: url('./assets/svg/slider-prev.svg');
   background-position: 20px center;
   transform-origin: left center;
 }
 
 .slide-next {
   right: 0;
-  background-image: url('../assets/svg/slider-next.svg');
+  background-image: url('./assets/svg/slider-next.svg');
   background-position: 0 center;
   transform-origin: right center;
 }
