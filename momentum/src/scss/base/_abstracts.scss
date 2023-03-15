@@ -1,8 +1,8 @@
 :root {
-  --color-active: #ce51f5;
+  --color-active: #e100ff;
   --color-modal: #ffffff;
-  --color-modalBg: #09031599;
   --color-activeBtn: #ffffff;
+  --color-modalBg: #09031599;
   --color-overlay: #00001445;
 }
 
@@ -74,12 +74,6 @@ $xsmall: 360px;
   }
 }
 
-@mixin media-lm {
-  @media (max-width: $large), (max-height: $mob) {
-    @content;
-  }
-}
-
 @mixin media-tm {
   @media (max-width: $tab), (max-height: $mob) {
     @content;
@@ -115,8 +109,6 @@ $xsmall: 360px;
 
 @mixin modal-general {
   position: fixed;
-  max-height: calc(100vh - 20px * 2);
-  max-width: calc(100% - 20px * 2);
   color: var(--color-modal);
   background: var(--color-modalBg);
   backdrop-filter: blur(20px);
@@ -126,6 +118,8 @@ $xsmall: 360px;
 
 @mixin modal {
   @include modal-general;
+  max-height: calc(100vh - 20px * 2);
+  max-width: calc(100% - 20px * 2);
   font-size: 17px;
   visibility: hidden;
   opacity: 0;
@@ -140,5 +134,32 @@ $xsmall: 360px;
     max-height: calc(100vh - 5px * 2);
     max-width: calc(100% - 5px * 2);
     font-size: 16px;
+  }
+}
+
+// -----------------------------------------
+// This is necessary for correct automatic grouping media queries
+
+.media-fiction {
+  @include media-l {
+    font-size: 50px;
+  }
+  @include media-tm {
+    font-size: 40px;
+  }
+  @include media-ms {
+    font-size: 30px;
+  }
+  @include media-s {
+    font-size: 20px;
+  }
+  @include media-hs {
+    font-size: 20px;
+  }
+  @include media-sx {
+    font-size: 10px;
+  }
+  @include media-hx {
+    font-size: 10px;
   }
 }

@@ -43,7 +43,8 @@ module.exports = {
       {
         test: /\.(c|sa|sc)ss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          // devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -72,17 +73,7 @@ module.exports = {
       {
         test: /\.(ico|jpe?g|png|webp|gif|svg)$/,
         type: 'asset/resource',
-      },
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
+      }
     ],
   },
 };

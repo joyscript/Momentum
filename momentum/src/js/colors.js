@@ -9,7 +9,7 @@ const userThemeBtn = document.querySelector('input[value="user"]');
 
 const themes = {
   dark: {
-    active: '#d700ff',
+    active: '#e100ff',
     modal: '#ffffff',
     activeBtn: '#ffffff',
     modalBg: '#09031599',

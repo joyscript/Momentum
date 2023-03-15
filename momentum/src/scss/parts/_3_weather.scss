@@ -1,14 +1,9 @@
 .weather-main {
-  position: fixed;
   top: 32px;
   right: 35px;
   width: 70px;
   text-align: center;
   transition: 0.3s;
-
-  .error > & {
-    display: none;
-  }
 
   @include media-tm {
     top: 17px;
@@ -17,12 +12,16 @@
     text-align: right;
     opacity: 0.9;
     cursor: pointer;
-    transition: opacity 0.3s;
     -webkit-tap-highlight-color: transparent;
 
-    .error > & {
-      display: block;
-      z-index: 2;
+    .open.error > & {
+      opacity: 0;
+    }
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: 1;
     }
   }
 }
@@ -41,7 +40,7 @@
     @include modal-general;
     top: 5px;
     right: -300px;
-    width: 245px;
+    width: 250px;
     height: auto;
     min-height: 150px;
     max-height: calc(100vh - 5px * 2);
@@ -50,9 +49,6 @@
     gap: 12px;
     .open > & {
       right: 5px;
-    }
-    .error > & {
-      padding-right: 20px;
     }
   }
 }
@@ -103,11 +99,12 @@
   font-size: 20px;
   border-bottom: 1px solid $color-main;
 
-  @include media-lm {
+  @include media-l {
     width: 150px;
   }
 
   @include media-tm {
+    width: 150px;
     height: 30px;
     font-size: 18px;
     color: var(--color-modal);

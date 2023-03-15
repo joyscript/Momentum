@@ -15,7 +15,7 @@ let user = {
     player: true,
     todo: true,
     arrows: true,
-    mantra: false,
+    mantra: true,
   },
   player: {
     volume: 0.4,

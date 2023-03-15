@@ -19,14 +19,6 @@
   .open & {
     color: var(--color-active);
   }
-
-  @include media-tm {
-    opacity: 0.9;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
 }
 
 .scroll {

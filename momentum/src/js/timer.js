@@ -1,5 +1,6 @@
 import { user } from './user.js';
-import { checkValue } from './common.js';
+import { showBackground } from './slider.js';
+import { timesOfDay, getPartOfDay, getTimeOfDay, checkValue } from './common.js';
 
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
@@ -7,19 +8,19 @@ const name = document.querySelector('.name-input');
 const double = document.querySelector('.double');
 const greeting = document.querySelector('.greeting');
 
-const timesOfDay = ['night', 'morning', 'afternoon', 'evening'];
-const getPartOfDay = () => Math.floor(new Date().getHours() / 6);
-const getTimeOfDay = () => timesOfDay[getPartOfDay()];
-
 const locale = { en: 'en-US', ru: 'ru-RU' };
 const placeholder = { en: '[Enter name]', ru: '[Введите имя]' };
 const greetingsRU = ['Доброй ночи,', 'Доброе утро,', 'Добрый день,', 'Добрый вечер,'];
 
 const showTime = () => {
-  const nowString = new Date().toLocaleTimeString();
+  const nowString = new Date().toLocaleTimeString('en-GB');
   time.textContent = nowString;
   if (nowString === '00:00:00') showDate();
-  if (nowString.match(/^(00|06|12|18):00:00$/)) showGreeting();
+  if (nowString.match(/^(00|06|12|18):00:00$/)) {
+    showGreeting();
+    if (timesOfDay.includes(user.photoTag)) user.photoTag = getTimeOfDay();
+    showBackground();
+  }
 };
 
 const showDate = () => {
@@ -67,4 +68,4 @@ name.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === 'Escape') e.target.blur();
 });
 
-export { timesOfDay, getTimeOfDay, showDateAndGreeting, showTimeAndGreeting, decorateTimer };
+export { showDateAndGreeting, showTimeAndGreeting, decorateTimer };

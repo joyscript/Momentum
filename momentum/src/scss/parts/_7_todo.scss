@@ -15,10 +15,17 @@
   @include media-tm {
     right: 25px;
     bottom: 23px;
+    opacity: 0.9;
 
     .open > & {
       right: 25px;
       bottom: 23px;
+    }
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: 1;
     }
   }
 }
@@ -136,6 +143,7 @@
   color: $color-main;
   background: $color-main;
   box-shadow: $shadow;
+  opacity: 0.9;
 
   .done & {
     color: var(--color-activeBtn);

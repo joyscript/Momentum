@@ -18,10 +18,13 @@
   background: var(--color-overlay);
 }
 
-.fade-in,
-.fade-out {
+.slider > img {
   object-fit: cover;
   object-position: center;
+}
+
+.fade-in,
+.fade-out {
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
 }
@@ -56,44 +59,42 @@
   position: absolute;
   z-index: 1;
   top: 50%;
-  width: 50px;
+  width: 40px;
   height: 60px;
   margin-top: -30px;
   background-size: 30px;
   background-repeat: no-repeat;
   transition: opacity 1s ease-in-out, transform 0.3s;
+  opacity: 0.8;
 
   .animation & {
     opacity: 0;
   }
+
+  @media (any-hover: hover) {
+    &:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
 }
 
 .slide-prev {
-  left: 0;
+  left: 10px;
   background-image: url('./assets/svg/slide-prev.svg');
-  background-position: 20px center;
+  background-position: 10px center;
   transform-origin: left center;
+  @include media-s {
+    left: 0;
+  }
 }
 
 .slide-next {
-  right: 0;
+  right: 10px;
   background-image: url('./assets/svg/slide-next.svg');
   background-position: 0 center;
   transform-origin: right center;
-}
-
-@media (max-width: 480px) {
-  .slider-button {
-    width: 40px;
-  }
-
-  .slide-prev {
-    background-position: 10px center;
-  }
-}
-
-@media (any-hover: hover) {
-  .slider-button:hover {
-    transform: scale(1.1);
+  @include media-s {
+    right: 0;
   }
 }

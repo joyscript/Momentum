@@ -1,6 +1,5 @@
 import { user } from './user.js';
-import { timesOfDay, getTimeOfDay } from './timer.js';
-import { fetchAndGo, shuffleArr } from './common.js';
+import { timesOfDay, getTimeOfDay, fetchAndGo, shuffleArr } from './common.js';
 import { tagInput, handleError, goAfterSuccess } from './photo.js';
 
 const slider = document.querySelector('.slider');
@@ -53,6 +52,7 @@ const startAnimation = (img) => {
 const endAnimation = (img) => {
   img.nextElementSibling && img.nextElementSibling.remove();
   document.body.classList.remove('animation');
+  img.classList.remove('fade-in');
   isReady = true;
 };
 

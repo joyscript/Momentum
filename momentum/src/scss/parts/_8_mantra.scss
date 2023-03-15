@@ -38,10 +38,10 @@
   font-size: 22px;
   font-style: italic;
   line-height: 1.2;
-  animation-duration: 0.3s;
-  animation-timing-function: linear;
+  animation-duration: 0.4s;
+  animation-timing-function: ease;
   animation-fill-mode: forwards;
-  @include media-lm {
+  @include media-l {
     font-size: 20px;
   }
   @include media-tm {

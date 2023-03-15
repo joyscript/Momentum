@@ -41,6 +41,7 @@
     background-image: linear-gradient(-225deg, #ffffff 0%, #ff63fa 29%, #00e1ff 67%, #ffffff 100%);
     background-size: 300% auto;
     background-clip: text;
+    -webkit-background-clip: text;
     animation: gradient 5s linear infinite;
   }
 

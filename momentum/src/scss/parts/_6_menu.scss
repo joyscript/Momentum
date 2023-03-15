@@ -29,7 +29,7 @@
     bottom: 5px;
   }
 
-  @include media(405px) {
+  @include media(400px) {
     width: 100%;
   }
 }
@@ -396,11 +396,11 @@
 
   span {
     font-size: 15px;
-    opacity: 0.3;
+    opacity: 0.35;
   }
 }
 
-.menu-link {
+.menu-link[class*=' icon-'] {
   display: inline-block;
   width: 30px;
   height: 30px;

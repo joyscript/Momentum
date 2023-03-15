@@ -31,6 +31,7 @@ const renderWeather = (data) => {
     <span>${humidText[user.lang]}: ${Math.round(data.main.humidity)}%</span>
     <span>${windText[user.lang]}: ${Math.round(data.wind.speed)} m/s</span>
   `;
+  user.city = city.value;
 };
 
 const renderError = () => {
@@ -41,7 +42,6 @@ const renderError = () => {
 const checkCityValue = () => {
   city.value = isNaN(city.value) ? city.value.trim() : '';
   if (city.value) city.value = city.value[0].toUpperCase() + city.value.slice(1);
-  user.city = city.value;
 };
 
 const changeWeather = () => {

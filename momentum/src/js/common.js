@@ -1,3 +1,7 @@
+const timesOfDay = ['night', 'morning', 'afternoon', 'evening'];
+const getPartOfDay = () => Math.floor(new Date().getHours() / 6);
+const getTimeOfDay = () => timesOfDay[getPartOfDay()];
+
 const fetchAndGo = async (url, func, errorFunc) => {
   try {
     const res = await fetch(url);
@@ -21,4 +25,4 @@ const shuffleArr = (array) => {
   return array;
 };
 
-export { fetchAndGo, checkValue, updateBar, shuffleArr };
+export { timesOfDay, getPartOfDay, getTimeOfDay, fetchAndGo, checkValue, updateBar, shuffleArr };

@@ -296,6 +296,7 @@
 
   @include media-tm {
     border-color: var(--color-modal);
+    opacity: 0.75;
   }
 
   &::before {

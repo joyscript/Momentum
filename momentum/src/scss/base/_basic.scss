@@ -42,7 +42,6 @@ body {
   padding: 20px 0;
   line-height: 1;
   user-select: none;
-
   @include media-tm {
     gap: 15px;
   }
@@ -79,14 +78,21 @@ button {
   cursor: pointer;
 }
 
-.button {
+[class^='icon-'],
+[class*=' icon-'] {
   width: 30px;
   height: 30px;
   font-size: 30px;
   opacity: 0.8;
 
-  &:hover {
-    opacity: 1;
+  @include media-tm {
+    opacity: 0.9;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 

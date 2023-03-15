@@ -1,6 +1,5 @@
 import { user } from './user.js';
-import { getTimeOfDay } from './timer.js';
-import { checkValue } from './common.js';
+import { getTimeOfDay, checkValue } from './common.js';
 import { showBackground } from './slider.js';
 
 const photoPart = document.querySelector('[data-menu="photo"]');
