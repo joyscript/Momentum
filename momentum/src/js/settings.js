@@ -6,8 +6,9 @@ import { changePhoto, changePhotoSourse } from './photo.js';
 import { btnInputs, translateModals, changeLanguage } from './trans.js';
 
 const menu = document.querySelector('.menu');
-const menuParts = menu.querySelectorAll('.menu-part');
 const blocks = document.querySelectorAll('[data-show]');
+const menuParts = menu.querySelectorAll('.menu-part');
+const modalToggleBtns = document.querySelectorAll('.modal-toggle-button');
 
 const showBlocks = () => {
   blocks.forEach((block) => {
@@ -27,18 +28,21 @@ const changeBtns = () => {
   });
 };
 
+const menuHandlers = {
+  menu: changeMenuPart,
+  lang: changeLanguage,
+  showBlock: showBlocks,
+  effect: decorateTimer,
+  photoTag: changePhoto,
+  photoSource: changePhotoSourse,
+  colorTheme: changeTheme,
+};
+
 const handleMenuClicks = (e) => {
   if (!e.target.matches('.modal-button > input') || e.target.closest('.autoslider-button')) return;
   const input = e.target;
   input.name === 'showBlock' ? (user.showBlock[input.value] = input.checked) : (user[input.name] = input.value);
-
-  if (input.name === 'menu') changeMenuPart();
-  if (input.name === 'lang') changeLanguage();
-  if (input.name === 'showBlock') showBlocks();
-  if (input.name === 'effect') decorateTimer();
-  if (input.name === 'photoTag') changePhoto();
-  if (input.name === 'photoSource') changePhotoSourse();
-  if (input.name === 'colorTheme') changeTheme();
+  menuHandlers[input.name]();
 };
 
 const toggleModal = (modal) => {
@@ -72,10 +76,8 @@ const saveSettings = () => {
 
 menu.addEventListener('click', handleMenuClicks);
 
-document.addEventListener('click', (e) => {
-  if (e.target.closest('.modal-toggle-button')) {
-    toggleModal(e.target.closest('.modal-toggle-button').parentElement);
-  }
+modalToggleBtns.forEach((btn) => {
+  btn.addEventListener('click', () => toggleModal(btn.parentElement));
 });
 
 window.addEventListener('beforeunload', saveSettings);
